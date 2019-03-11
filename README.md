@@ -60,3 +60,11 @@ you'll also get a Table that should always be battleships and a Query that descr
 if you receive a LastKey object that means your results are paginated and you can use it to retrieve the next page either by including it in a POST body or in query string parameters as lastKey=KEY:VALUE,KEY:VALUE
 
 alternatively you can use the special query string continue=true to fetch all results but beware this may cause timeout issues all requests time out after 30 seconds and i cannot increase that
+
+
+for single-game data send calls to the same endpoint
+but use battleships/battleships_game
+instead of battleships/battleships
+everything else is the same
+i sorted the data there by negative matchID
+presuming that matchID is continually increasing that means you'll return data from newest to oldest
