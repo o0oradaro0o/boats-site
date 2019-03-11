@@ -7,12 +7,12 @@ import { GameSimple, content } from 'src/app/GameSimple';
 })
 export class GamesListComponent implements OnInit {
   @Input() SimpleGamesList: content;
-  constructor() { 
-    
+  constructor() {
+
   }
 
   ngOnInit() {
-   alert(this.SimpleGamesList);
+
   }
 
 }

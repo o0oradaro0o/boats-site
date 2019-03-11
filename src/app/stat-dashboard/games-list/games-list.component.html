@@ -1,3 +1,17 @@
-<tbody>
-  <app-games-row *ngFor="let game of SimpleGamesList" [game]=game></app-games-row>
-</tbody>
+
+    <mat-list *ngIf="SimpleGamesList">
+        <mat-list-item>
+        <tr>
+            <th>number of Players</th>
+            <th>Winners</th>
+            <th>CoOp</th>
+            <th>Game Mode</th>
+            <th>Trading</th>
+            <th>Date</th>
+        </tr>
+      </mat-list-item>
+          <mat-list-item *ngFor="let game of SimpleGamesList.Content">
+          <app-games-row  [game]=game></app-games-row>
+          </mat-list-item>
+    </mat-list>
+

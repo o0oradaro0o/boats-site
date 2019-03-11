@@ -12,8 +12,6 @@ export class StatDashboardComponent implements OnInit {
 
   SimpleGamesList: Observable<content>;
   constructor(loader: DataGrabberService) {
-    // .valueChanges is missing the initial value; add it:
-    
 
     // List reacts to filter and sort changes
     this.SimpleGamesList = loader.getGames();

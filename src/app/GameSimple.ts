@@ -3,9 +3,10 @@ export interface GameSimple {
   wn: string;
   settings: settings;
   matchID: number;
+  dateProcessed: string;
 }
 
-interface settings 
+interface settings
 {
   battle: number;
   coOp: number;
@@ -13,5 +14,5 @@ interface settings
 }
 export interface content
 {
-  content: GameSimple[]
+  Content: GameSimple[]
 }

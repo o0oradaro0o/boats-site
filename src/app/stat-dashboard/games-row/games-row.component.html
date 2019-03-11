@@ -1,7 +1,8 @@
 <tr>
-    <td>{{ game.numPlayers }}</td>
-    <td>{{ game.wn }}</td>
-    <td>{{ game.settings.coOp }}</td>
-    <td>{{ game.settings.battle }}</td>
-    <td>{{ game.settings.trading }}</td>
+    <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
+    <td *ngIf="game.wn">{{ game.wn }}</td>
+    <td *ngIf="game.settings">{{ game.settings.coOp? "Coop":"VS" }}</td>
+    <td *ngIf="game.settings">{{ game.settings.battle? "Battle":"Standard"}}</td>
+    <td *ngIf="game.settings">{{ game.settings.trading? "Trading":"Combat" }}</td>
+    <td *ngIf="game.dateProcessed">{{ game.dateProcessed }}</td>
 </tr>

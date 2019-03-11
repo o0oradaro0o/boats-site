@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { GameSimple, content } from './GameSimple';
 import { HttpHeaders } from '@angular/common/http';
 
-const apiUrl = 'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/battleships';
+const apiUrl = 'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
 const apikey = 'FX5Tqd1joL2CC3p1tjCoF7hJCIoRrNDv4m0tqmvo';
 
 
@@ -25,6 +25,6 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-    return this.http.get<content>(apiUrl + '/?include=numPlayers,dateProcessed,wn,settings,matchID', httpOptions);
+      return this.http.get<content>(apiUrl + 'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=10', httpOptions);
   }
 }

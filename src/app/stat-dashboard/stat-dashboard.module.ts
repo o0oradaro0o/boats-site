@@ -8,7 +8,8 @@ import { StatDashboardComponent } from './stat-dashboard/stat-dashboard.componen
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatListModule} from '@angular/material/list';
 const StatDashboard: Routes = [
   { path: '', component:StatDashboardComponent },
 
@@ -20,7 +21,9 @@ const StatDashboard: Routes = [
     CommonModule,
     RouterModule.forChild(StatDashboard),
     ReactiveFormsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatTableModule,
+    MatListModule
   ]
 })
 export class StatDashboardModule { }
