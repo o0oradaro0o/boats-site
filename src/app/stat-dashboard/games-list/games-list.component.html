@@ -1,21 +1,22 @@
 
 <table matSort (matSortChange)="sortData($event)" >
 <tr>
+     <th mat-sort-header="dateProcessed">Date</th>
     <th mat-sort-header="numPlayers">Number of Players</th>
     <th mat-sort-header="wn">Winners</th>
     <th mat-sort-header="CoOp">CoOp</th>
     <th mat-sort-header="battle">Game Mode</th>
     <th mat-sort-header="trading">Trading</th>
-    <th mat-sort-header="dateProcessed">Date</th>
+
 </tr>
-<tr *ngFor="let game of sortedData" (click)="handleClick(game.matchID)">
+<tr class = "innerRow" *ngFor="let game of sortedData" (click)="handleClick(game.matchID)">
     <ng-container *ngIf="showRow(game)">
+        <td *ngIf="game.dateProcessed">{{ game.dateProcessed }}</td>
         <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
         <td *ngIf="game.wn">{{ game.wn }}</td>
         <td *ngIf="game.settings">{{ game.settings.coOp? "Coop":"VS" }}</td>
         <td *ngIf="game.settings">{{ game.settings.battle? "Battle":"Standard"}}</td>
         <td *ngIf="game.settings">{{ game.settings.trading? "Trading":"Combat" }}</td>
-        <td *ngIf="game.dateProcessed">{{ game.dateProcessed }}</td>
     </ng-container>
 </tr>
 </table>

@@ -22,7 +22,14 @@ constructor( private svc: DataGrabberService, private  route: ActivatedRoute) {
     console.log(this.matchId); // Print the parameter to the console. 
   });
 
-  
+  console.log(this.matchId);
+  this.GameDetail$ = route.queryParams.pipe(
+map(params => params.matchId),
+filter(matchId => !!matchId),
+switchMap(matchId => svc.getGameDetail(this.matchId))
+);
+
+  console.log(this.matchId);
 }
   ngOnInit() {
   }
