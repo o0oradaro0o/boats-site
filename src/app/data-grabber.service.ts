@@ -25,6 +25,6 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-      return this.http.get<content>(apiUrl + 'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=10', httpOptions);
+      return this.http.get<content>(apiUrl + 'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=100', httpOptions);
   }
 }

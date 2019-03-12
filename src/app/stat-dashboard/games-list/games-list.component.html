@@ -1,17 +1,22 @@
 
-    <mat-list *ngIf="SimpleGamesList">
-        <mat-list-item>
-        <tr>
-            <th>number of Players</th>
-            <th>Winners</th>
-            <th>CoOp</th>
-            <th>Game Mode</th>
-            <th>Trading</th>
-            <th>Date</th>
-        </tr>
-      </mat-list-item>
-          <mat-list-item *ngFor="let game of SimpleGamesList.Content">
-          <app-games-row  [game]=game></app-games-row>
-          </mat-list-item>
-    </mat-list>
+<table matSort (matSortChange)="sortData($event)" >
+<tr>
+    <th mat-sort-header="numPlayers">Number of Players</th>
+    <th mat-sort-header="wn">Winners</th>
+    <th mat-sort-header="CoOp">CoOp</th>
+    <th mat-sort-header="battle">Game Mode</th>
+    <th mat-sort-header="trading">Trading</th>
+    <th mat-sort-header="dateProcessed">Date</th>
+</tr>
+<tr *ngFor="let game of sortedData">
+    <ng-container *ngIf="showRow(game)">
+        <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
+        <td *ngIf="game.wn">{{ game.wn }}</td>
+        <td *ngIf="game.settings">{{ game.settings.coOp? "Coop":"VS" }}</td>
+        <td *ngIf="game.settings">{{ game.settings.battle? "Battle":"Standard"}}</td>
+        <td *ngIf="game.settings">{{ game.settings.trading? "Trading":"Combat" }}</td>
+        <td *ngIf="game.dateProcessed">{{ game.dateProcessed }}</td>
+    </ng-container>
+</tr>
+</table>
 
