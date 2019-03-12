@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges  } from '@angular/core';
-import { GameSimple, gameContent } from 'src/app/GameSimple';
+import { GameSimple, GameContent } from './../../models/game-simple';
 import {Sort} from '@angular/material';
 import { Alert } from 'selenium-webdriver';
 
@@ -9,55 +9,47 @@ import { Alert } from 'selenium-webdriver';
   styleUrls: ['./games-list.component.scss']
 })
 export class GamesListComponent implements OnInit, OnChanges  {
-  @Input() SimpleGamesList: gameContent;
+  @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
   sortedData: GameSimple[];
   constructor() {
 
   }
   ngOnChanges(changes: SimpleChanges) {
-    if(!this.filteredGamesList)
-    {
-      this.filteredGamesList=[]
+    if (!this.filteredGamesList) {
+      this.filteredGamesList = [];
     }
-    if(this.SimpleGamesList)
-    {
-      this.SimpleGamesList.Content.forEach(game => {
-        if(game.dateProcessed && game.numPlayers && game.settings && game.wn)
-      {
-        
-        var somedate = new Date(game.dateProcessed);
-        somedate.setMinutes(-somedate.getTimezoneOffset())
- 
-        game.dateProcessed=somedate.toLocaleDateString()+" "+somedate.toLocaleTimeString();
-        this.filteredGamesList.push(game)
-      }
-      });
+
+    if (this.SimpleGamesList) {
+      this.SimpleGamesList.Content.forEach(
+        game => {
+          if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+            const somedate = new Date(game.dateProcessed);
+            somedate.setMinutes(-somedate.getTimezoneOffset());
+            game.dateProcessed = somedate.toLocaleDateString() + ' ' + somedate.toLocaleTimeString();
+            this.filteredGamesList.push(game);
+          }
+        });
     }
     const data = this.filteredGamesList.slice();
-      this.sortedData = data;
-
-
+    this.sortedData = data;
     this.sortedData = data.sort((a, b) => {
         return compare(new Date(a.dateProcessed), new Date(b.dateProcessed), false);
     });
   }
 
   ngOnInit() {
-    if(this.SimpleGamesList)
-    {
-    this.SimpleGamesList.Content.forEach(game => {
-      if(game.dateProcessed && game.numPlayers && game.settings && game.wn)
-    {
-      this.filteredGamesList.push(game)
+    if (this.SimpleGamesList) {
+    this.SimpleGamesList.Content.forEach(
+      game => {
+        if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+          this.filteredGamesList.push(game);
+        }
+      });
     }
-    });
   }
-    
-  }
-  
-  sortData(sort: Sort) {
 
+  sortData(sort: Sort) {
     const data = this.filteredGamesList.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
@@ -77,20 +69,16 @@ export class GamesListComponent implements OnInit, OnChanges  {
       }
     });
   }
-  
 
-  showRow(game: GameSimple)
-  {
-    if(game.dateProcessed && game.numPlayers && game.settings && game.wn)
-    {
+
+  showRow(game: GameSimple) {
+    if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
       return true;
     }
-    else
-    {
-      return false;
-    }
+    return false;
   }
 }
+
 function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

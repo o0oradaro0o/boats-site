@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { GameSimple, gameContent } from './GameSimple';
 import { HttpHeaders } from '@angular/common/http';
+import { GameContent } from './models/game-simple';
 
 const apiUrl = 'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
 const apikey = 'FX5Tqd1joL2CC3p1tjCoF7hJCIoRrNDv4m0tqmvo';
@@ -12,12 +12,9 @@ const apikey = 'FX5Tqd1joL2CC3p1tjCoF7hJCIoRrNDv4m0tqmvo';
 @Injectable({
   providedIn: 'root'
 })
-
-
 export class DataGrabberService {
-
   constructor(route: ActivatedRoute, private http: HttpClient) {}
-  getGames(): Observable<gameContent> {
+  getGames(): Observable<GameContent> {
     // One of several ways to set up HTTP request URL parameters
     // without concatenating them manually.
       const httpOptions = {
@@ -25,9 +22,11 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-      return this.http.get<gameContent>(apiUrl + 'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=100', httpOptions);
+      return this.http.get<GameContent>(apiUrl +
+        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=100',
+        httpOptions);
   }
-  getGameDetail(matchId): Observable<gameContent> {
+  getGameDetail(matchId): Observable<GameContent> {
     // One of several ways to set up HTTP request URL parameters
     // without concatenating them manually.
       const httpOptions = {
@@ -35,6 +34,6 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-      return this.http.get<gameContent>(apiUrl + 'battleships/'+matchId, httpOptions);
+      return this.http.get<GameContent>(apiUrl + 'battleships/' + matchId, httpOptions);
   }
 }
