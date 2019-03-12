@@ -26,7 +26,7 @@ export class DataGrabberService {
         })};
 
       return this.http.get<GameContent>(apiUrl +
-        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=100',
+        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=100',
         httpOptions);
   }
 
