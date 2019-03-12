@@ -9,10 +9,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
-import {MatSortModule} from '@angular/material/sort'
-const StatDashboard: Routes = [
-  { path: '', component:StatDashboardComponent },
+import {MatSortModule} from '@angular/material/sort';
 
+const StatDashboard: Routes = [
+  { path: '', component: StatDashboardComponent },
 ];
 
 @NgModule({
