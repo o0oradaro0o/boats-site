@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { GameSimple, gameContent } from './GameSimple';
 import { HttpHeaders } from '@angular/common/http';
+import { gameDetailContent } from './GameDetail';
 
 const apiUrl = 'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
 const apikey = 'FX5Tqd1joL2CC3p1tjCoF7hJCIoRrNDv4m0tqmvo';
@@ -27,7 +28,7 @@ export class DataGrabberService {
 
       return this.http.get<gameContent>(apiUrl + 'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed&take=100', httpOptions);
   }
-  getGameDetail(matchId): Observable<gameContent> {
+  getGameDetail(matchId : number): Observable<gameDetailContent> {
     // One of several ways to set up HTTP request URL parameters
     // without concatenating them manually.
       const httpOptions = {
@@ -35,6 +36,6 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-      return this.http.get<gameContent>(apiUrl + 'battleships/'+matchId, httpOptions);
+      return this.http.get<gameDetailContent>(apiUrl + 'battleships/'+matchId, httpOptions);
   }
 }
