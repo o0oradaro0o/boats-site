@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { DataGrabberService } from '../../data-grabber.service';
+import {ActivatedRoute} from "@angular/router"
+import {map, filter, switchMap} from "rxjs/operators"
+import { Observable } from 'rxjs';
+import { GameDetail } from 'src/app/models/game-detail';
 
 @Component({
   selector: 'app-game-dashboard',
@@ -7,8 +12,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GameDashboardComponent implements OnInit {
 
-  constructor() { }
+  
+matchId;
+GameDetail$ : Observable<GameDetail>;
+constructor( private svc: DataGrabberService, route: ActivatedRoute) {
+  console.log(this.matchId)
+this.GameDetail$ = route.queryParams.pipe(
+map(params => params.matchId),
+filter(matchId => !!matchId),
+switchMap(matchId => svc.getGameDetail(this.matchId))
+);
 
+console.log(this.matchId)
+}
   ngOnInit() {
   }
 

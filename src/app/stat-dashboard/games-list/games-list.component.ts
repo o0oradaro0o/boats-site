@@ -77,6 +77,10 @@ export class GamesListComponent implements OnInit, OnChanges  {
     }
     return false;
   }
+  handleClick(matchId)
+  {
+    
+  }
 }
 
 function compare(a: number | string | Date, b: number | string | Date, isAsc: boolean) {
