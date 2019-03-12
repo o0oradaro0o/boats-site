@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges  } from '@angular/core';
 import { GameSimple, GameContent } from './../../models/game-simple';
 import {Sort} from '@angular/material';
-import { Alert } from 'selenium-webdriver';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-games-list',
@@ -12,7 +12,7 @@ export class GamesListComponent implements OnInit, OnChanges  {
   @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
   sortedData: GameSimple[];
-  constructor() {
+  constructor(private router: Router) {
 
   }
   ngOnChanges(changes: SimpleChanges) {
@@ -79,7 +79,14 @@ export class GamesListComponent implements OnInit, OnChanges  {
   }
   handleClick(matchId)
   {
-    
+    this.router.navigate(['/game',{matchId: matchId}]).then( (e) => {
+      if (e) {
+        console.log("Navigation is successful!");
+      } else {
+        console.log("Navigation has failed!");
+      }
+    });
+    console.log(matchId)
   }
 }
 

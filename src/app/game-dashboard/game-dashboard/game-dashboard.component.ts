@@ -3,7 +3,7 @@ import { DataGrabberService } from '../../data-grabber.service';
 import {ActivatedRoute} from "@angular/router"
 import {map, filter, switchMap} from "rxjs/operators"
 import { Observable } from 'rxjs';
-import { GameDetail } from 'src/app/models/game-detail';
+import { GameDetail, GameDetailContent } from 'src/app/models/game-detail';
 
 @Component({
   selector: 'app-game-dashboard',
@@ -14,7 +14,7 @@ export class GameDashboardComponent implements OnInit {
 
   
 matchId;
-GameDetail$ : Observable<GameDetail>;
+GameDetail$ : Observable<GameDetailContent>;
 constructor( private svc: DataGrabberService, route: ActivatedRoute) {
   console.log(this.matchId)
 this.GameDetail$ = route.queryParams.pipe(

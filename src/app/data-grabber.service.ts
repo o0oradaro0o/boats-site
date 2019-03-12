@@ -3,7 +3,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { GameDetail } from './models/game-detail';
+import { GameDetailContent } from './models/game-detail';
 
 import { GameContent } from './models/game-simple';
 
@@ -30,7 +30,7 @@ export class DataGrabberService {
         httpOptions);
   }
 
-  getGameDetail(matchId : number): Observable<GameDetail> {
+  getGameDetail(matchId : number): Observable<GameDetailContent> {
     // One of several ways to set up HTTP request URL parameters
     // without concatenating them manually.
       const httpOptions = {
@@ -38,6 +38,6 @@ export class DataGrabberService {
           'x-api-key':  apikey,
         })};
 
-      return this.http.get<GameDetail>(apiUrl + 'battleships/'+matchId, httpOptions);
+      return this.http.get<GameDetailContent>(apiUrl + 'battleships/'+matchId, httpOptions);
   }
 }
