@@ -30,14 +30,14 @@ export class DataGrabberService {
         httpOptions);
   }
 
-  getGameDetail(matchId : number): Observable<GameDetailContent> {
+  getGameDetail(matchId: number): Observable<GameDetailContent> {
     // One of several ways to set up HTTP request URL parameters
     // without concatenating them manually.
       const httpOptions = {
         headers: new HttpHeaders({
           'x-api-key':  apikey,
         })};
-
-      return this.http.get<GameDetailContent>(apiUrl + 'battleships/'+matchId, httpOptions);
+      console.log('made a call for ' + matchId);
+      return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + matchId, httpOptions);
   }
 }

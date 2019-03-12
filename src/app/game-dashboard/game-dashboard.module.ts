@@ -4,7 +4,7 @@ import { GameDashboardComponent } from './game-dashboard/game-dashboard.componen
 import { RouterModule, Routes } from '@angular/router';
 
 const GameDashboard: Routes = [
-  { path: ':matchId', component: GameDashboardComponent },
+  { path: '', component: GameDashboardComponent },
 
 ];
 
