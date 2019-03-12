@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GameSimple, content } from 'src/app/GameSimple';
+import { GameSimple, gameContent } from 'src/app/GameSimple';
 import { DataGrabberService } from 'src/app/data-grabber.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { DataGrabberService } from 'src/app/data-grabber.service';
 })
 export class StatDashboardComponent implements OnInit {
 
-  SimpleGamesList: Observable<content>;
+  SimpleGamesList: Observable<gameContent>;
   constructor(loader: DataGrabberService) {
 
     // List reacts to filter and sort changes

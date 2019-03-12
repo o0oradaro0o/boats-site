@@ -12,7 +12,7 @@ interface settings
   coOp: number;
   trading: number;
 }
-export interface content
+export interface gameContent
 {
   Content: GameSimple[]
 }
