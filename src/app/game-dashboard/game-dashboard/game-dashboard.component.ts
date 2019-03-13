@@ -17,21 +17,13 @@ matchId;
 GameDetail$: Observable<GameDetailContent>;
 constructor( private svc: DataGrabberService, private  route: ActivatedRoute) {
 
-  this.route.queryParams.subscribe(params => {
-    this.matchId = params['matchId'];
-    console.log(this.matchId); // Print the parameter to the console. 
-  });
-
-  console.log(this.matchId);
-  this.GameDetail$ = route.queryParams.pipe(
-map(params => params.matchId),
-filter(matchId => !!matchId),
-switchMap(matchId => svc.getGameDetail(this.matchId))
-);
 
   console.log(this.matchId);
 }
   ngOnInit() {
+    this.matchId = this.route.snapshot.paramMap.get('matchId');
+    console.log(this.matchId);
+    this.GameDetail$ = this.svc.getGameDetail(this.matchId);
   }
 
 }
