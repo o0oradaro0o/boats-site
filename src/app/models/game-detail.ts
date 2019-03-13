@@ -21,6 +21,7 @@ export interface GameDetail {
   lvl: number;
   boatOrder: BoatSell[];
   playerID: string;
+  gameDuration: string;
 }
 
 interface BoatSell {

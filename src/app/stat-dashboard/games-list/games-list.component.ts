@@ -36,10 +36,10 @@ export class GamesListComponent implements OnInit, OnChanges {
             const seconds = totalSecs % 60;
             let minSep = '0';
             let secSeo = '0';
-            if (seconds > 10) {
+            if (seconds > 9) {
               secSeo = '';
             }
-            if (minutes > 10) {
+            if (minutes > 9) {
               minSep = '';
             }
             if (hours > 1) {

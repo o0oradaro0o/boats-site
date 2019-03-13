@@ -1,4 +1,11 @@
-<p>
-  game-dashboard works!
-</p>
+<a [routerLink]="['/dash']" preserveQueryParams preserveFragment>
+  Back to games list
+</a>
+<div class = "flex-container">
+<div class="data-holder">
+    <app-game-general-data [DetailGamesList]="GameDetail$ | async"></app-game-general-data>
+</div>
+<div class="data-holder">
 <app-game-gold-data [DetailGamesList]="GameDetail$ | async"></app-game-gold-data>
+</div>
+</div>

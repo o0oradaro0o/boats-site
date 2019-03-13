@@ -17,16 +17,15 @@ export class GameGoldDataComponent implements OnInit, OnChanges {
   goldAdvantage: number[] = [];
   empireTick = [];
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['DetailGamesList']) {
+    if (changes.DetailGamesList) {
       this.makeGraph();
     }
   }
   ngOnInit() {
   }
   makeGraph() {
-    console.log(this.empireTick.length)
-    if(!this.DetailGamesList)
-    {
+    console.log(this.empireTick.length);
+    if (!this.DetailGamesList) {
       return true;
     }
     if (this.empireTick.length > 0) {
@@ -36,9 +35,9 @@ export class GameGoldDataComponent implements OnInit, OnChanges {
       this.empireTick.push(Math.floor(gold.EmpireGoldCount * 4));
       this.northEmpTotal.push(Math.floor(gold.North_gold));
       this.southEmpTotal.push(Math.floor(gold.South_Gold * -1));
-      this.goldAdvantage.push(Math.floor((gold.South_Gold-gold.North_gold) / (0.1 + 0.8 * (1 / Math.sqrt(gold.EmpireGoldCount)))));
+      this.goldAdvantage.push(Math.floor((gold.South_Gold - gold.North_gold) / (0.1 + 0.8 * (1 / Math.sqrt(gold.EmpireGoldCount)))));
     });
-    console.log(this.empireTick[0])
+    console.log(this.empireTick[0]);
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
