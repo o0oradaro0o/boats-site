@@ -12,7 +12,7 @@ export interface GameDetail {
   loadTime: number;
   mapVersion: number;
   buildOrder: ItemBuy[];
-  combatLog: CombatLogEntry;
+  combatLog: CombatLogEntry[];
   HeroDamage: number;
   dth: number; // player deaths
   damageTanked: number;
