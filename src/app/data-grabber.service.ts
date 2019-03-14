@@ -25,7 +25,7 @@ export class DataGrabberService {
 
   getGames(): Observable<GameContent> {
       return this.http.get<GameContent>(apiUrl +
-        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=100',
+        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200',
         this.httpOptions);
   }
 

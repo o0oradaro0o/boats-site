@@ -18,55 +18,59 @@ export class GamesListComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
   sortedData: GameSimple[];
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
   ngOnChanges(changes: SimpleChanges) {
-    if (!this.filteredGamesList) {
-      this.filteredGamesList = [];
-    }
+    if (changes.SimpleGamesList) {
 
-    if (this.SimpleGamesList) {
-      this.SimpleGamesList.Content.forEach(game => {
-        if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
-          if (!game.gameDuration) {
-            game.gameDuration = '--';
-          } else {
-            const totalSecs = +game.gameDuration;
-            const hours = totalSecs / 3600;
-            const minutes = (totalSecs % 3600) / 60;
-            const seconds = totalSecs % 60;
-            let minSep = '0';
-            let secSeo = '0';
-            if (seconds > 9) {
-              secSeo = '';
-            }
-            if (minutes > 9) {
-              minSep = '';
-            }
-            if (hours > 1) {
 
-              game.gameDuration = Math.floor(hours) + ':' + minSep + Math.floor(minutes) + ':' + secSeo + seconds;
+      if (!this.filteredGamesList) {
+        this.filteredGamesList = [];
+      }
+
+      if (this.SimpleGamesList) {
+        this.SimpleGamesList.Content.forEach(game => {
+          if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+            if (!game.gameDuration) {
+              game.gameDuration = '--';
             } else {
+              const totalSecs = +game.gameDuration;
+              const hours = totalSecs / 3600;
+              const minutes = (totalSecs % 3600) / 60;
+              const seconds = totalSecs % 60;
+              let minSep = '0';
+              let secSeo = '0';
+              if (seconds > 9) {
+                secSeo = '';
+              }
+              if (minutes > 9) {
+                minSep = '';
+              }
+              if (hours > 1) {
 
-              game.gameDuration = Math.floor(minutes) + ':' + secSeo + seconds;
+                game.gameDuration = Math.floor(hours) + ':' + minSep + Math.floor(minutes) + ':' + secSeo + seconds;
+              } else {
+
+                game.gameDuration = Math.floor(minutes) + ':' + secSeo + seconds;
+              }
             }
+            const somedate = new Date(game.dateProcessed);
+            somedate.setMinutes(-somedate.getTimezoneOffset());
+            game.dateProcessed =
+              somedate.toLocaleDateString() + ' ' + somedate.toLocaleTimeString();
+            this.filteredGamesList.push(game);
           }
-          const somedate = new Date(game.dateProcessed);
-          somedate.setMinutes(-somedate.getTimezoneOffset());
-          game.dateProcessed =
-            somedate.toLocaleDateString() + ' ' + somedate.toLocaleTimeString();
-          this.filteredGamesList.push(game);
-        }
+        });
+      }
+      const data = this.filteredGamesList.slice();
+      this.sortedData = data;
+      this.sortedData = data.sort((a, b) => {
+        return compare(
+          new Date(a.dateProcessed),
+          new Date(b.dateProcessed),
+          false
+        );
       });
     }
-    const data = this.filteredGamesList.slice();
-    this.sortedData = data;
-    this.sortedData = data.sort((a, b) => {
-      return compare(
-        new Date(a.dateProcessed),
-        new Date(b.dateProcessed),
-        false
-      );
-    });
   }
 
   ngOnInit() {
