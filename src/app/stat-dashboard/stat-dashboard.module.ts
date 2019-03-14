@@ -10,13 +10,14 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
+import { GamesAggregateComponent } from './games-aggregate/games-aggregate.component';
 
 const StatDashboard: Routes = [
   { path: '', component: StatDashboardComponent },
 ];
 
 @NgModule({
-  declarations: [PlayersListComponent, PlayersRowComponent, GamesListComponent, StatDashboardComponent],
+  declarations: [PlayersListComponent, PlayersRowComponent, GamesListComponent, StatDashboardComponent, GamesAggregateComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(StatDashboard),

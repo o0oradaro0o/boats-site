@@ -46,21 +46,25 @@ export class GameGoldDataComponent implements OnInit, OnChanges {
           {
             label: 'North Gold Awarded',
             data: this.northEmpTotal,
-            borderColor: '#FFcccc',
-            fill: false
+            borderColor: '#FF5555',
+            backgroundColor: '#FF5555',
+            fill: false,
+
           },
           {
             label: 'South Gold Awarded',
             data: this.southEmpTotal,
-            borderColor: '#ccFFcc',
-            fill: false
+            borderColor: '#55FF55',
+            backgroundColor: '#55FF55',
+            fill: false,
+
           },
           {
             label: 'Gold Advantage',
             data: this.goldAdvantage,
             borderColor: '#DAA520',
-            fill: false,
-            backgroundColor: '#EBB630'
+            backgroundColor: '#EBB63055',
+            borderWidth: 1
           }
         ]
       },
