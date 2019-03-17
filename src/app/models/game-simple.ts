@@ -4,6 +4,7 @@ export interface GameSimple {
   settings: Settings;
   matchID: number;
   dateProcessed: string;
+  gameDuration: string;
 }
 
 interface Settings {

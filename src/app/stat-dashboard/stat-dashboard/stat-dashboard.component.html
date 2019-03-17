@@ -1,5 +1,8 @@
 <mat-tab-group  mat-align-tabs="center">
   <mat-tab label="Games"> 
+    <h2></h2>
+    <app-games-aggregate [SimpleGamesList]="SimpleGamesList | async"></app-games-aggregate>
+    <h2>Recent Games</h2>
     <app-games-list [SimpleGamesList]="SimpleGamesList | async"></app-games-list>
   </mat-tab>
   <mat-tab label="Players"> 

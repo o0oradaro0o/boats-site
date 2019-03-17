@@ -1,0 +1,25 @@
+
+<h3>Winner</h3>
+<p class="game-detail">{{ DetailGamesList.Content[0].wn }}</p>
+<div class="flex-container">
+  <div class = "detail-two">
+<h4>Date</h4>
+<p class="game-detail">{{ FixDate(DetailGamesList.Content[0].dateProcessed) }}</p>
+<h4>Number of Players</h4>
+<p class="game-detail">{{ DetailGamesList.Content[0].numPlayers }}</p>
+<h4>Load Time</h4>
+<p class="game-detail">{{ DetailGamesList.Content[0].loadTime }} seconds</p>
+</div>
+<div  class = "detail-two">
+<h4>Settings</h4>
+<p class="game-detail">{{ DetailGamesList.Content[0].settings.coOp? "Coop":"VS" }}</p>
+<p class="game-detail">{{ DetailGamesList.Content[0].settings.battle? "Battle":"Normal" }}</p>
+<p class="game-detail">{{ DetailGamesList.Content[0].settings.trading? "Trading":"No Trading" }}</p>
+<h4>Duration</h4>
+<p class="game-detail">{{ FixTime(DetailGamesList.Content[0].gameDuration) }}</p>
+<h4>matchID</h4>
+<p class="game-detail">{{ DetailGamesList.Content[0].matchID }}</p>
+
+</div>
+</div>
+

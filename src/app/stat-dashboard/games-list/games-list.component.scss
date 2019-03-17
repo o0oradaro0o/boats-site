@@ -4,3 +4,7 @@ table {
     margin-right: auto;
   }
   tr:nth-child(even) {background-color: #f2f2f2;}
+  .innerRow:hover {
+    background-color: #e2e2ff;
+    cursor: pointer;
+  }

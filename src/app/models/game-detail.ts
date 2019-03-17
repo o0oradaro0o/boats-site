@@ -12,15 +12,16 @@ export interface GameDetail {
   loadTime: number;
   mapVersion: number;
   buildOrder: ItemBuy[];
-  combatLog: CombatLogEntry
+  combatLog: CombatLogEntry[];
   HeroDamage: number;
   dth: number; // player deaths
   damageTanked: number;
   saleOrder: ItemSell[];
   kls: number;
   lvl: number;
-  boatOrder: BoatSell[]
+  boatOrder: BoatSell[];
   playerID: string;
+  gameDuration: string;
 }
 
 interface BoatSell {
@@ -45,7 +46,7 @@ interface CombatLogEntry {
   time: number;
 }
 
-interface EmpGold {
+export interface EmpGold {
   North_gold: number;
   South_Gold: number;
   EmpireGoldCount: number;
