@@ -12,12 +12,12 @@ const routes: Routes = [
   {
     path: '',
     component: BrochureLayoutComponent,
-    children: [{ path: '', component: HomepageComponent, pathMatch: 'full' }]
+    children: [
+    { path: '', component: HomepageComponent, pathMatch: 'full' },
+    { path: 'stats', loadChildren: './stat-dashboard/stat-dashboard.module#StatDashboardModule' },
+    { path: 'game', loadChildren: './game-dashboard/game-dashboard.module#GameDashboardModule' },
+    ]
   },
-
-  // App Routes
-  { path: 'stats', loadChildren: './stat-dashboard/stat-dashboard.module#StatDashboardModule' },
-  { path: 'game', loadChildren: './game-dashboard/game-dashboard.module#GameDashboardModule' },
 ];
 
 @NgModule({
