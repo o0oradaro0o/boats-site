@@ -1,18 +1,12 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  OnChanges,
-  SimpleChanges
-} from '@angular/core';
-import { GameSimple, GameContent } from './../../models/game-simple';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Sort } from '@angular/material';
 import { Router } from '@angular/router';
+import { GameSimple, GameContent } from 'src/app/models/game-simple';
 
 @Component({
-  selector: 'app-games-list',
-  templateUrl: './games-list.component.html',
-  styleUrls: ['./games-list.component.scss']
+  selector: 'games-list',
+  templateUrl: './list.component.html',
+  styleUrls: ['./list.component.scss']
 })
 export class GamesListComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;

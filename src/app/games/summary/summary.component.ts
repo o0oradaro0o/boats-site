@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { GameContent, GameSimple } from 'src/app/models/game-simple';
+import { GameContent } from 'src/app/models/game-simple';
 
 @Component({
-  selector: 'app-games-aggregate',
-  templateUrl: './games-aggregate.component.html',
-  styleUrls: ['./games-aggregate.component.scss']
+  selector: 'games-summary',
+  templateUrl: './summary.component.html',
+  styleUrls: ['./summary.component.scss']
 })
-export class GamesAggregateComponent implements OnInit, OnChanges {
+export class GamesSummaryComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
 
   constructor() { }
@@ -20,8 +20,8 @@ export class GamesAggregateComponent implements OnInit, OnChanges {
   gamesInLast24Hours = 0;
   playersInLast24Hours = 0;
 
-ngOnChanges(changes: SimpleChanges) {
-    if (changes.SimpleGamesList) {
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.SimpleGamesList) {
       this.coOpCount = 0;
       this.tradingCount = 0;
       this.southWins = 0;
@@ -31,6 +31,7 @@ ngOnChanges(changes: SimpleChanges) {
       this.totalValidGames = 0;
       this.gamesInLast24Hours = 0;
       this.playersInLast24Hours = 0;
+
       this.SimpleGamesList.Content.forEach(game => {
         const yesterday = new Date();
         yesterday.setHours(yesterday.getHours() - 24);
@@ -66,14 +67,17 @@ ngOnChanges(changes: SimpleChanges) {
       });
     }
   }
+
   truncateDecimals(dec, digits) {
+    if (!dec) return '-';
+
     const multiplier = Math.pow(10, digits);
     const adjustedNum = dec * multiplier;
     const truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
 
     return truncatedNum / multiplier;
-}
-  ngOnInit() {
   }
 
+  ngOnInit() {
+  }
 }

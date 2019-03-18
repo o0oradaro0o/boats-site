@@ -13,9 +13,9 @@ const routes: Routes = [
     path: '',
     component: BrochureLayoutComponent,
     children: [
-    { path: '', component: HomepageComponent, pathMatch: 'full' },
-    { path: 'stats', loadChildren: './stat-dashboard/stat-dashboard.module#StatDashboardModule' },
-    { path: 'game', loadChildren: './game-dashboard/game-dashboard.module#GameDashboardModule' },
+      { path: '', component: HomepageComponent, pathMatch: 'full' },
+      { path: 'games', loadChildren: './games/games.module#GamesModule' },
+      { path: 'game', loadChildren: './game-dashboard/game-dashboard.module#GameDashboardModule' },
     ]
   },
 ];

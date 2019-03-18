@@ -3,3 +3,25 @@
 @import 'layout';
 
 body { background-color: $color-gray-500; }
+
+.banner {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+.bg-gray-vertical-emboss {
+  background-image: linear-gradient(to bottom, $color-gray-400, $color-gray-500 5%, $color-gray-500 95%, $color-gray-400);
+  background-repeat: no-repeat;
+}
+
+.table-striped > tbody > tr:nth-child(2n+1) > td {
+  background-color: rgba($color-gray-400, 0.1);
+}
+
+.table-hover > tbody > tr:hover {
+  background-color: rgba($color-blue-500, 0.125);
+  cursor: pointer;
+}
+
+.mat-sort-header-stem, .mat-sort-header-indicator { color: $color-gray-500; }
