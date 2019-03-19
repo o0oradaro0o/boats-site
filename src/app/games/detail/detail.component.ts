@@ -2,17 +2,17 @@ import { Component, OnInit, Input } from '@angular/core';
 import { GameDetailContent } from 'src/app/models/game-detail';
 
 @Component({
-  selector: 'app-game-general-data',
-  templateUrl: './game-general-data.component.html',
-  styleUrls: ['./game-general-data.component.scss']
+  selector: 'game-detail',
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss']
 })
-export class GameGeneralDataComponent implements OnInit {
+export class GameDetailComponent implements OnInit {
   @Input() DetailGamesList: GameDetailContent;
   constructor() { }
 
-
   ngOnInit() {
   }
+
   FixDate(date)
   {
     const somedate = new Date(date);

@@ -120,7 +120,7 @@ export class GamesListComponent implements OnInit, OnChanges {
     return false;
   }
   handleClick(matchId) {
-    this.router.navigate(['/game', { matchId }]).then(e => {
+    this.router.navigate(['/games', matchId ]).then(e => {
       if (e) {
         console.log('Navigation is successful!');
       } else {

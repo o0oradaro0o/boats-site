@@ -11,12 +11,21 @@ import { GamesComponent } from './games.component';
 import { GamesSummaryComponent } from './summary/summary.component';
 import { GamesListComponent } from './list/list.component';
 
+import { GameComponent } from './game.component';
+import { GameGoldChartComponent } from './gold-chart/gold-chart.component';
+import { GameDetailComponent } from './detail/detail.component';
+import { GameTimelineComponent } from './timeline/timeline.component';
+
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
+  { path: ':id', component: GameComponent }
 ];
 
 @NgModule({
-  declarations: [ GamesComponent, GamesSummaryComponent, GamesListComponent ],
+  declarations: [
+    GamesComponent, GamesSummaryComponent, GamesListComponent,
+    GameComponent, GameGoldChartComponent, GameDetailComponent, GameTimelineComponent
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(GamesRoutes),

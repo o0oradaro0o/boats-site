@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameGoldDataComponent } from './game-gold-data.component';
+import { GameTimelineComponent } from './timeline.component';
 
-describe('GameGoldDataComponent', () => {
-  let component: GameGoldDataComponent;
-  let fixture: ComponentFixture<GameGoldDataComponent>;
+describe('GameTimelineComponent', () => {
+  let component: GameTimelineComponent;
+  let fixture: ComponentFixture<GameTimelineComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameGoldDataComponent ]
+      declarations: [ GameTimelineComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameGoldDataComponent);
+    fixture = TestBed.createComponent(GameTimelineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

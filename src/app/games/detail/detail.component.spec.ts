@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameTimelineComponent } from './game-timeline.component';
+import { GameGeneralDataComponent } from './detail.component';
 
-describe('GameTimelineComponent', () => {
-  let component: GameTimelineComponent;
-  let fixture: ComponentFixture<GameTimelineComponent>;
+describe('GameGeneralDataComponent', () => {
+  let component: GameGeneralDataComponent;
+  let fixture: ComponentFixture<GameGeneralDataComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GameTimelineComponent ]
+      declarations: [ GameGeneralDataComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GameTimelineComponent);
+    fixture = TestBed.createComponent(GameGeneralDataComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

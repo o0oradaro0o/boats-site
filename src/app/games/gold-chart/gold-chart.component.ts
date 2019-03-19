@@ -3,11 +3,11 @@ import { GameDetailContent, EmpGold } from 'src/app/models/game-detail';
 import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-game-gold-data',
-  templateUrl: './game-gold-data.component.html',
-  styleUrls: ['./game-gold-data.component.scss']
+  selector: 'game-gold-chart',
+  templateUrl: './gold-chart.component.html',
+  styleUrls: ['./gold-chart.component.scss']
 })
-export class GameGoldDataComponent implements OnInit, OnChanges {
+export class GameGoldChartComponent implements OnInit, OnChanges {
   @Input() DetailGamesList: GameDetailContent;
   constructor() { }
 

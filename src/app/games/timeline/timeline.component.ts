@@ -10,9 +10,9 @@ interface Interaction {
 }
 
 @Component({
-  selector: 'app-game-timeline',
-  templateUrl: './game-timeline.component.html',
-  styleUrls: ['./game-timeline.component.scss']
+  selector: 'game-timeline',
+  templateUrl: './timeline.component.html',
+  styleUrls: ['./timeline.component.scss']
 })
 export class GameTimelineComponent implements OnInit, OnChanges {
   @Input() details: GameDetailContent;

@@ -1,0 +1,34 @@
+<div class="row small">
+  <div class="col-12 col-sm-6 col-lg-3">
+    <h4>ID</h4>
+    <p class="mb-lg-0">
+      <strong>Match Id:</strong> {{ DetailGamesList.Content[0].matchID }}<br>
+      <strong>Date:</strong> {{ FixDate(DetailGamesList.Content[0].dateProcessed) }}
+    </p>
+  </div>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <h4>Match Settings</h4>
+    <p class="mb-lg-0">
+      <strong>Objective:</strong> {{ DetailGamesList.Content[0].settings.coOp? "Coop":"VS" }}<br>
+      <strong>Mode:</strong> {{ DetailGamesList.Content[0].settings.battle? "Battle":"Normal" }}<br>
+      <strong>Trading:</strong> {{ DetailGamesList.Content[0].settings.trading? "Enabled":"Disabled" }}
+    </p>
+  </div>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <h4>Players</h4>
+    <p class="mb-lg-0">
+      <strong># of Players:</strong> {{ DetailGamesList.Content[0].numPlayers }}<br>
+      <strong>Load Time:</strong> {{ DetailGamesList.Content[0].loadTime }}s
+    </p>
+  </div>
+
+  <div class="col-12 col-sm-6 col-lg-3">
+    <h4>Outcome</h4>
+    <p class="mb-lg-0">
+      <strong>Winner:</strong> {{ DetailGamesList.Content[0].wn }}<br>
+      <strong>Duration:</strong> {{ FixTime(DetailGamesList.Content[0].gameDuration) }}
+    </p>
+  </div>
+</div>
