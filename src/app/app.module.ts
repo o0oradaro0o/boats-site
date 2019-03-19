@@ -1,20 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
+import { AppRoutingModule } from './app-routing.module';
+
+// Layout Components
+import { AppComponent } from './app.component';
+import { BrochureLayoutComponent } from './_layout/brochure-layout/brochure-layout.component';
+import { BrochureNavComponent } from './_layout/brochure-nav/brochure-nav.component';
+import { BrochureFooterComponent } from './_layout/brochure-footer/brochure-footer.component';
+
+// Page Components
+import { HomepageComponent } from './homepage/homepage.component';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
+  ],
+  declarations: [
+    AppComponent,
+    BrochureLayoutComponent, BrochureNavComponent, BrochureFooterComponent,
+    HomepageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

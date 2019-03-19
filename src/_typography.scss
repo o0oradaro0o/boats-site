@@ -1,0 +1,30 @@
+$primary-font-family:   'Montserrat', sans-serif;
+$font-weight-light:     300;
+$font-weight-regular:   400;
+$font-weight-medium:    500;
+$font-weight-semibold:  600;
+$font-weight-bold:      700;
+
+$weight-classes: () !default;
+$weight-classes: map-merge((
+    light: $font-weight-light,
+    regular: $font-weight-regular,
+    medium: $font-weight-medium,
+    semibold: $font-weight-semibold,
+    bold: $font-weight-bold
+), $weight-classes);
+
+@each $key, $value in $weight-classes {
+    .font-weight-#{$key} {
+        font-weight: $value !important;
+    }
+}
+
+body {
+    font-family: $primary-font-family;
+}
+
+h1 { font-size: 64px; }
+h2 { font-size: 48px; }
+h3 { font-size: 32px; }
+h4 { font-size: 18px; }

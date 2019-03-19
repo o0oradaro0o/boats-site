@@ -1,0 +1,10 @@
+@import '../../colors';
+
+.banner {
+  -webkit-box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+  -moz-box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+  box-shadow: inset 0px 0px 100px 100px rgba(0,0,0,0.5);
+}
+
+#banner { background-image: url(/assets/homepage/banner.png); }
+#banner2 { background-image: url(/assets/homepage/banner2.png); }

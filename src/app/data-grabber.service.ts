@@ -5,11 +5,8 @@ import { Observable } from 'rxjs';
 import { GameDetailContent } from './models/game-detail';
 import { GameContent } from './models/game-simple';
 
-
-
 const apiUrl = 'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
 const apikey = 'FX5Tqd1joL2CC3p1tjCoF7hJCIoRrNDv4m0tqmvo';
-
 
 @Injectable({
   providedIn: 'root'
