@@ -17,13 +17,12 @@ export class GameComponent implements OnInit {
   GameDetail$: Observable<GameDetailContent>;
 
   constructor( private svc: DataGrabberService, private route: ActivatedRoute) {
-    this.route.params.subscribe( params => console.log(params) );
-    console.log(this.matchId);
+    this.route.params.subscribe(params => {
+      this.matchId = params.id;
+    });
   }
 
   ngOnInit() {
-    this.matchId = this.route.snapshot.paramMap.get('matchId');
-    console.log(this.matchId);
     this.GameDetail$ = this.svc.getGameDetail(this.matchId);
   }
 }
