@@ -11,7 +11,7 @@ body { background-color: $color-gray-500; }
 }
 
 .bg-gray-vertical-emboss {
-  background-image: linear-gradient(to bottom, $color-gray-400, $color-gray-500 5%, $color-gray-500 95%, $color-gray-400);
+  background-image: linear-gradient(to bottom, $color-gray-400, $color-gray-500 15px);
   background-repeat: no-repeat;
 }
 
