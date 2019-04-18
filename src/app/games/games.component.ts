@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, merge} from 'rxjs';
 import { GameContent } from './../models/game-simple';
 import { DataGrabberService } from './../data-grabber.service';
 
@@ -13,7 +13,13 @@ export class GamesComponent implements OnInit {
 
   constructor(loader: DataGrabberService) {
     // List reacts to filter and sort changes
-    this.SimpleGamesList = loader.getGames();
+    const today = new Date();
+    const yesterday = new Date(today);
+    const DByesterday = new Date(today);
+    yesterday.setDate(today.getDate() - 1);
+    DByesterday.setDate(today.getDate() - 2);
+    this.SimpleGamesList = merge(loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
+
   }
 
   ngOnInit() {

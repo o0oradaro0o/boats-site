@@ -20,7 +20,7 @@ export class GamesListComponent implements OnInit, OnChanges {
       if (!this.filteredGamesList) {
         this.filteredGamesList = [];
       }
-
+      
       if (this.SimpleGamesList) {
         this.SimpleGamesList.Content.forEach(game => {
           if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
@@ -55,6 +55,8 @@ export class GamesListComponent implements OnInit, OnChanges {
           }
         });
       }
+      console.log(this.filteredGamesList.length)
+      console.log(this.SimpleGamesList.Content.length)
       const data = this.filteredGamesList.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {

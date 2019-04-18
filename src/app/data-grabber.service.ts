@@ -20,14 +20,19 @@ export class DataGrabberService {
 
   constructor(route: ActivatedRoute, private http: HttpClient) {}
 
-  getGames(): Observable<GameContent> {
-      return this.http.get<GameContent>(apiUrl +
-        'battleships_game?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200',
-        this.httpOptions);
+  getGames(date:Date): Observable<GameContent> {
+    let dd = String(date.getDate()).padStart(2, '0');
+    let mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+    let yyyy = date.getFullYear();
+          
+    return this.http.get<GameContent>(apiUrl +
+      'battleships_games/' + yyyy + mm + dd + '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200',
+      this.httpOptions);
   }
 
   getGameDetail(matchId: number): Observable<GameDetailContent> {
+      
       console.log('made a call for ' + matchId);
-      return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + matchId, this.httpOptions);
+      return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId), this.httpOptions);
   }
 }

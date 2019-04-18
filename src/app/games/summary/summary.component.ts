@@ -21,7 +21,7 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
   playersInLast24Hours = 0;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (this.SimpleGamesList) {
+    if (changes.SimpleGamesList) {
       this.coOpCount = 0;
       this.tradingCount = 0;
       this.southWins = 0;
