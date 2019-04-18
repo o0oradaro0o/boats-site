@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
-import { GameContent } from 'src/app/models/game-simple';
+import { GameContent, GameSimple } from 'src/app/models/game-simple';
 
 @Component({
   selector: 'games-summary',
@@ -8,7 +8,7 @@ import { GameContent } from 'src/app/models/game-simple';
 })
 export class GamesSummaryComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
-
+  filteredGamesList: GameSimple[];
   constructor() { }
   coOpCount = 0;
   tradingCount = 0;
@@ -22,6 +22,18 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.SimpleGamesList) {
+      if (!this.filteredGamesList) {
+        this.filteredGamesList = [];
+      }
+      if (this.SimpleGamesList) {
+        this.SimpleGamesList.Content.forEach(game => {
+          if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+            this.filteredGamesList.push(game);
+          }
+        });
+      }
+
+
       this.coOpCount = 0;
       this.tradingCount = 0;
       this.southWins = 0;
@@ -32,7 +44,7 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
       this.gamesInLast24Hours = 0;
       this.playersInLast24Hours = 0;
 
-      this.SimpleGamesList.Content.forEach(game => {
+      this.filteredGamesList.forEach(game => {
         const yesterday = new Date();
         yesterday.setHours(yesterday.getHours() - 24);
         if (new Date(game.dateProcessed) > yesterday) {
