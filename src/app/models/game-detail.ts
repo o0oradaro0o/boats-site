@@ -41,6 +41,7 @@ interface ItemBuy {
 }
 
 interface CombatLogEntry {
+  Game_time: any;
   killed_name: string;
   killer_name: string;
   time: number;

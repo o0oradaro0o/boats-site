@@ -16,5 +16,8 @@
       <div class="col-12 col-lg-6">
         <game-gold-chart [DetailGamesList]="GameDetail$ | async"></game-gold-chart>
       </div>
+      <div class="col-12 col-lg-6">
+        <game-timeline [details]="GameDetail$ | async"></game-timeline>
+    </div>
   </div>
 </div>
