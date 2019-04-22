@@ -33,7 +33,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   ShowBuys = true;
   // new hotness
   interactions: Interaction[] = [];
-
+  usedTimes = [];
   datasets = [];
   empireTick = [];
   svg: any;
@@ -41,13 +41,13 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
   ngOnInit() { }
   toggle(checkbox) {
-    if (checkbox === "ShowKillsDeaths") {
+    if (checkbox === 'ShowKillsDeaths') {
       this.ShowKillsDeaths = !this.ShowKillsDeaths;
     }
-    if (checkbox === "ShowBoats") {
+    if (checkbox === 'ShowBoats') {
       this.ShowBoats = !this.ShowBoats;
     }
-    if (checkbox === "ShowBuys") {
+    if (checkbox === 'ShowBuys') {
       this.ShowBuys = !this.ShowBuys;
     }
 
@@ -152,63 +152,89 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   }
 
   makeGraph() {
+
     for (const player of this.players) {
-      const timelinePoints = [];
-      let color = '#55FF5599';
-      if (player[2] == "North") {
-        color ='#FF555599'
+      this.usedTimes = [];
+      if (player[2] == 'North') {
+      this.fillPlayerData(player);
       }
-      const teamPoint = {
-        color,
-        starting_time: 0,
-        ending_time: +this.details.Content[0].gameDuration * 1000 / 60,
-      };
-      timelinePoints.push(teamPoint);
-      for (const inter of this.interactions.filter(inter => inter.actor == player[0])) {
-        let color = 'red';
-        let target = inter.target;
-        let image = '';
-        if (this.playerIdToName.get(target)) {
-          target = this.playerIdToName.get(target);
-        }
-        let actionText = 'killed ' + target;
-        if (inter.action == 'death') {
-          color = 'black';
-          actionText = 'died to ' + target;
-        }
-        if (inter.action == 'ship') {
-          color = '#673AB7';
-          actionText = 'Purchased ' + target;
-          image = '/boats-site/assets/boat-icons/' + target.replace(' ', '_') + '.png';
-        }
-        if (inter.action == 'buy') {
-          color = 'yellow';
-          actionText = 'Purchased ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
-          image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
-        }
-        if (inter.action == 'sell') {
-          color = 'grey';
-          actionText = 'sold ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
-          image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
-        }
+    }
 
-
-        const point = {
-          color,
-          info: actionText,
-          starting_time: inter.time * 1000,
-          ending_time: inter.time * 1000 + .1,
-          display: 'circle',
-          img: image
-        };
-        timelinePoints.push(point);
+    for (const player of this.players) {
+      this.usedTimes = [];
+      if (player[2] == 'South') {
+      this.fillPlayerData(player);
       }
-      this.datasets.push({
-          label: player[1],
-          times: timelinePoints
-        });
     }
   }
+
+fillPlayerData(player) {
+  const timelinePoints = [];
+  let color = '#55FF5599';
+  if (player[2] == 'North') {
+    color = '#FF555599';
+  }
+  const teamPoint = {
+    color,
+    starting_time: 0,
+    ending_time: +this.details.Content[0].gameDuration * 1000 / 60,
+  };
+  timelinePoints.push(teamPoint);
+  for (const inter of this.interactions.filter(inter => inter.actor == player[0])) {
+    let color = 'red';
+    let target = inter.target;
+    let image = '';
+    if (this.playerIdToName.get(target)) {
+      target = this.playerIdToName.get(target);
+    }
+    let actionText = 'killed ' + target;
+    if (inter.action == 'death') {
+      color = 'black';
+      actionText = 'died to ' + target;
+    }
+    if (inter.action == 'ship') {
+      color = '#673AB7';
+      actionText = 'Purchased ' + target;
+      while(target.indexOf(" ")>=0)
+      {
+        target=target.replace(' ', '_')
+      }
+      image = '/boats-site/assets/boat-icons/' + target.replace(' ', '_') + '.png';
+    }
+    if (inter.action == 'buy') {
+      color = 'yellow';
+      actionText = 'Purchased ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
+      image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
+    }
+    if (inter.action == 'sell') {
+      color = 'grey';
+      actionText = 'sold ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
+      image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
+    }
+    let thisTime = inter.time * 1000;
+    this.usedTimes.forEach(usedTime => {
+      if(thisTime<usedTime+50 && thisTime>usedTime-50)
+      {
+        thisTime=thisTime+150
+      }
+    });
+    this.usedTimes.push(thisTime);
+    this.usedTimes.sort();
+    const point = {
+      color,
+      info: actionText,
+      starting_time: thisTime,
+      ending_time: thisTime + .1,
+      display: 'circle',
+      img: image
+    };
+    timelinePoints.push(point);
+  }
+  this.datasets.push({
+      label: player[1],
+      times: timelinePoints
+    });
+}
 
   display() {
     const laneLength = this.players.length;
@@ -245,7 +271,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       }
     }.bind(this));
 
-    this.svg = d3.select('#timeline').append('svg').attr('width', 500).attr('height', miniHeight).datum(this.datasets).call(chart);
+    this.svg = d3.select('#timeline').append('svg').attr('width', 500).attr('height', miniHeight).style("stroke", "#777777") .datum(this.datasets).call(chart);
 
   }
 
