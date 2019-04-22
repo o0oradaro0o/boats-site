@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GameDetailContent } from 'src/app/models/game-detail';
-import {time} from "d3-time";
+
+import {time} from 'd3-time';
 import * as d3 from 'd3';
 import * as d3timelines from 'd3-timelines';
 
@@ -20,23 +21,72 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   @Input() details: GameDetailContent;
 
   players = [];
-  currentHoverInfo = 'test!';
-  HoverImg=""
+  currentHoverInfo = '';
+  HoverImg = '';
   // old; don't need.
   kills = {};
   deaths = {};
   ships = {};
   playerIdToName = new Map();
-
+  ShowKillsDeaths = true;
+  ShowBoats = true;
+  ShowBuys = true;
   // new hotness
   interactions: Interaction[] = [];
 
   datasets = [];
   empireTick = [];
-
+  svg: any;
   constructor() { }
 
   ngOnInit() { }
+  toggle(checkbox) {
+    if (checkbox === "ShowKillsDeaths") {
+      this.ShowKillsDeaths = !this.ShowKillsDeaths;
+    }
+    if (checkbox === "ShowBoats") {
+      this.ShowBoats = !this.ShowBoats;
+    }
+    if (checkbox === "ShowBuys") {
+      this.ShowBuys = !this.ShowBuys;
+    }
+
+    this.interactions = [];
+    this.players = [];
+    this.datasets = [];
+    this.parseContent();
+    this.makeGraph();
+    const laneLength = this.players.length;
+    const miniHeight = laneLength * 25 + 50;
+
+    const tBegin = 0;
+    const tEnd = +this.details.Content[0].gameDuration * 1000 / 60;
+
+
+    const chart = d3timelines.timelines();
+    chart.stack();
+    chart.beginning(tBegin);
+    chart.ending(tEnd);
+    chart.margin({left: 120, right: 30, top: 0, bottom: 0});
+    chart.width(tEnd / 15);
+    chart.relativeTime();
+    chart.tickFormat({
+            format(d) { return d3.timeFormat('%S')(d); },
+            tickTime: d3.timeSecond,
+            tickInterval: 10,
+            tickSize: 5,
+          });
+
+
+    chart.hover(function(d, i, datum) {
+      if (d.info) {
+        this.currentHoverInfo = d.info;
+        this.HoverImg = d.img;
+      }
+    }.bind(this));
+    d3.selectAll('svg > *').remove();
+    this.svg.datum(this.datasets).call(chart);
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.details) {
@@ -55,14 +105,17 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   parseContent() {
     // player data
     this.details.Content.forEach( player => {
-      this.playerIdToName.set(player.playerID,player.playerName);
+      this.playerIdToName.set(player.playerID, player.playerName);
       this.players.push([player.playerID, player.playerName, player.tm]);
+      if (this.ShowBoats) {
       for (const ship of player.boatOrder) {
         this.ships[player.playerID] = this.ships[player.playerID] || [];
         this.ships[player.playerID].push([ship.time, 'ship', player.playerID, ship.item]);
         this.interactions.push({ time: ship.time, action: 'ship',
           actor: player.playerID, target: ship.item.toString() });
       }
+    }
+      if (this.ShowBuys) {
       for (const item of player.buildOrder) {
         this.ships[player.playerID] = this.ships[player.playerID] || [];
         this.ships[player.playerID].push([item.time, 'buy', player.playerID, item.item]);
@@ -70,17 +123,17 @@ export class GameTimelineComponent implements OnInit, OnChanges {
           actor: player.playerID, target: item.item.toString() });
       }
       for (const item of player.saleOrder) {
-        if(item.item)
-        {
+        if (item.item) {
         this.ships[player.playerID] = this.ships[player.playerID] || [];
         this.ships[player.playerID].push([item.time, 'sell', player.playerID, item.item]);
         this.interactions.push({ time: item.time, action: 'sell',
           actor: player.playerID, target: item.item.toString() });
         }
       }
+      }
     });
-    
 
+    if (this.ShowKillsDeaths) {
     // game data
     this.details.Content[0].combatLog.forEach(interaction => {
         // kills
@@ -96,45 +149,55 @@ export class GameTimelineComponent implements OnInit, OnChanges {
           actor: interaction.killed_name, target: interaction.killer_name });
     });
   }
+  }
 
   makeGraph() {
     for (const player of this.players) {
       const timelinePoints = [];
+      let color = '#55FF5599';
+      if (player[2] == "North") {
+        color ='#FF555599'
+      }
+      const teamPoint = {
+        color,
+        starting_time: 0,
+        ending_time: +this.details.Content[0].gameDuration * 1000 / 60,
+      };
+      timelinePoints.push(teamPoint);
       for (const inter of this.interactions.filter(inter => inter.actor == player[0])) {
         let color = 'red';
-        let target=inter.target
-        let image=""
-        if(this.playerIdToName.get(target))
-        {
-          target=this.playerIdToName.get(target)
+        let target = inter.target;
+        let image = '';
+        if (this.playerIdToName.get(target)) {
+          target = this.playerIdToName.get(target);
         }
-        let actionText = "killed " +target
+        let actionText = 'killed ' + target;
         if (inter.action == 'death') {
           color = 'black';
-          actionText = "died to " +target
+          actionText = 'died to ' + target;
         }
         if (inter.action == 'ship') {
-          color = 'blue';
-          actionText="Purchased "+target
+          color = '#673AB7';
+          actionText = 'Purchased ' + target;
+          image = '/boats-site/assets/boat-icons/' + target.replace(' ', '_') + '.png';
         }
         if (inter.action == 'buy') {
           color = 'yellow';
-          actionText="Purchased "+target.substring(target.indexOf("_")+1).replace("_bow","");
-          image="/assets/items/"+target.substring(target.indexOf("_")+1)+".png"
+          actionText = 'Purchased ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
+          image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
         }
         if (inter.action == 'sell') {
           color = 'grey';
-          actionText="sold "+target.substring(target.indexOf("_")+1).replace("_bow","");
-          image="/assets/items/"+target.substring(target.indexOf("_")+1)+".png"
-       
+          actionText = 'sold ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
+          image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
         }
 
 
         const point = {
           color,
           info: actionText,
-          starting_time: inter.time*1000,
-          ending_time: inter.time*1000 + .1,
+          starting_time: inter.time * 1000,
+          ending_time: inter.time * 1000 + .1,
           display: 'circle',
           img: image
         };
@@ -157,7 +220,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     const miniHeight = laneLength * 25 + 50;
 
     const tBegin = 0;
-    const tEnd = this.details.Content[0].gameDuration*1000 / 60;
+    const tEnd = +this.details.Content[0].gameDuration * 1000 / 60;
 
 
     const chart = d3timelines.timelines();
@@ -165,25 +228,24 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     chart.beginning(tBegin);
     chart.ending(tEnd);
     chart.margin({left: 120, right: 30, top: 0, bottom: 0});
-    chart.width(tEnd/15);
-    chart.relativeTime()
+    chart.width(tEnd / 15);
+    chart.relativeTime();
     chart.tickFormat({
-            format: function(d) { return d3.timeFormat("%S")(d) },
+            format(d) { return d3.timeFormat('%S')(d); },
             tickTime: d3.timeSecond,
             tickInterval: 10,
             tickSize: 5,
           });
-    
+
 
     chart.hover(function(d, i, datum) {
-      if(d.info)
-      {
+      if (d.info) {
         this.currentHoverInfo = d.info;
-        this.HoverImg= d.img
+        this.HoverImg = d.img;
       }
-    }.bind(this)); 
+    }.bind(this));
 
-    const svg = d3.select('#timeline').append('svg').attr('width', 500).attr("height", miniHeight).datum(this.datasets).call(chart);
+    this.svg = d3.select('#timeline').append('svg').attr('width', 500).attr('height', miniHeight).datum(this.datasets).call(chart);
 
   }
 

@@ -6,7 +6,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
-
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { GamesComponent } from './games.component';
 import { GamesSummaryComponent } from './summary/summary.component';
 import { GamesListComponent } from './list/list.component';
@@ -33,7 +33,8 @@ const GamesRoutes: Routes = [
     MatTabsModule,
     MatTableModule,
     MatListModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
   ]
 })
 

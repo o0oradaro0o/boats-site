@@ -1,9 +1,17 @@
 <h2>Timeline</h2>
 <div>
   <p>drag to scroll, hover on node for detail</p>
-  <div id='timeline' ></div>
+  <div id='timeline'></div>
+  <div id="checkHolder">
+    <mat-checkbox class="checkbox" color="warn" (change)="toggle('ShowKillsDeaths')" [checked]="ShowKillsDeaths">Show
+      Kills and Deaths</mat-checkbox>
+    <mat-checkbox class="checkbox" color="primary" (change)="toggle('ShowBoats')" [checked]="ShowBoats">Show Boats
+    </mat-checkbox>
+    <mat-checkbox class="checkbox" color="accent" (change)="toggle('ShowBuys')" [checked]="ShowBuys">Show Items
+    </mat-checkbox>
+  </div>
 </div>
 <div id="detailBox">
   <p id="eventName">{{currentHoverInfo}}</p>
-  <img id="eventImage" src={{HoverImg}}/>
+  <img id="eventImage" src={{HoverImg}} />
 </div>
