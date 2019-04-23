@@ -4,10 +4,11 @@
     <p>drag to scroll, hover on node for detail</p>
   </div>
   <div id="detailBox" class="col-sm-3">
-      <div id="eventImage">
-      <img src={{HoverImg}} />
+      <div id="eventImageHolder">
+      <img id="eventImage" src={{HoverImg}} (error)="tempImg()"/>
       </div>
     <p id="eventName">{{currentHoverInfo}}</p>
+    <p id="playerName">{{currentHoverPlayerName}}</p>
     </div>
 </div>
 <div id='timeline'></div>
