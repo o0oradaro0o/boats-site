@@ -31,7 +31,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   playerIdToName = new Map();
   ShowKillsDeaths = true;
   ShowBoats = true;
-  ShowBuys = true;
+  ShowBuys = false;
   // new hotness
   interactions: Interaction[] = [];
   usedTimes = [];
@@ -179,7 +179,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     }
   }
   tempImg() {
-    this.HoverImg = window.location.origin + '/assets/items/white.png';
+    this.HoverImg = '/boats-site/assets/items/white.png';
   }
 
   fillPlayerData(player) {
@@ -291,6 +291,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         this.currentHoverPlayerName = d.playerInfo
       }
     }.bind(this));
+
 
     this.svg = d3.select('#timeline').append('svg').attr('width', 1000).attr('height', miniHeight).style('stroke', '#777777').datum(this.datasets).call(chart);
 

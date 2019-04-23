@@ -13,15 +13,18 @@
 <div class="bg-gray-vertical-emboss py-5">
   <div class="container">
     <div class="row">
-      <div class="col-5 col-lg-5">
+      <div class="col-6 col-lg-6">
         <game-gold-chart [DetailGamesList]="GameDetail$ | async"></game-gold-chart>
       </div>
+    </div>
+    <div class="row">
       <div class="col-10 col-lg-10">
         <game-player-snapshot [DetailGamesList]="GameDetail$ | async"></game-player-snapshot>
       </div>
-      <div class="row"></div>
-      <div class="col-12 col-lg-6">
-        <game-timeline [details]="GameDetail$ | async"></game-timeline>
-      </div>
+    </div>
+    <div class="row"></div>
+    <div class="col-12 col-lg-12">
+      <game-timeline [details]="GameDetail$ | async"></game-timeline>
     </div>
   </div>
+</div>

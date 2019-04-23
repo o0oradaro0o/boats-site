@@ -75,7 +75,9 @@ export class PlayerSnapshotComponent implements OnInit {
           return compare(a.damageTanked, b.damageTanked, isAsc);
         case 'damageTanked':
           return compare(a.damageTanked, b.damageTanked, isAsc);
-        
+        case 'ship':
+          return compare(a.shp, b.shp, isAsc);
+          
         default:
           return compare(
             new Date(a.tm),
