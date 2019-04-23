@@ -1,0 +1,34 @@
+<div class="TableHolder">
+<table class="table table-striped table-hover table-responsive-lg small" matSort (matSortChange)="sortData($event)">
+
+
+  <thead class="bg-gray-100 text-gray-500">
+    <tr>
+      <th mat-sort-header="playerName">Name</th>
+      <th mat-sort-header="ship">Boat</th>
+      <th mat-sort-header="level">Level</th>
+      <th mat-sort-header="kills">Kills</th>
+      <th mat-sort-header="deaths">Deaths</th>
+      <th mat-sort-header="lasthits">Last Hits</th>
+      <th mat-sort-header="herodamage">Hero Damage</th>
+      <th mat-sort-header="damageTanked">Damage Tanked</th>
+      <th mat-sort-header="buildingDamage">Building Damage</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="innerRow" *ngFor="let player of sortedData">
+      <ng-container>
+        <td *ngIf="player.playerName">{{ player.playerName }}</td>
+        <td *ngIf="player.shp">{{ player.shp }}</td>
+        <td *ngIf="player.lvl">{{ player.lvl }}</td>
+        <td *ngIf="player.kls">{{ player.kls }}</td>
+        <td *ngIf="player.dth">{{ player.dth }}</td>
+        <td *ngIf="player.lh">{{ player.lh }}</td>
+        <td *ngIf="player.HeroDamage">{{ player.HeroDamage }}</td>
+        <td *ngIf="player.damageTanked">{{ player.damageTanked }}</td>
+        <td *ngIf="player.buildingDamage">{{ player.buildingDamage }}</td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
+</div>

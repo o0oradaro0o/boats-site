@@ -22,6 +22,8 @@ export interface GameDetail {
   boatOrder: BoatSell[];
   playerID: string;
   gameDuration: string;
+  buildingDamage: number;
+  shp: string;
 }
 
 interface BoatSell {

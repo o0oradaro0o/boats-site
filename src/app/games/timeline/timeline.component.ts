@@ -292,7 +292,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       }
     }.bind(this));
 
-    this.svg = d3.select('#timeline').append('svg').attr('width', 500).attr('height', miniHeight).style('stroke', '#777777').datum(this.datasets).call(chart);
+    this.svg = d3.select('#timeline').append('svg').attr('width', 1000).attr('height', miniHeight).style('stroke', '#777777').datum(this.datasets).call(chart);
 
   }
 
