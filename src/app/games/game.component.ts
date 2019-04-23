@@ -14,7 +14,9 @@ import { GameDetail, GameDetailContent } from 'src/app/models/game-detail';
 
 export class GameComponent implements OnInit {
   matchId;
-  GameDetail$: Observable<GameDetailContent>;
+  
+  GeneralGameDetail$: Observable<GameDetailContent>;
+  PlayerDetails$: Observable<GameDetailContent>;
 
   constructor( private svc: DataGrabberService, private route: ActivatedRoute) {
     this.route.params.subscribe(params => {
@@ -23,6 +25,7 @@ export class GameComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.GameDetail$ = this.svc.getGameDetail(this.matchId);
+    this.PlayerDetails$ = this.svc.getPlayerDetails(this.matchId);
+    this.GeneralGameDetail$ = this.svc.getGeneralGameDetail(this.matchId);
   }
 }

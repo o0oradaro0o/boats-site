@@ -15,24 +15,38 @@ export class DataGrabberService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'x-api-key':  apikey,
-    })};
+      'x-api-key': apikey,
+    })
+  };
 
-  constructor(route: ActivatedRoute, private http: HttpClient) {}
+  constructor(route: ActivatedRoute, private http: HttpClient) { }
 
-  getGames(date:Date): Observable<GameContent> {
-    let dd = String(date.getDate()).padStart(2, '0');
-    let mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
-    let yyyy = date.getFullYear();
-          
+  getGames(date: Date): Observable<GameContent> {
+    const dd = String(date.getDate()).padStart(2, '0');
+    const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
+    const yyyy = date.getFullYear();
+
     return this.http.get<GameContent>(apiUrl +
       'battleships_games/' + yyyy + mm + dd + '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200',
       this.httpOptions);
   }
 
   getGameDetail(matchId: number): Observable<GameDetailContent> {
-      
-      console.log('made a call for ' + matchId);
-      return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId), this.httpOptions);
+
+    console.log('made a call for ' + matchId);
+    return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId), this.httpOptions);
   }
+
+  getPlayerDetails(matchId: number): Observable<GameDetailContent> {
+
+    console.log('made a call for ' + matchId);
+    return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId) + '?include=buildingDamage,connectionState,afk,playerName,lh,tm,loadTime,wn,shp,HeroDamage,buildOrder,dth,damageTanked,saleOrder,kls,lvl,boatOrder,playerID', this.httpOptions);
+  }
+  getGeneralGameDetail(matchId: number): Observable<GameDetailContent> {
+
+    console.log('made a call for ' + matchId);
+    return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId) + '?include=numPlayers,gameDuration,empGoldHist,wn,combatLog,settings,matchID,dateProcessed&take=1', this.httpOptions);
+  }
+
+
 }

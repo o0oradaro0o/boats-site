@@ -18,16 +18,13 @@ interface Interaction {
   styleUrls: ['./timeline.component.scss']
 })
 export class GameTimelineComponent implements OnInit, OnChanges {
-  @Input() details: GameDetailContent;
+  @Input() gameDetails: GameDetailContent;
+  @Input() playerDetails: GameDetailContent;
 
   players = [];
   currentHoverInfo = '';
   currentHoverPlayerName = '';
   HoverImg = '';
-  // old; don't need.
-  kills = {};
-  deaths = {};
-  ships = {};
   playerIdToName = new Map();
   ShowKillsDeaths = true;
   ShowBoats = true;
@@ -61,7 +58,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     const miniHeight = laneLength * 25 + 50;
 
     const tBegin = 0;
-    const tEnd = +this.details.Content[0].gameDuration * 1000 / 60;
+    const tEnd = +this.gameDetails.Content[0].gameDuration * 1000 / 60;
 
 
     const chart = d3timelines.timelines();
@@ -90,10 +87,10 @@ export class GameTimelineComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.details) {
+    if (changes.gameDetails || changes.playerDetails) {
       console.log(this.empireTick.length);
 
-      if (!this.details || this.empireTick.length > 0) {
+      if (!this.gameDetails || !this.playerDetails  || this.empireTick.length > 0) {
         return true;
       }
 
@@ -105,14 +102,12 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
   parseContent() {
     // player data
-    this.details.Content.forEach(player => {
+    this.playerDetails.Content.forEach(player => {
       this.playerIdToName.set(player.playerID, player.playerName);
       this.players.push([player.playerID, player.playerName, player.tm]);
       if (this.ShowBoats) {
         for (const ship of player.boatOrder) {
-          this.ships[player.playerID] = this.ships[player.playerID] || [];
-          this.ships[player.playerID].push([ship.time, 'ship', player.playerID, ship.item]);
-          this.interactions.push({
+           this.interactions.push({
             time: ship.time, action: 'ship',
             actor: player.playerID, target: ship.item.toString()
           });
@@ -120,8 +115,6 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       }
       if (this.ShowBuys) {
         for (const item of player.buildOrder) {
-          this.ships[player.playerID] = this.ships[player.playerID] || [];
-          this.ships[player.playerID].push([item.time, 'buy', player.playerID, item.item]);
           this.interactions.push({
             time: item.time, action: 'buy',
             actor: player.playerID, target: item.item.toString()
@@ -129,9 +122,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         }
         for (const item of player.saleOrder) {
           if (item.item) {
-            this.ships[player.playerID] = this.ships[player.playerID] || [];
-            this.ships[player.playerID].push([item.time, 'sell', player.playerID, item.item]);
-            this.interactions.push({
+           this.interactions.push({
               time: item.time, action: 'sell',
               actor: player.playerID, target: item.item.toString()
             });
@@ -142,18 +133,14 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
     if (this.ShowKillsDeaths) {
       // game data
-      this.details.Content[0].combatLog.forEach(interaction => {
+      this.gameDetails.Content[0].combatLog.forEach(interaction => {
         // kills
-        this.kills[interaction.killer_name] = this.kills[interaction.killer_name] || [];
-        this.kills[interaction.killer_name].push([interaction.Game_time, 'kill', interaction.killed_name]);
-        this.interactions.push({
+         this.interactions.push({
           time: interaction.Game_time, action: 'kill',
           actor: interaction.killer_name, target: interaction.killed_name
         });
 
         // deaths
-        this.deaths[interaction.killed_name] = this.deaths[interaction.killed_name] || [];
-        this.deaths[interaction.killed_name].push([interaction.Game_time, 'death', interaction.killer_name]);
         this.interactions.push({
           time: interaction.Game_time, action: 'death',
           actor: interaction.killed_name, target: interaction.killer_name
@@ -191,7 +178,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     const teamPoint = {
       color,
       starting_time: 0,
-      ending_time: +this.details.Content[0].gameDuration * 1000 / 60,
+      ending_time: +this.gameDetails.Content[0].gameDuration * 1000 / 60,
     };
     timelinePoints.push(teamPoint);
     for (const inter of this.interactions.filter(inter => inter.actor == player[0])) {
@@ -266,7 +253,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     const miniHeight = laneLength * 25 + 50;
 
     const tBegin = 0;
-    const tEnd = +this.details.Content[0].gameDuration * 1000 / 60;
+    const tEnd = +this.gameDetails.Content[0].gameDuration * 1000 / 60;
 
 
     const chart = d3timelines.timelines();

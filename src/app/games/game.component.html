@@ -6,7 +6,7 @@
 
 <div class="bg-blue-200 text-gray-500 py-4">
   <div class="container">
-    <game-detail [DetailGamesList]="GameDetail$ | async"></game-detail>
+    <game-detail [DetailGamesList]="GeneralGameDetail$ | async"></game-detail>
   </div>
 </div>
 
@@ -14,17 +14,17 @@
   <div class="container">
     <div class="row">
       <div class="col-6 col-lg-6">
-        <game-gold-chart [DetailGamesList]="GameDetail$ | async"></game-gold-chart>
+        <game-gold-chart [DetailGamesList]="GeneralGameDetail$ | async"></game-gold-chart>
       </div>
     </div>
     <div class="row">
       <div class="col-10 col-lg-10">
-        <game-player-snapshot [DetailGamesList]="GameDetail$ | async"></game-player-snapshot>
+        <game-player-snapshot [DetailGamesList]="PlayerDetails$ | async"></game-player-snapshot>
       </div>
     </div>
     <div class="row"></div>
     <div class="col-12 col-lg-12">
-      <game-timeline [details]="GameDetail$ | async"></game-timeline>
+      <game-timeline [playerDetails]="PlayerDetails$ | async" [gameDetails]="GeneralGameDetail$ | async"></game-timeline>
     </div>
   </div>
 </div>
