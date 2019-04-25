@@ -166,7 +166,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     }
   }
   tempImg() {
-    this.HoverImg = '/boats-site/assets/items/white.png';
+    this.HoverImg = '/assets/items/white.png';
   }
 
   fillPlayerData(player) {
@@ -191,14 +191,14 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       }
       let actionText = 'killed';
       if (inter.action == 'kill') {
-        image = '/boats-site/assets/items/kill.png';
+        image = '/assets/items/kill.png';
         playerName = target;
       }
       if (inter.action == 'death') {
         color = 'black';
         actionText = 'died to';
         playerName = target;
-        image = '/boats-site/assets/items/death.png';
+        image = '/assets/items/death.png';
       }
       if (inter.action == 'ship') {
         color = '#673AB7';
@@ -206,17 +206,17 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         while (target.indexOf(' ') >= 0) {
           target = target.replace(' ', '_');
         }
-        image = '/boats-site/assets/boat-icons/' + target.replace(' ', '_') + '.png';
+        image = '/assets/boat-icons/' + target.replace(' ', '_') + '.png';
       }
       if (inter.action == 'buy') {
         color = 'yellow';
         actionText = 'Purchased ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
-        image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
+        image = '/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
       }
       if (inter.action == 'sell') {
         color = 'grey';
         actionText = 'sold ' + target.substring(target.indexOf('_') + 1).replace('_bow', '');
-        image = '/boats-site/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
+        image = '/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
       }
       let thisTime = inter.time * 1000;
       this.usedTimes.forEach(usedTime => {

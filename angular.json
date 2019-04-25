@@ -92,7 +92,8 @@
             "assets": [
               "assets",
               "favicon.ico",
-              "404.html"
+              "404.html",
+              "CNAME"
             ]
           }
         },
