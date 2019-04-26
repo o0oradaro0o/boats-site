@@ -13,13 +13,15 @@ export class GamesComponent implements OnInit {
 
   constructor(loader: DataGrabberService) {
     // List reacts to filter and sort changes
+    
     const today = new Date();
+    const tomorrow = new Date(today);
     const yesterday = new Date(today);
     const DByesterday = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
     yesterday.setDate(today.getDate() - 1);
     DByesterday.setDate(today.getDate() - 2);
-    this.SimpleGamesList = merge(loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
-
+    this.SimpleGamesList = merge(loader.getGames(tomorrow),loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
   }
 
   ngOnInit() {

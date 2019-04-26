@@ -18,15 +18,15 @@
   <tbody>
     <tr class="innerRow" *ngFor="let player of sortedData">
       <ng-container>
-        <td *ngIf="player.playerName">{{ player.playerName }}</td>
-        <td *ngIf="player.shp">{{ player.shp }}</td>
-        <td *ngIf="player.lvl">{{ player.lvl }}</td>
-        <td *ngIf="player.kls">{{ player.kls }}</td>
-        <td *ngIf="player.dth">{{ player.dth }}</td>
-        <td *ngIf="player.lh">{{ player.lh }}</td>
-        <td *ngIf="player.HeroDamage">{{ player.HeroDamage }}</td>
-        <td *ngIf="player.damageTanked">{{ player.damageTanked }}</td>
-        <td *ngIf="player.buildingDamage">{{ player.buildingDamage }}</td>
+        <td *ngIf="player.playerName!=undefined">{{ player.playerName }}</td>
+        <td *ngIf="player.shp!=undefined">{{ player.shp }}</td>
+        <td *ngIf="player.lvl!=undefined">{{ player.lvl }}</td>
+        <td *ngIf="player.kls!=undefined">{{ player.kls }}</td>
+        <td *ngIf="player.dth!=undefined">{{ player.dth }}</td>
+        <td *ngIf="player.lh!=undefined">{{ player.lh }}</td>
+        <td *ngIf="player.HeroDamage!=undefined">{{ player.HeroDamage }}</td>
+        <td *ngIf="player.damageTanked!=undefined">{{ player.damageTanked }}</td>
+        <td *ngIf="player.buildingDamage!=undefined">{{ player.buildingDamage }}</td>
       </ng-container>
     </tr>
   </tbody>
