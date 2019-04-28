@@ -15,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: '', component: HomepageComponent, pathMatch: 'full' },
       { path: 'games', loadChildren: './games/games.module#GamesModule' },
+      { path: 'players', loadChildren: './players/players.module#PlayersModule' },
     ]
   },
 ];

@@ -25,7 +25,7 @@ export class DataGrabberService {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = date.getFullYear();
-    let s =apiUrl +
+    let s = apiUrl +
     'battleships_games/' + yyyy + mm + dd + '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200'
     return this.http.get<GameContent>(s,
       this.httpOptions);
@@ -47,6 +47,4 @@ export class DataGrabberService {
     console.log('made a call for ' + matchId);
     return this.http.get<GameDetailContent>(apiUrl + 'battleships/' + Math.abs(matchId) + '?include=numPlayers,gameDuration,empGoldHist,wn,combatLog,settings,matchID,dateProcessed&take=1', this.httpOptions);
   }
-
-
 }
