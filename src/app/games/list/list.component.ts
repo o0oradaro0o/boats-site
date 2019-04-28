@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { Sort } from '@angular/material';
 import { Router } from '@angular/router';
 import { GameSimple, GameContent } from 'src/app/models/game-simple';
@@ -12,18 +18,21 @@ export class GamesListComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
   sortedData: GameSimple[];
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes.SimpleGamesList) {
-
-
       if (!this.filteredGamesList) {
         this.filteredGamesList = [];
       }
-      
+
       if (this.SimpleGamesList) {
         this.SimpleGamesList.Content.forEach(game => {
-          if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+          if (
+            game.dateProcessed &&
+            game.numPlayers &&
+            game.settings &&
+            game.wn
+          ) {
             if (!game.gameDuration) {
               game.gameDuration = '--';
             } else {
@@ -40,23 +49,31 @@ export class GamesListComponent implements OnInit, OnChanges {
                 minSep = '';
               }
               if (hours > 1) {
-
-                game.gameDuration = Math.floor(hours) + ':' + minSep + Math.floor(minutes) + ':' + secSeo + seconds;
+                game.gameDuration =
+                  Math.floor(hours) +
+                  ':' +
+                  minSep +
+                  Math.floor(minutes) +
+                  ':' +
+                  secSeo +
+                  seconds;
               } else {
-
-                game.gameDuration = Math.floor(minutes) + ':' + secSeo + seconds;
+                game.gameDuration =
+                  Math.floor(minutes) + ':' + secSeo + seconds;
               }
             }
             const somedate = new Date(game.dateProcessed);
             somedate.setMinutes(-somedate.getTimezoneOffset());
             game.dateProcessed =
-              somedate.toLocaleDateString() + ' ' + somedate.toLocaleTimeString();
+              somedate.toLocaleDateString() +
+              ' ' +
+              somedate.toLocaleTimeString();
             this.filteredGamesList.push(game);
           }
         });
       }
-      console.log(this.filteredGamesList.length)
-      console.log(this.SimpleGamesList.Content.length)
+      // console.log(this.filteredGamesList.length)
+      // console.log(this.SimpleGamesList.Content.length)
       const data = this.filteredGamesList.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {
@@ -115,6 +132,19 @@ export class GamesListComponent implements OnInit, OnChanges {
     });
   }
 
+  getDurationPercent(duration: string) {
+    // duration = mm:ss
+    const timeTokens = duration.split(':');
+    if (timeTokens.length > 2) {
+      return '100%';
+    } else if (timeTokens.length < 2) {
+      return '0%';
+    }
+    const minutes = timeTokens[0];
+    const percent = (100 * +minutes) / 60;
+    return `${percent}%`;
+  }
+
   showRow(game: GameSimple) {
     if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
       return true;
@@ -122,7 +152,7 @@ export class GamesListComponent implements OnInit, OnChanges {
     return false;
   }
   handleClick(matchId) {
-    this.router.navigate(['/games', matchId ]).then(e => {
+    this.router.navigate(['/games', matchId]).then(e => {
       if (e) {
         console.log('Navigation is successful!');
       } else {

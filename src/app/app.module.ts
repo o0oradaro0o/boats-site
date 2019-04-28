@@ -23,10 +23,12 @@ import { HomepageComponent } from './homepage/homepage.component';
   ],
   declarations: [
     AppComponent,
-    BrochureLayoutComponent, BrochureNavComponent, BrochureFooterComponent,
+    BrochureLayoutComponent,
+    BrochureNavComponent,
+    BrochureFooterComponent,
     HomepageComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
