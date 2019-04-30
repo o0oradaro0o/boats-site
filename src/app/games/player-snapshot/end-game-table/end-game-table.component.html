@@ -19,10 +19,10 @@
     <tbody>
       <tr class="innerRow" *ngFor="let player of playerData">
         <ng-container>
-          <td *ngIf="player.playerName !== undefined">
+          <td *ngIf="player.playerName !== undefined" class="name-row">
             <img
               src="{{
-                '/assets/boat-icons/' + player.shp.replace(' ', '_') + '.png'
+                '/assets/boat-icons/' + player.shp.split(' ').join('_') + '.png'
               }}"
               alt="{{ player.shp }}"
               class="boat-icons"

@@ -7,7 +7,9 @@
     <tr>
       <th mat-sort-header="name">Name</th>
       <th mat-sort-header="games">Games Played</th>
-      <th mat-sort-header="winper">Competitive Win %</th>
+      <th mat-sort-header="winper" title="Only counts games with >5 players">
+        Competitive Win %
+      </th>
       <th mat-sort-header="KD">KDR</th>
       <th mat-sort-header="lastHits">Average Last Hits</th>
       <th mat-sort-header="RecentGame">Most Recent Game</th>
@@ -22,7 +24,13 @@
       <ng-container>
         <td>{{ player.playerName }}</td>
         <td>{{ player.games }}</td>
-        <td>{{ ((player.compWins / player.compGames) * 100).toFixed(2) }}</td>
+        <td>
+          {{
+            player.compGames
+              ? ((player.compWins / player.compGames) * 100).toFixed(2) + '%'
+              : 'N/A'
+          }}
+        </td>
         <td>
           {{ (player.kills / player.deaths).toFixed(2) }}
           <div

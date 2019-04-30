@@ -35,7 +35,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
         items = items.map(itemData => {
           const itemName = itemData.item;
           // have to remove the item_ substring to get the right asset name
-          const imageName = itemName.replace(' ', '_').substring(5);
+          const imageName = itemName.replace(/ /g, '_').substring(5);
           const time = itemData.time;
           const image = `/assets/items/${imageName}.png`;
           return { name: itemName, time, image };
@@ -43,7 +43,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
 
         ships = ships.map(shipData => {
           const shipName = shipData.item;
-          const imageName = shipName.replace(' ', '_');
+          const imageName = shipName.replace(/ /g, '_');
           const time = shipData.time;
           const image = `/assets/boat-icons/${imageName}.png`;
           return { name: shipName, time, image };
