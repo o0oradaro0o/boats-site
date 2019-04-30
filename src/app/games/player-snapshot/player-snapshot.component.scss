@@ -1,12 +1,13 @@
-.TableHolder
-{
+td {
+  padding: 2px;
+  margin: 1px;
+}
 
+th {
+  padding: 5px;
+  margin: 1px;
 }
-td{
-    padding:2px;
-    margin:1px;
-}
-th{
-    padding:5px;
-    margin:1px;
+
+.right-align {
+  text-align: right;
 }

@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { GameDetailContent, EmpGold } from 'src/app/models/game-detail';
 import { Chart } from 'chart.js';
 
@@ -9,7 +15,7 @@ import { Chart } from 'chart.js';
 })
 export class GameGoldChartComponent implements OnInit, OnChanges {
   @Input() DetailGamesList: GameDetailContent;
-  constructor() { }
+  constructor() {}
 
   chart = [];
   northEmpTotal: number[] = [];
@@ -21,23 +27,33 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
       this.makeGraph();
     }
   }
-  ngOnInit() {
-  }
+  ngOnInit() {}
   makeGraph() {
-    console.log(this.empireTick.length);
+    // console.log(this.empireTick.length);
     if (!this.DetailGamesList) {
       return true;
     }
     if (this.empireTick.length > 0) {
       return true;
     }
+    // Add the initial tick to be 0
+    this.empireTick.push(0);
+    this.northEmpTotal.push(0);
+    this.southEmpTotal.push(0);
+    this.goldAdvantage.push(0);
+
     this.DetailGamesList.Content[0].empGoldHist.forEach(gold => {
       this.empireTick.push(Math.floor(gold.EmpireGoldCount * 4));
       this.northEmpTotal.push(Math.floor(gold.North_gold));
       this.southEmpTotal.push(Math.floor(gold.South_Gold * -1));
-      this.goldAdvantage.push(Math.floor((gold.South_Gold - gold.North_gold) / (0.1 + 0.8 * (1 / Math.sqrt(gold.EmpireGoldCount)))));
+      this.goldAdvantage.push(
+        Math.floor(
+          (gold.South_Gold - gold.North_gold) /
+            (0.1 + 0.8 * (1 / Math.sqrt(gold.EmpireGoldCount)))
+        )
+      );
     });
-    console.log(this.empireTick[0]);
+    // console.log(this.empireTick[0]);
     this.chart = new Chart('canvas', {
       type: 'line',
       data: {
@@ -48,16 +64,14 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
             data: this.northEmpTotal,
             borderColor: '#FF5555',
             backgroundColor: '#FF5555',
-            fill: false,
-
+            fill: false
           },
           {
             label: 'South Gold Awarded',
             data: this.southEmpTotal,
             borderColor: '#55FF55',
             backgroundColor: '#55FF55',
-            fill: false,
-
+            fill: false
           },
           {
             label: 'Gold Advantage',
@@ -73,12 +87,16 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
           display: true
         },
         scales: {
-          xAxes: [{
-            display: true
-          }],
-          yAxes: [{
-            display: true
-          }],
+          xAxes: [
+            {
+              display: true
+            }
+          ],
+          yAxes: [
+            {
+              display: true
+            }
+          ]
         }
       }
     });

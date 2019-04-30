@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { GameDetailContent, GameDetail } from 'src/app/models/game-detail';
 import { Sort } from '@angular/material';
 
@@ -7,43 +13,36 @@ import { Sort } from '@angular/material';
   templateUrl: './player-snapshot.component.html',
   styleUrls: ['./player-snapshot.component.scss']
 })
-export class PlayerSnapshotComponent implements OnInit {
+export class PlayerSnapshotComponent implements OnInit, OnChanges {
   @Input() DetailGamesList: GameDetailContent;
   playersList: GameDetail[];
   sortedData: GameDetail[];
-  constructor() { }
+  northTeamData: GameDetail[];
+  southTeamData: GameDetail[];
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.DetailGamesList) {
-
-
       if (!this.playersList) {
         this.playersList = [];
       }
-      
-      if (this.playersList) {
+
+      if (this.playersList && this.DetailGamesList) {
         this.DetailGamesList.Content.forEach(player => {
-          player.HeroDamage=Math.floor(player.HeroDamage)
-          player.damageTanked=Math.floor(player.damageTanked)
-          player.buildingDamage=Math.floor(player.buildingDamage)
-          
+          player.HeroDamage = Math.floor(player.HeroDamage);
+          player.damageTanked = Math.floor(player.damageTanked);
+          player.buildingDamage = Math.floor(player.buildingDamage);
+
           this.playersList.push(player);
         });
       }
-      console.log(this.playersList.length)
-      console.log(this.DetailGamesList.Content.length)
+      // console.log(this.playersList.length);
+      // console.log(this.DetailGamesList.Content.length);
       const data = this.playersList.slice();
-      this.sortedData = data;
-      this.sortedData = data.sort((a, b) => {
-        return compare(
-          a.tm,
-          b.tm,
-          false
-        );
-      });
+      this.northTeamData = data.filter(playerData => playerData.tm === 'North');
+      this.southTeamData = data.filter(playerData => playerData.tm === 'South');
     }
   }
 
@@ -77,13 +76,9 @@ export class PlayerSnapshotComponent implements OnInit {
           return compare(a.damageTanked, b.damageTanked, isAsc);
         case 'ship':
           return compare(a.shp, b.shp, isAsc);
-          
+
         default:
-          return compare(
-            new Date(a.tm),
-            new Date(b.tm),
-            isAsc
-          );
+          return compare(new Date(a.tm), new Date(b.tm), isAsc);
       }
     });
   }

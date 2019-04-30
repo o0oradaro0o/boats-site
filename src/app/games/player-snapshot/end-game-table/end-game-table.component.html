@@ -1,0 +1,52 @@
+<div class="TableHolder">
+  <table class="table table-striped table-hover table-responsive-lg small">
+    <thead class="bg-gray-100 text-gray-500">
+      <tr>
+        <th>Player</th>
+        <th>Boat</th>
+        <th class="right-align">Level</th>
+        <th class="right-align">Kills</th>
+        <th class="right-align">Deaths</th>
+        <th class="right-align">Last Hits</th>
+        <th class="right-align">Hero Damage</th>
+        <th class="right-align">
+          Damage Tanked
+        </th>
+        <th class="right-align">
+          Building Damage
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="innerRow" *ngFor="let player of playerData">
+        <ng-container>
+          <td *ngIf="player.playerName !== undefined">
+            {{ player.playerName }}
+          </td>
+          <td *ngIf="player.shp !== undefined">{{ player.shp }}</td>
+          <td *ngIf="player.lvl !== undefined" class="right-align">
+            {{ player.lvl.toLocaleString() }}
+          </td>
+          <td *ngIf="player.kls !== undefined" class="right-align">
+            {{ player.kls.toLocaleString() }}
+          </td>
+          <td *ngIf="player.dth !== undefined" class="right-align">
+            {{ player.dth.toLocaleString() }}
+          </td>
+          <td *ngIf="player.lh !== undefined" class="right-align">
+            {{ player.lh.toLocaleString() }}
+          </td>
+          <td *ngIf="player.HeroDamage !== undefined" class="right-align">
+            {{ player.HeroDamage.toLocaleString() }}
+          </td>
+          <td *ngIf="player.damageTanked !== undefined" class="right-align">
+            {{ player.damageTanked.toLocaleString() }}
+          </td>
+          <td *ngIf="player.buildingDamage !== undefined" class="right-align">
+            {{ player.buildingDamage.toLocaleString() }}
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>

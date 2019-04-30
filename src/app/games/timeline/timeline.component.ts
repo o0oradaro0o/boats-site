@@ -96,7 +96,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.gameDetails || changes.playerDetails) {
-      console.log(this.empireTick.length);
+      // console.log(this.empireTick.length);
 
       if (
         !this.gameDetails ||

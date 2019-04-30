@@ -16,6 +16,9 @@ import { GameGoldChartComponent } from './gold-chart/gold-chart.component';
 import { GameDetailComponent } from './detail/detail.component';
 import { GameTimelineComponent } from './timeline/timeline.component';
 import { PlayerSnapshotComponent } from './player-snapshot/player-snapshot.component';
+import { EndGameTableComponent } from './player-snapshot/end-game-table/end-game-table.component';
+import { PurchaseLogComponent } from './purchase-log/purchase-log.component';
+import { PlayerPurchaseHistoryComponent } from './purchase-log/player-purchase-history/player-purchase-history.component';
 
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
@@ -25,7 +28,7 @@ const GamesRoutes: Routes = [
 @NgModule({
   declarations: [
     GamesComponent, GamesSummaryComponent, GamesListComponent,
-    GameComponent, GameGoldChartComponent, GameDetailComponent, GameTimelineComponent, PlayerSnapshotComponent
+    GameComponent, GameGoldChartComponent, GameDetailComponent, GameTimelineComponent, PlayerSnapshotComponent, EndGameTableComponent, PurchaseLogComponent, PlayerPurchaseHistoryComponent
   ],
   imports: [
     CommonModule,
