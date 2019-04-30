@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { GameDetailContent } from './models/game-detail';
 import { GameContent } from './models/game-simple';
+import { PlayerSimpleContent } from './models/player-simple';
 
 const apiUrl =
   'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
@@ -25,12 +26,6 @@ export class DataGrabberService {
     const dd = String(date.getDate()).padStart(2, '0');
     const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
     const yyyy = date.getFullYear();
-<<<<<<< HEAD
-    let s = apiUrl +
-    'battleships_games/' + yyyy + mm + dd + '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200'
-    return this.http.get<GameContent>(s,
-      this.httpOptions);
-=======
     const s =
       apiUrl +
       'battleships_games/' +
@@ -39,7 +34,6 @@ export class DataGrabberService {
       dd +
       '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200';
     return this.http.get<GameContent>(s, this.httpOptions);
->>>>>>> b22ef4ad77398ba686efd71eacd9ee33772a1824
   }
 
   getGameDetail(matchId: number): Observable<GameDetailContent> {
@@ -70,8 +64,10 @@ export class DataGrabberService {
       this.httpOptions
     );
   }
-<<<<<<< HEAD
+  getTopPlayers(): Observable<PlayerSimpleContent> {
+    return this.http.get<PlayerSimpleContent>(
+      apiUrl + 'query/582995a9-6a32-11e9-a89e-c70fc193172b',
+      this.httpOptions
+    );
+  } 
 }
-=======
-}
->>>>>>> b22ef4ad77398ba686efd71eacd9ee33772a1824

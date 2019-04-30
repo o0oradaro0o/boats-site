@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ListComponent } from './list/list.component';
+import { ListComponent } from './players/players-subcomponents/list/list.component';
 import { PlayersComponent } from './players/players.component';
 import { PlayerComponent } from './player/player.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -10,7 +10,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
-import { SummaryComponent } from './summary/summary.component';
+import { SummaryComponent } from './players/players-subcomponents/summary/summary.component';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
