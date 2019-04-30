@@ -6,9 +6,9 @@
   <thead class="bg-gray-100 text-gray-500">
     <tr>
       <th mat-sort-header="name">Name</th>
-      <th mat-sort-header="games">Games Playerd</th>
+      <th mat-sort-header="games">Games Played</th>
       <th mat-sort-header="winper">Competitive Win %</th>
-      <th mat-sort-header="KD">Kills/Deaths</th>
+      <th mat-sort-header="KD">KDR</th>
       <th mat-sort-header="lastHits">Average Last Hits</th>
       <th mat-sort-header="RecentGame">Most Recent Game</th>
     </tr>
@@ -22,15 +22,16 @@
       <ng-container>
         <td>{{ player.playerName }}</td>
         <td>{{ player.games }}</td>
-        <td>{{ (player.compWins/player.compGames*100).toFixed(2) }}</td>
-        <td>{{ (player.kills/player.deaths).toFixed(2) }}
+        <td>{{ ((player.compWins / player.compGames) * 100).toFixed(2) }}</td>
+        <td>
+          {{ (player.kills / player.deaths).toFixed(2) }}
           <div
             class="kd-segment"
-            [ngStyle]="{ width: getKDPercent(player.kills/player.deaths) }"
+            [ngStyle]="{ width: getKDPercent(player.kills / player.deaths) }"
           ></div>
         </td>
         <td>
-          {{ (player.lastHits/player.games).toFixed(2) }}
+          {{ (player.lastHits / player.games).toFixed(2) }}
         </td>
         <td>
           {{ player.lastGame }}

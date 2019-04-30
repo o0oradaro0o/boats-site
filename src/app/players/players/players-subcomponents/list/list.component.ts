@@ -7,14 +7,17 @@ import {
 } from '@angular/core';
 import { Sort } from '@angular/material';
 import { Router } from '@angular/router';
-import { PlayerSimple, PlayerSimpleContent } from 'src/app/models/player-simple';
+import {
+  PlayerSimple,
+  PlayerSimpleContent
+} from 'src/app/models/player-simple';
 
 @Component({
   selector: 'players-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnChanges {
   @Input() SimplePlayersList: PlayerSimpleContent;
   filteredPlayersList: PlayerSimple[];
   sortedData: PlayerSimple[];
@@ -27,7 +30,7 @@ export class ListComponent implements OnInit {
 
       if (this.SimplePlayersList) {
         this.SimplePlayersList.Content.forEach(player => {
-            this.filteredPlayersList.push(player);
+          this.filteredPlayersList.push(player);
         });
       }
       // console.log(this.filteredGamesList.length)
@@ -35,17 +38,12 @@ export class ListComponent implements OnInit {
       const data = this.filteredPlayersList.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {
-        return compare(
-          new Date(a.games),
-          new Date(b.games),
-          false
-        );
+        return compare(new Date(a.games), new Date(b.games), false);
       });
     }
   }
-  ngOnInit() {
-  }
-  
+  ngOnInit() {}
+
   sortData(sort: Sort) {
     const data = this.filteredPlayersList.slice();
     if (!sort.active || sort.direction === '') {
@@ -53,7 +51,7 @@ export class ListComponent implements OnInit {
       return;
     }
 
-    this.sortedData = data.sort((a:PlayerSimple, b:PlayerSimple) => {
+    this.sortedData = data.sort((a: PlayerSimple, b: PlayerSimple) => {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'name':
@@ -61,17 +59,17 @@ export class ListComponent implements OnInit {
         case 'games':
           return compare(a.games, b.games, isAsc);
         case 'winper':
-        return compare(a.compWins/a.compGames, b.compWins/b.compGames, isAsc);
-        case 'KD':
-        return compare(a.kills/a.deaths, b.kills/b.deaths, isAsc);
-        case 'lastHits':
-        return compare(a.lastHits/a.games, b.lastHits/b.games, isAsc);
-        case 'RecentGame':
           return compare(
-            new Date(a.lastGame),
-            new Date(b.lastGame),
+            a.compGames > 0 ? a.compWins / a.compGames : -1,
+            b.compGames > 0 ? b.compWins / b.compGames : -1,
             isAsc
           );
+        case 'KD':
+          return compare(a.kills / a.deaths, b.kills / b.deaths, isAsc);
+        case 'lastHits':
+          return compare(a.lastHits / a.games, b.lastHits / b.games, isAsc);
+        case 'RecentGame':
+          return compare(new Date(a.lastGame), new Date(b.lastGame), isAsc);
         default:
           return compare(a.games, b.games, isAsc);
       }
@@ -79,15 +77,14 @@ export class ListComponent implements OnInit {
   }
   getKDPercent(kd: number) {
     // duration = mm:ss
-    
+
     if (kd > 3) {
       return '100%';
-    } 
-    
-    return `${kd*100/3}%`;
+    }
+
+    return `${(kd * 100) / 3}%`;
   }
 }
-
 
 function compare(
   a: number | string | Date,
