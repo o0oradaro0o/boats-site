@@ -3,7 +3,6 @@
     <thead class="bg-gray-100 text-gray-500">
       <tr>
         <th>Player</th>
-        <th>Boat</th>
         <th class="right-align">Level</th>
         <th class="right-align">Kills</th>
         <th class="right-align">Deaths</th>
@@ -21,9 +20,15 @@
       <tr class="innerRow" *ngFor="let player of playerData">
         <ng-container>
           <td *ngIf="player.playerName !== undefined">
+            <img
+              src="{{
+                '/assets/boat-icons/' + player.shp.replace(' ', '_') + '.png'
+              }}"
+              alt="{{ player.shp }}"
+              class="boat-icons"
+            />
             {{ player.playerName }}
           </td>
-          <td *ngIf="player.shp !== undefined">{{ player.shp }}</td>
           <td *ngIf="player.lvl !== undefined" class="right-align">
             {{ player.lvl.toLocaleString() }}
           </td>

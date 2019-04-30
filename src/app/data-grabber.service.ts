@@ -69,5 +69,5 @@ export class DataGrabberService {
       apiUrl + 'query/582995a9-6a32-11e9-a89e-c70fc193172b',
       this.httpOptions
     );
-  } 
+  }
 }

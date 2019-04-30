@@ -6,13 +6,14 @@
 
 <div class="bg-blue-200 text-gray-500 py-4">
   <div class="container">
-    <players-summary ></players-summary>
+    <!-- <players-summary></players-summary> -->
   </div>
 </div>
 
 <div class="bg-gray-vertical-emboss py-5">
   <div class="container">
-    <h3 class="text-center mb-4">Recent Games</h3>
-    <players-list [SimplePlayersList]="SimplePlayersList | async"></players-list>
+    <players-list
+      [SimplePlayersList]="SimplePlayersList | async"
+    ></players-list>
   </div>
 </div>

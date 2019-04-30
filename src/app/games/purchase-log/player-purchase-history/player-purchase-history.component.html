@@ -1,12 +1,11 @@
 <div class="card" *ngFor="let playerData of teamPlayers">
   <div class="content">
-    <h5>{{ playerData.name }}</h5>
-    <hr />
     <div class="row">
       <div class="item-holder" *ngFor="let ship of playerData.ships">
         <img class="ship-image" src="{{ ship.image }}" alt="{{ ship.name }}" />
         <div class="timestamp">{{ ship.time }}</div>
       </div>
+      <a routerLink="#" class="nav-link player-name">{{ playerData.name }}</a>
     </div>
     <div class="row">
       <div class="item-holder" *ngFor="let item of playerData.items">
