@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
-import {MatListModule} from '@angular/material/list';
-import {MatSortModule} from '@angular/material/sort';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { GamesComponent } from './games.component';
 import { GamesSummaryComponent } from './summary/summary.component';
 import { GamesListComponent } from './list/list.component';
@@ -20,6 +20,9 @@ import { EndGameTableComponent } from './player-snapshot/end-game-table/end-game
 import { PurchaseLogComponent } from './purchase-log/purchase-log.component';
 import { PlayerPurchaseHistoryComponent } from './purchase-log/player-purchase-history/player-purchase-history.component';
 
+import { HowLongAgoPipe } from '../pipes/how-long-ago.pipe';
+import { SecondsToHhmmssPipe } from '../pipes/seconds-to-hhmmss.pipe';
+
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
   { path: ':id', component: GameComponent }
@@ -27,8 +30,19 @@ const GamesRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    GamesComponent, GamesSummaryComponent, GamesListComponent,
-    GameComponent, GameGoldChartComponent, GameDetailComponent, GameTimelineComponent, PlayerSnapshotComponent, EndGameTableComponent, PurchaseLogComponent, PlayerPurchaseHistoryComponent
+    GamesComponent,
+    GamesSummaryComponent,
+    GamesListComponent,
+    GameComponent,
+    GameGoldChartComponent,
+    GameDetailComponent,
+    GameTimelineComponent,
+    PlayerSnapshotComponent,
+    EndGameTableComponent,
+    PurchaseLogComponent,
+    PlayerPurchaseHistoryComponent,
+    HowLongAgoPipe,
+    SecondsToHhmmssPipe
   ],
   imports: [
     CommonModule,
@@ -41,5 +55,4 @@ const GamesRoutes: Routes = [
     MatCheckboxModule
   ]
 })
-
-export class GamesModule { }
+export class GamesModule {}

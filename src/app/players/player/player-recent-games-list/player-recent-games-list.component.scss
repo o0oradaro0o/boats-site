@@ -4,6 +4,7 @@
 
 .table td {
   padding: 0.25rem;
+  vertical-align: middle;
 }
 
 .winner-color {
@@ -12,4 +13,9 @@
 
 .loser-color {
   color: red;
+}
+
+.duration-segment {
+  background-color: black;
+  height: 4px;
 }

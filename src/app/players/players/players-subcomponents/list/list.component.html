@@ -42,7 +42,7 @@
           {{ (player.lastHits / player.games).toFixed(2) }}
         </td>
         <td>
-          {{ player.lastGame }}
+          {{ player.lastGame | howLongAgo }}
         </td>
       </ng-container>
     </tr>

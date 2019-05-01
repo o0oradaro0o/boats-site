@@ -53,54 +53,54 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
         )
       );
     });
-    // console.log(this.empireTick[0]);
-    this.chart = new Chart('canvas', {
-      type: 'line',
-      data: {
-        labels: this.empireTick,
-        datasets: [
-          {
-            label: 'North Gold Awarded',
-            data: this.northEmpTotal,
-            borderColor: '#FF5555',
-            backgroundColor: '#FF5555',
-            fill: false
-          },
-          {
-            label: 'South Gold Awarded',
-            data: this.southEmpTotal,
-            borderColor: '#55FF55',
-            backgroundColor: '#55FF55',
-            fill: false
-          },
-          {
-            label: 'Gold Advantage',
-            data: this.goldAdvantage,
-            borderColor: '#DAA520',
-            backgroundColor: '#EBB63055',
-            borderWidth: 1
-          }
-        ]
-      },
-      options: {
-        legend: {
-          display: true
-        },
-        scales: {
-          xAxes: [
+
+    if (this.empireTick.length > 0) {
+      this.chart = new Chart('canvas', {
+        type: 'line',
+        data: {
+          labels: this.empireTick,
+          datasets: [
             {
-              display: true
-            }
-          ],
-          yAxes: [
+              label: 'North Gold Awarded',
+              data: this.northEmpTotal,
+              borderColor: '#FF5555',
+              backgroundColor: '#FF5555',
+              fill: false
+            },
             {
-              display: true
+              label: 'South Gold Awarded',
+              data: this.southEmpTotal,
+              borderColor: '#55FF55',
+              backgroundColor: '#55FF55',
+              fill: false
+            },
+            {
+              label: 'Gold Advantage',
+              data: this.goldAdvantage,
+              borderColor: '#DAA520',
+              backgroundColor: '#EBB63055',
+              borderWidth: 1
             }
           ]
+        },
+        options: {
+          legend: {
+            display: true
+          },
+          scales: {
+            xAxes: [
+              {
+                display: true
+              }
+            ],
+            yAxes: [
+              {
+                display: true
+              }
+            ]
+          }
         }
-      }
-    });
-    if (this.empireTick.length > 0) {
+      });
       return true;
     }
     return false;

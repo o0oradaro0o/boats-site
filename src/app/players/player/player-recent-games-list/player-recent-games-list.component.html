@@ -1,5 +1,5 @@
 <table
-  class="table table-striped table-hover table-responsive-lg small"
+  class="table table-striped table-hover small"
   matSort
   (matSortChange)="sortData($event)"
 >
@@ -8,11 +8,9 @@
       <th>Ship</th>
       <th>Result</th>
       <th>Game Mode</th>
-      <th>Level</th>
+      <th>Players</th>
       <th>K/D</th>
-      <th># Players</th>
       <th>Duration</th>
-      <th>Date</th>
     </tr>
   </thead>
   <tbody>
@@ -31,13 +29,18 @@
             class="boat-icons"
           />
         </td>
-        <td
-          [ngClass]="{
-            'winner-color': game.tm === game.wn,
-            'loser-color': game.tm !== game.wn
-          }"
-        >
-          {{ game.tm === game.wn ? 'Won Game' : 'Lost Game' }}
+        <td>
+          <div
+            [ngClass]="{
+              'winner-color': game.tm === game.wn,
+              'loser-color': game.tm !== game.wn
+            }"
+          >
+            <strong>{{
+              game.tm === game.wn ? 'Won Game' : 'Lost Game'
+            }}</strong>
+          </div>
+          <div>{{ game.dateProcessed | howLongAgo }}</div>
         </td>
         <td>
           {{ game.coOp ? 'Co-op' : '' }}
@@ -45,17 +48,15 @@
           {{ game.trading ? 'Trading' : '' }}
           {{ !(game.coOp || game.battle || game.trading) ? 'Standard' : '' }}
         </td>
-        <td>{{ game.lvl }}</td>
-        <td>{{ game.kls }} / {{ game.dth }}</td>
         <td>{{ game.numPlayers }}</td>
+        <td>{{ game.kls }}/{{ game.dth }}</td>
         <td>
-          {{ parseSeconds(game.gameDuration) }}
-          <!-- <div
+          {{ game.gameDuration | secondsToHhmmss }}
+          <div
             class="duration-segment"
             [ngStyle]="{ width: getDurationPercent(game.gameDuration) }"
-          ></div> -->
+          ></div>
         </td>
-        <td>{{ game.dateProcessed }}</td>
       </tr>
     </ng-container>
   </tbody>

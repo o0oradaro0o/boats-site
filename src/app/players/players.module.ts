@@ -5,13 +5,16 @@ import { PlayersComponent } from './players/players.component';
 import { PlayerComponent } from './player/player.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
-import {MatListModule} from '@angular/material/list';
-import {MatSortModule} from '@angular/material/sort';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatListModule } from '@angular/material/list';
+import { MatSortModule } from '@angular/material/sort';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryComponent } from './players/players-subcomponents/summary/summary.component';
 import { PlayerRecentGamesListComponent } from './player/player-recent-games-list/player-recent-games-list.component';
+
+import { HowLongAgoPipe } from '../pipes/how-long-ago.pipe';
+import { SecondsToHhmmssPipe } from '../pipes/seconds-to-hhmmss.pipe';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
@@ -19,7 +22,15 @@ const PlayersRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ListComponent, PlayersComponent, PlayerComponent, SummaryComponent, PlayerRecentGamesListComponent],
+  declarations: [
+    ListComponent,
+    PlayersComponent,
+    PlayerComponent,
+    SummaryComponent,
+    PlayerRecentGamesListComponent,
+    HowLongAgoPipe,
+    SecondsToHhmmssPipe
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(PlayersRoutes),
@@ -31,4 +42,4 @@ const PlayersRoutes: Routes = [
     MatCheckboxModule
   ]
 })
-export class PlayersModule { }
+export class PlayersModule {}

@@ -1,14 +1,13 @@
 <table
-  class="table table-striped table-hover table-responsive-lg small"
+  class="table table-striped table-hover small"
   matSort
   (matSortChange)="sortData($event)"
 >
   <thead class="bg-gray-100 text-gray-500">
     <tr>
-      <th mat-sort-header="dateProcessed">Date</th>
-      <th mat-sort-header="numPlayers"># of Players</th>
+      <th mat-sort-header="dateProcessed">Result</th>
+      <th mat-sort-header="numPlayers">Players</th>
       <th mat-sort-header="CoOp">Game Mode</th>
-      <th mat-sort-header="wn">Winner</th>
       <th mat-sort-header="gameDuration">Duration</th>
     </tr>
   </thead>
@@ -19,7 +18,16 @@
       (click)="handleClick(game.matchID)"
     >
       <ng-container *ngIf="showRow(game)">
-        <td *ngIf="game.dateProcessed">{{ game.dateProcessed }}</td>
+        <td>
+          <strong
+            [ngClass]="{
+              'north-empire-color': game.wn === 'North',
+              'south-empire-color': game.wn === 'South'
+            }"
+            >{{ game.wn }} Victory</strong
+          >
+          <div>{{ game.dateProcessed | howLongAgo }}</div>
+        </td>
         <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
         <td *ngIf="game.settings">
           {{ game.settings.coOp ? 'Co-op' : '' }}
@@ -34,15 +42,6 @@
               ? 'Standard'
               : ''
           }}
-        </td>
-        <td
-          *ngIf="game.wn"
-          [ngClass]="{
-            'north-empire-color': game.wn === 'North',
-            'south-empire-color': game.wn === 'South'
-          }"
-        >
-          {{ game.wn }}
         </td>
         <td>
           {{ game.gameDuration }}
