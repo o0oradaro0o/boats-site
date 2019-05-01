@@ -84,6 +84,10 @@ export class ListComponent implements OnInit, OnChanges {
 
     return `${(kd * 100) / 3}%`;
   }
+
+  handleClick(playerId) {
+    this.router.navigate(['/players', playerId]);
+  }
 }
 
 function compare(

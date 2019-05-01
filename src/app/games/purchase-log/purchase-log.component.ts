@@ -28,6 +28,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
       for (const player of playerData) {
         const name = player.playerName;
         const team = player.tm;
+        const playerID = player.playerID;
         // items and ships should already be sorted
         let items = player.buildOrder;
         let ships = player.boatOrder;
@@ -52,7 +53,8 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
         const newPlayerData = {
           name,
           items,
-          ships
+          ships,
+          playerID
         };
 
         if (team === 'North') {

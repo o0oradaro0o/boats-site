@@ -11,6 +11,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatSortModule} from '@angular/material/sort';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { SummaryComponent } from './players/players-subcomponents/summary/summary.component';
+import { PlayerRecentGamesListComponent } from './player/player-recent-games-list/player-recent-games-list.component';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
@@ -18,7 +19,7 @@ const PlayersRoutes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ListComponent, PlayersComponent, PlayerComponent, SummaryComponent],
+  declarations: [ListComponent, PlayersComponent, PlayerComponent, SummaryComponent, PlayerRecentGamesListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(PlayersRoutes),

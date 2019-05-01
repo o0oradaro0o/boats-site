@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { GameDetailContent } from './models/game-detail';
+import { GameDetailContent, GameDetail } from './models/game-detail';
 import { GameContent } from './models/game-simple';
 import { PlayerSimpleContent } from './models/player-simple';
 
@@ -67,6 +67,16 @@ export class DataGrabberService {
   getTopPlayers(): Observable<PlayerSimpleContent> {
     return this.http.get<PlayerSimpleContent>(
       apiUrl + 'query/582995a9-6a32-11e9-a89e-c70fc193172b',
+      this.httpOptions
+    );
+  }
+  getRecentMatches(playerId: number): Observable<GameDetail[]> {
+    const columns =
+      'trading, battle, coOp, wn, tm, gameDuration, kls, dth, lvl, numPlayers, shp, dateProcessed, matchID';
+    const query = `{"query":"SELECT top (20) ${columns} FROM gamedata where playerID='${playerId}' and dedi=1 order by dateProcessed desc"}`;
+    return this.http.post<GameDetail[]>(
+      `${apiUrl}query/`,
+      query,
       this.httpOptions
     );
   }

@@ -17,7 +17,11 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="innerRow" *ngFor="let player of playerData">
+      <tr
+        class="innerRow"
+        *ngFor="let player of playerData"
+        (click)="handleClick(player.playerID)"
+      >
         <ng-container>
           <td *ngIf="player.playerName !== undefined" class="name-row">
             <img
