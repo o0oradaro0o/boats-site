@@ -11,6 +11,8 @@ import { BrochureLayoutComponent } from './_layout/brochure-layout/brochure-layo
 import { BrochureNavComponent } from './_layout/brochure-nav/brochure-nav.component';
 import { BrochureFooterComponent } from './_layout/brochure-footer/brochure-footer.component';
 
+import { PipesModule } from './pipes/pipes.module';
+
 // Page Components
 import { HomepageComponent } from './homepage/homepage.component';
 
@@ -19,7 +21,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    PipesModule.forRoot()
   ],
   declarations: [
     AppComponent,

@@ -5,11 +5,13 @@
         <img class="ship-image" src="{{ ship.image }}" alt="{{ ship.name }}" />
         <div class="timestamp">{{ ship.time }}</div>
       </div>
-      <a
-        routerLink="{{ '/players/' + playerData.playerID }}"
-        class="nav-link player-name"
-        >{{ playerData.name }}</a
-      >
+      <div class="player-name">
+        <a
+          routerLink="{{ '/players/' + playerData.playerID }}"
+          class="nav-link"
+          >{{ playerData.name }}</a
+        >
+      </div>
     </div>
     <div class="row">
       <div class="item-holder" *ngFor="let item of playerData.items">

@@ -43,10 +43,16 @@
           <div>{{ game.dateProcessed | howLongAgo }}</div>
         </td>
         <td>
-          {{ game.coOp ? 'Co-op' : '' }}
-          {{ game.battle ? 'Battle' : '' }}
-          {{ game.trading ? 'Trading' : '' }}
-          {{ !(game.coOp || game.battle || game.trading) ? 'Standard' : '' }}
+          <div>
+            <strong>{{ game.coOp ? 'Co-Op' : 'Normal' }}</strong>
+          </div>
+          <div>
+            <small>
+              {{ game.battle ? 'Battle' : '' }}
+              {{ game.battle && game.trading ? '-' : '' }}
+              {{ game.trading ? 'Trading' : '' }}
+            </small>
+          </div>
         </td>
         <td>{{ game.numPlayers }}</td>
         <td>{{ game.kls }}/{{ game.dth }}</td>

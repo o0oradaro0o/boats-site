@@ -12,9 +12,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryComponent } from './players/players-subcomponents/summary/summary.component';
 import { PlayerRecentGamesListComponent } from './player/player-recent-games-list/player-recent-games-list.component';
-
-import { HowLongAgoPipe } from '../pipes/how-long-ago.pipe';
-import { SecondsToHhmmssPipe } from '../pipes/seconds-to-hhmmss.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
@@ -27,9 +25,7 @@ const PlayersRoutes: Routes = [
     PlayersComponent,
     PlayerComponent,
     SummaryComponent,
-    PlayerRecentGamesListComponent,
-    HowLongAgoPipe,
-    SecondsToHhmmssPipe
+    PlayerRecentGamesListComponent
   ],
   imports: [
     CommonModule,
@@ -39,7 +35,8 @@ const PlayersRoutes: Routes = [
     MatTableModule,
     MatListModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    PipesModule
   ]
 })
 export class PlayersModule {}

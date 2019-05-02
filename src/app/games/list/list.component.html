@@ -30,18 +30,16 @@
         </td>
         <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
         <td *ngIf="game.settings">
-          {{ game.settings.coOp ? 'Co-op' : '' }}
-          {{ game.settings.battle ? 'Battle' : '' }}
-          {{ game.settings.trading ? 'Trading' : '' }}
-          {{
-            !(
-              game.settings.coOp ||
-              game.settings.battle ||
-              game.settings.trading
-            )
-              ? 'Standard'
-              : ''
-          }}
+          <div>
+            <strong>{{ game.settings.coOp ? 'Co-Op' : 'Normal' }}</strong>
+          </div>
+          <div>
+            <small>
+              {{ game.settings.battle ? 'Battle' : '' }}
+              {{ game.settings.battle && game.settings.trading ? '-' : '' }}
+              {{ game.settings.trading ? 'Trading' : '' }}
+            </small>
+          </div>
         </td>
         <td>
           {{ game.gameDuration }}

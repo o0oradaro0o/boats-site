@@ -20,8 +20,7 @@ import { EndGameTableComponent } from './player-snapshot/end-game-table/end-game
 import { PurchaseLogComponent } from './purchase-log/purchase-log.component';
 import { PlayerPurchaseHistoryComponent } from './purchase-log/player-purchase-history/player-purchase-history.component';
 
-import { HowLongAgoPipe } from '../pipes/how-long-ago.pipe';
-import { SecondsToHhmmssPipe } from '../pipes/seconds-to-hhmmss.pipe';
+import { PipesModule } from '../pipes/pipes.module';
 
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
@@ -40,9 +39,7 @@ const GamesRoutes: Routes = [
     PlayerSnapshotComponent,
     EndGameTableComponent,
     PurchaseLogComponent,
-    PlayerPurchaseHistoryComponent,
-    HowLongAgoPipe,
-    SecondsToHhmmssPipe
+    PlayerPurchaseHistoryComponent
   ],
   imports: [
     CommonModule,
@@ -52,7 +49,8 @@ const GamesRoutes: Routes = [
     MatTableModule,
     MatListModule,
     MatSortModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    PipesModule
   ]
 })
 export class GamesModule {}
