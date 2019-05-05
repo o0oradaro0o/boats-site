@@ -44,7 +44,8 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
 
         ships = ships.map(shipData => {
           const shipName = shipData.item;
-          const imageName = shipName.replace(/ /g, '_');
+          let imageName = shipName.replace(/ /g, '_');
+          imageName = imageName.replace('\'', '');
           const time = shipData.time;
           const image = `/assets/boat-icons/${imageName}.png`;
           return { name: shipName, time, image };

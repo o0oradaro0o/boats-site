@@ -9,7 +9,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class HowLongAgoPipe implements PipeTransform {
   transform(dateString: string): string {
-    const timeDifferenceMS = Date.now() - +new Date(dateString);
+    const somedate = new Date(dateString);
+    somedate.setMinutes(-somedate.getTimezoneOffset());
+    const timeDifferenceMS = Date.now() - +somedate;
     return this.secondsToHowLongAgo(timeDifferenceMS / 1000);
   }
 

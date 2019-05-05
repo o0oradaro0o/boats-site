@@ -26,7 +26,7 @@
           <td *ngIf="player.playerName !== undefined" class="name-row">
             <img
               src="{{
-                '/assets/boat-icons/' + player.shp.split(' ').join('_') + '.png'
+                '/assets/boat-icons/' + player.shp.split(' ').join('_').replace('\'', '') + '.png'
               }}"
               alt="{{ player.shp }}"
               class="boat-icons"

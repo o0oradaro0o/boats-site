@@ -29,7 +29,7 @@ import { HomepageComponent } from './homepage/homepage.component';
     BrochureLayoutComponent,
     BrochureNavComponent,
     BrochureFooterComponent,
-    HomepageComponent
+    HomepageComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]

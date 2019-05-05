@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { GameDetailContent, GameDetail } from './models/game-detail';
 import { GameContent } from './models/game-simple';
 import { PlayerSimpleContent } from './models/player-simple';
+import { BoatRecordContent } from './models/player-boat-record';
 
 const apiUrl =
   'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
@@ -70,6 +71,14 @@ export class DataGrabberService {
       this.httpOptions
     );
   }
+
+  getBoatData(): Observable<BoatRecordContent> {
+    return this.http.get<BoatRecordContent>(
+      apiUrl + 'query/e8a516bb-6eda-11e9-b8b5-e969e44c0733',
+      this.httpOptions
+    );
+  }
+
   getRecentMatches(playerId: number): Observable<GameDetail[]> {
     const columns =
       'trading, battle, coOp, wn, tm, gameDuration, kls, dth, lvl, numPlayers, shp, dateProcessed, matchID';
