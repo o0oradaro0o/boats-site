@@ -1,5 +1,23 @@
-<div class="container">
-  <h3>Recent Games</h3>
-  <app-player-recent-games-list [recentGames]="recentGames">
-  </app-player-recent-games-list>
+<div id="banner" class="bg-blue-100">
+  <div class="container py-5 text-center text-gray-500">
+    <h1 class="text-uppercase font-weight-bold">Player Details</h1>
+  </div>
+</div>
+<div class="bg-gray-vertical-emboss py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-6 col-lg-6 heightContainer">
+          <h3>Boat Use</h3>
+          <player-boats-list [ItemRecordList]="BoatRecordList$ | async"></player-boats-list>
+        </div>
+      <div class="col-6 col-lg-6 heightContainer">
+          <h3>Item Use</h3>
+        <player-items-list [ItemRecordList]="ItemRecordList$ | async"></player-items-list>
+      </div>
+    
+    </div>
+    <h3>Recent Games</h3>
+    <app-player-recent-games-list [recentGames]="recentGames">
+    </app-player-recent-games-list>
+  </div>
 </div>

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 
 import { DataGrabberService } from 'src/app/data-grabber.service';
 import { GameDetail } from 'src/app/models/game-detail';
+import { ItemRecordContent } from 'src/app/models/player-item-record';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-player',
@@ -10,6 +12,9 @@ import { GameDetail } from 'src/app/models/game-detail';
   styleUrls: ['./player.component.scss']
 })
 export class PlayerComponent implements OnInit {
+  ItemRecordList$: Observable<ItemRecordContent>;
+  BoatRecordList$: Observable<ItemRecordContent>;
+
   recentGames: GameDetail[];
   playerId: number;
 
@@ -19,6 +24,9 @@ export class PlayerComponent implements OnInit {
       loader.getRecentMatches(this.playerId).subscribe(res => {
         this.recentGames = res;
       });
+      this.ItemRecordList$ = loader.getPlayerItemData(this.playerId);
+      this.BoatRecordList$ = loader.getPlayerBoatData(this.playerId);
+   
     });
   }
 

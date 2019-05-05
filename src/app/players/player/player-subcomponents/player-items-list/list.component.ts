@@ -1,41 +1,37 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemRecordContent, ItemRecord } from 'src/app/models/player-item-record';
+import { ItemRecordContent, ItemRecord } from 'src/app/models/player-Item-record';
 import { Sort } from '@angular/material';
+import { itemsSummaryComponent } from 'src/app/items/summary/summary.component';
 
 @Component({
-  selector: 'boats-list',
+  selector: 'player-items-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
-export class ListComponent implements OnInit, OnChanges {
-  @Input() boatRecordList: ItemRecordContent;
-  CondencedBoatRecords: ItemRecord[];
+export class PlayerItemListComponent implements OnInit, OnChanges {
+  @Input() ItemRecordList: ItemRecordContent;
+  CondencedItemRecords: ItemRecord[];
   sortedData: ItemRecord[];
   TotalSample: number;
   constructor() {}
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.boatRecordList) {
-      if (!this.CondencedBoatRecords) {
-        this.CondencedBoatRecords = [];
+    if (changes.ItemRecordList) {
+      if (!this.CondencedItemRecords) {
+        this.CondencedItemRecords = [];
       }
 
-      if (this.boatRecordList) {
-        this.boatRecordList.Content.forEach(boat => {
-          if(boat.item) {
-            if (boat.item==="Barrel") 
-            {
-              this.TotalSample  =boat.compGames;
-              boat.compWins=boat.compGames/2
-            }
-            this.CondencedBoatRecords.push(boat);
-            
-
+      if (this.ItemRecordList) {
+        this.TotalSample = 0;
+        this.ItemRecordList.Content.forEach(Item => {
+          if (Item.item && Item.compGames > 0 && !Item.item.includes('lorne') && !Item.item.includes('caulk') && !Item.item.includes('combo')) {
+            this.TotalSample = this.TotalSample + Item.compGames;
+            this.CondencedItemRecords.push(Item);
           }
         });
       }
       // console.log(this.filteredGamesList.length)
       // console.log(this.SimpleGamesList.Content.length)
-      const data = this.CondencedBoatRecords.slice();
+      const data = this.CondencedItemRecords.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {
         return compare(new Date(a.compGames), new Date(b.compGames), false);
@@ -45,7 +41,7 @@ export class ListComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   sortData(sort: Sort) {
-    const data = this.CondencedBoatRecords.slice();
+    const data = this.CondencedItemRecords.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -72,7 +68,10 @@ export class ListComponent implements OnInit, OnChanges {
   getPercent(input: number) {
     // duration = mm:ss
 
-    return `${(input * 100)}%`;
+    if (input > 3) {
+      return '100%';
+    }
+    return `${(input * 100) / 3}%`;
   }
 
 }

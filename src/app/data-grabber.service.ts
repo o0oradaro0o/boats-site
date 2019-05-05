@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { GameDetailContent, GameDetail } from './models/game-detail';
 import { GameContent } from './models/game-simple';
 import { PlayerSimpleContent } from './models/player-simple';
-import { BoatRecordContent } from './models/player-boat-record';
+import { ItemRecordContent } from './models/player-item-record';
 
 const apiUrl =
   'https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships/';
@@ -72,9 +72,33 @@ export class DataGrabberService {
     );
   }
 
-  getBoatData(): Observable<BoatRecordContent> {
-    return this.http.get<BoatRecordContent>(
+  getBoatData(): Observable<ItemRecordContent> {
+    return this.http.get<ItemRecordContent>(
       apiUrl + 'query/e8a516bb-6eda-11e9-b8b5-e969e44c0733',
+      this.httpOptions
+    );
+  }
+  getItemData(): Observable<ItemRecordContent> {
+    return this.http.get<ItemRecordContent>(
+      apiUrl + 'query/56c4bfe4-6f42-11e9-b2b2-b91d96137316',
+      this.httpOptions
+    );
+  }
+
+  getPlayerItemData(playerId: number): Observable<ItemRecordContent> {
+    const query = `{"query":"SELECT * FROM playerBuildInfo where playerID='${playerId}'"}`;
+    return this.http.post<ItemRecordContent>(
+      `${apiUrl}query/`,
+      query,
+      this.httpOptions
+    );
+  }
+
+  getPlayerBoatData(playerId: number): Observable<ItemRecordContent> {
+    const query = `{"query":"SELECT * FROM recentPlayerBoatInfo where playerID='${playerId}'"}`;
+    return this.http.post<ItemRecordContent>(
+      `${apiUrl}query/`,
+      query,
       this.httpOptions
     );
   }

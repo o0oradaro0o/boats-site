@@ -4,15 +4,15 @@ import { ItemRecordContent } from 'src/app/models/player-item-record';
 import { DataGrabberService } from 'src/app/data-grabber.service';
 
 @Component({
-  selector: 'app-boats',
-  templateUrl: './boats.component.html',
-  styleUrls: ['./boats.component.scss']
+  selector: 'app-items',
+  templateUrl: './items.component.html',
+  styleUrls: ['./items.component.scss']
 })
-export class BoatsComponent implements OnInit {
-  BoatRecordList: Observable<ItemRecordContent>;
+export class ItemsComponent implements OnInit {
+  ItemRecordList$: Observable<ItemRecordContent>;
 
   constructor(loader: DataGrabberService) { 
-    this.BoatRecordList = loader.getBoatData();
+    this.ItemRecordList$ = loader.getItemData();
   }
 
   ngOnInit() {

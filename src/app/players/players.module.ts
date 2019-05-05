@@ -11,8 +11,10 @@ import { MatListModule } from '@angular/material/list';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SummaryComponent } from './players/players-subcomponents/summary/summary.component';
-import { PlayerRecentGamesListComponent } from './player/player-recent-games-list/player-recent-games-list.component';
+import { PlayerRecentGamesListComponent } from './player/player-subcomponents/player-recent-games-list/player-recent-games-list.component';
 import { PipesModule } from '../pipes/pipes.module';
+import { PlayerItemListComponent } from './player/player-subcomponents/player-items-list/list.component';
+import { PlayerBoatListComponent } from './player/player-subcomponents/player-boats-list/list.component';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
@@ -25,7 +27,9 @@ const PlayersRoutes: Routes = [
     PlayersComponent,
     PlayerComponent,
     SummaryComponent,
-    PlayerRecentGamesListComponent
+    PlayerRecentGamesListComponent,
+    PlayerItemListComponent,
+    PlayerBoatListComponent
   ],
   imports: [
     CommonModule,

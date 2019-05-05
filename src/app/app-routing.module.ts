@@ -17,6 +17,8 @@ const routes: Routes = [
       { path: 'games', loadChildren: './games/games.module#GamesModule' },
       { path: 'players', loadChildren: './players/players.module#PlayersModule' },
       { path: 'boats', loadChildren: './boats/boats.module#BoatsModule' },
+      { path: 'items', loadChildren: './items/items.module#ItemsModule' },
+    
     ]
   },
 ];

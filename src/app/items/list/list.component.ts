@@ -3,39 +3,33 @@ import { ItemRecordContent, ItemRecord } from 'src/app/models/player-item-record
 import { Sort } from '@angular/material';
 
 @Component({
-  selector: 'boats-list',
+  selector: 'items-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit, OnChanges {
-  @Input() boatRecordList: ItemRecordContent;
-  CondencedBoatRecords: ItemRecord[];
+  @Input() ItemRecordList: ItemRecordContent;
+  CondencedItemRecords: ItemRecord[];
   sortedData: ItemRecord[];
   TotalSample: number;
   constructor() {}
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.boatRecordList) {
-      if (!this.CondencedBoatRecords) {
-        this.CondencedBoatRecords = [];
+    if (changes.ItemRecordList) {
+      if (!this.CondencedItemRecords) {
+        this.CondencedItemRecords = [];
       }
-
-      if (this.boatRecordList) {
-        this.boatRecordList.Content.forEach(boat => {
-          if(boat.item) {
-            if (boat.item==="Barrel") 
-            {
-              this.TotalSample  =boat.compGames;
-              boat.compWins=boat.compGames/2
-            }
-            this.CondencedBoatRecords.push(boat);
-            
-
+      this.TotalSample = 0;
+      if (this.ItemRecordList) {
+        this.ItemRecordList.Content.forEach(item => {
+          if(item.item && !item.item.includes('lorne') && !item.item.includes('caulk') && !item.item.includes('combo')) {
+            this.CondencedItemRecords.push(item);
+            this.TotalSample = this.TotalSample + item.compGames;
           }
         });
       }
       // console.log(this.filteredGamesList.length)
       // console.log(this.SimpleGamesList.Content.length)
-      const data = this.CondencedBoatRecords.slice();
+      const data = this.CondencedItemRecords.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {
         return compare(new Date(a.compGames), new Date(b.compGames), false);
@@ -45,7 +39,7 @@ export class ListComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   sortData(sort: Sort) {
-    const data = this.CondencedBoatRecords.slice();
+    const data = this.CondencedItemRecords.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;

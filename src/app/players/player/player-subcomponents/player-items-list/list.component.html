@@ -17,37 +17,36 @@
   <tbody>
     <tr
       class="innerRow"
-      *ngFor="let boat of sortedData"
+      *ngFor="let item of sortedData"
     >
       <ng-container>
         <td>
             <img
             src="{{
-              '/assets/boat-icons/' + boat.item.split(' ').join('_').replace('\'', '') + '.png'
+              '/assets/items/' + item.item.replace('item_', '') + '.png'
             }}"
-            alt="{{ boat.item }}"
-            class="boat-icons"
+            alt="{{ item.item }}"
+            class="item-icons"
           />
-          {{ boat.item }}
+          {{ item.item.split('_').join(' ').replace('item ', '') }}
         </td>
-        <td>{{ boat.compGames
-            ? ((boat.compGames / TotalSample) * 100).toFixed(2) + '%'
+        <td>{{ item.compGames
+            ? ((item.compGames / TotalSample) * 100).toFixed(2) + '%'
             : 'N/A' }}
             <div
             class="segment"
-            [ngStyle]="{ width: getPercent((boat.compGames / TotalSample)) }"
+            [ngStyle]="{ width: getPercent((item.compGames / TotalSample)*18) }"
           ></div>
         </td>
-            
         <td>
           {{
-            boat.compGames
-              ? ((boat.compWins / boat.compGames) * 100).toFixed(2) + '%'
+            item.compGames
+              ? ((item.compWins / item.compGames) * 100).toFixed(2) + '%'
               : 'N/A'
           }}
           <div
             class="segment"
-            [ngStyle]="{ width: getPercent((boat.compWins / boat.compGames)) }"
+            [ngStyle]="{ width: getPercent((item.compWins / item.compGames)) }"
           ></div>
         </td>
       </ng-container>

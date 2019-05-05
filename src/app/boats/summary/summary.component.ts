@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DataGrabberService } from 'src/app/data-grabber.service';
-import { BoatRecordContent } from 'src/app/models/player-boat-record';
 
 @Component({
   selector: 'boats-summary',

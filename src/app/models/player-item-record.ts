@@ -1,4 +1,4 @@
-export interface BoatRecord {
+export interface ItemRecord {
     playerID: number;
     games: number;
     wins: number;
@@ -6,7 +6,7 @@ export interface BoatRecord {
     compGames: number;
     item: string;
  }
-export interface BoatRecordContent {
-   Content: BoatRecord[];
+export interface ItemRecordContent {
+   Content: ItemRecord[];
  }
  
