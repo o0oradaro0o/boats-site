@@ -1,0 +1,176 @@
+<div class="player-info">
+  <img
+    src="https://steamcdn-a.akamaihd.net/steamcommunity/public/images/avatars/e1/e10a3a2a606a2d104f43a40379a4770e371ed168_full.jpg"
+    alt="VicFrank"
+  />
+  <h3>VicFrank</h3>
+</div>
+<div class="records">
+  <div class="record">
+    <span class="wins"><strong>Wins</strong></span>
+    <span>865</span>
+  </div>
+  <div class="record">
+    <span class="losses"><strong>Losses</strong></span>
+    <span>694</span>
+  </div>
+  <div class="record">
+    <span><strong>Winrate</strong></span>
+    <span>{{ 865 / (865 + 694) | percent: '1.2' }}</span>
+  </div>
+</div>
+
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link btn-block"
+          data-toggle="collapse"
+          data-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
+        >
+          Games Played
+        </button>
+      </h5>
+    </div>
+
+    <div
+      id="collapseOne"
+      class="collapse show"
+      aria-labelledby="headingOne"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <div class="records">
+          <div class="record">
+            <strong>Total</strong>
+            <span>2156</span>
+          </div>
+          <div class="record">
+            <strong>Competitive</strong>
+            <span>1986</span>
+          </div>
+          <div class="record">
+            <strong>Co-Op</strong>
+            <span>214</span>
+          </div>
+          <div class="record">
+            <strong>Trading</strong>
+            <span>12</span>
+          </div>
+          <div class="record">
+            <strong>Battle</strong>
+            <span>34</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingTwo">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link btn-block collapsed"
+          data-toggle="collapse"
+          data-target="#collapseTwo"
+          aria-expanded="false"
+          aria-controls="collapseTwo"
+        >
+          Average Stats
+        </button>
+      </h5>
+    </div>
+    <div
+      id="collapseTwo"
+      class="collapse"
+      aria-labelledby="headingTwo"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <div class="records">
+          <div class="record">
+            <strong>KDA</strong>
+            <span>3.65</span>
+          </div>
+          <div class="record">
+            <strong>Kills</strong>
+            <span>3.65</span>
+          </div>
+          <div class="record">
+            <strong>Deaths</strong>
+            <span>1</span>
+          </div>
+          <div class="record">
+            <strong>Last Hits</strong>
+            <span>95.4</span>
+          </div>
+          <div class="record">
+            <strong>GPM</strong>
+            <span>565</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" id="headingThree">
+      <h5 class="mb-0">
+        <button
+          class="btn btn-link btn-block collapsed"
+          data-toggle="collapse"
+          data-target="#collapseThree"
+          aria-expanded="false"
+          aria-controls="collapseThree"
+        >
+          All Time Records
+        </button>
+      </h5>
+    </div>
+    <div
+      id="collapseThree"
+      class="collapse"
+      aria-labelledby="headingThree"
+      data-parent="#accordion"
+    >
+      <div class="card-body">
+        <div class="records">
+          <!-- Should Link to game where record was achieved -->
+          <div class="record">
+            <strong>Kills</strong>
+            <span>3.65</span>
+          </div>
+          <div class="record">
+            <strong>Deaths</strong>
+            <span>1</span>
+          </div>
+          <div class="record">
+            <strong>Last Hits</strong>
+            <span>95.4</span>
+          </div>
+          <div class="record">
+            <strong>Highest GPM</strong>
+            <span>565</span>
+          </div>
+          <div class="record">
+            <strong>Tower Damage</strong>
+            <span>565</span>
+          </div>
+          <div class="record">
+            <strong>Hero Damage</strong>
+            <span>565</span>
+          </div>
+          <div class="record">
+            <strong>Damage Taken</strong>
+            <span>565</span>
+          </div>
+          <div class="record">
+            <strong>Longest Match</strong>
+            <span>565</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

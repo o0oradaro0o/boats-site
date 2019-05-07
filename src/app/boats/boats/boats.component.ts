@@ -11,11 +11,9 @@ import { DataGrabberService } from 'src/app/data-grabber.service';
 export class BoatsComponent implements OnInit {
   BoatRecordList: Observable<ItemRecordContent>;
 
-  constructor(loader: DataGrabberService) { 
+  constructor(loader: DataGrabberService) {
     this.BoatRecordList = loader.getBoatData();
   }
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

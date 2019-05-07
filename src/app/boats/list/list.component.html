@@ -1,5 +1,5 @@
 <table
-  class="table table-striped table-hover table-responsive-lg small"
+  class="table table-striped table-hover small"
   matSort
   (matSortChange)="sortData($event)"
 >
@@ -7,38 +7,43 @@
     <tr>
       <th mat-sort-header="name">Name</th>
       <th mat-sort-header="games" title="Only counts games with >5 players">
-          Use %
-        </th>
+        Use %
+      </th>
       <th mat-sort-header="winper" title="Only counts games with >5 players">
         Competitive Win %
       </th>
     </tr>
   </thead>
   <tbody>
-    <tr
-      class="innerRow"
-      *ngFor="let boat of sortedData"
-    >
+    <tr class="innerRow" *ngFor="let boat of sortedData">
       <ng-container>
         <td>
-            <img
+          <img
             src="{{
-              '/assets/boat-icons/' + boat.item.split(' ').join('_').replace('\'', '') + '.png'
+              '/assets/boat-icons/' +
+                boat.item
+                  .split(' ')
+                  .join('_')
+                  .replace('\'', '') +
+                '.png'
             }}"
             alt="{{ boat.item }}"
             class="boat-icons"
           />
           {{ boat.item }}
         </td>
-        <td>{{ boat.compGames
-            ? ((boat.compGames / TotalSample) * 100).toFixed(2) + '%'
-            : 'N/A' }}
-            <div
+        <td>
+          {{
+            boat.compGames
+              ? ((boat.compGames / TotalSample) * 100).toFixed(2) + '%'
+              : 'N/A'
+          }}
+          <div
             class="segment"
-            [ngStyle]="{ width: getPercent((boat.compGames / TotalSample)) }"
+            [ngStyle]="{ width: getPercent(boat.compGames / TotalSample) }"
           ></div>
         </td>
-            
+
         <td>
           {{
             boat.compGames
@@ -47,7 +52,7 @@
           }}
           <div
             class="segment"
-            [ngStyle]="{ width: getPercent((boat.compWins / boat.compGames)) }"
+            [ngStyle]="{ width: getPercent(boat.compWins / boat.compGames) }"
           ></div>
         </td>
       </ng-container>

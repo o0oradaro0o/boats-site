@@ -15,6 +15,7 @@ import { PlayerRecentGamesListComponent } from './player/player-subcomponents/pl
 import { PipesModule } from '../pipes/pipes.module';
 import { PlayerItemListComponent } from './player/player-subcomponents/player-items-list/list.component';
 import { PlayerBoatListComponent } from './player/player-subcomponents/player-boats-list/list.component';
+import { PlayerStatsOverviewComponent } from './player/player-subcomponents/player-stats-overview/player-stats-overview.component';
 
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
@@ -29,7 +30,8 @@ const PlayersRoutes: Routes = [
     SummaryComponent,
     PlayerRecentGamesListComponent,
     PlayerItemListComponent,
-    PlayerBoatListComponent
+    PlayerBoatListComponent,
+    PlayerStatsOverviewComponent
   ],
   imports: [
     CommonModule,

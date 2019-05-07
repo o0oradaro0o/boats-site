@@ -1,5 +1,14 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemRecordContent, ItemRecord } from 'src/app/models/player-Item-record';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import {
+  ItemRecordContent,
+  ItemRecord
+} from 'src/app/models/player-Item-record';
 import { Sort } from '@angular/material';
 
 @Component({
@@ -18,26 +27,29 @@ export class PlayerBoatListComponent implements OnInit, OnChanges {
       if (!this.CondencedItemRecords) {
         this.CondencedItemRecords = [];
       }
-      
+
       if (this.ItemRecordList) {
-        this.TotalSample=0;
+        this.TotalSample = 0;
         this.ItemRecordList.Content.forEach(Item => {
-          if (Item.item && Item.compGames>0 && !Item.item.includes('Barrel')) {
-            this.TotalSample=this.TotalSample+Item.compGames;
+          if (
+            Item.item &&
+            Item.compGames > 0 &&
+            !Item.item.includes('Barrel')
+          ) {
+            this.TotalSample = this.TotalSample + Item.compGames;
             if (this.CondencedItemRecords.length === 0) {
-            this.CondencedItemRecords.push(Item);
+              this.CondencedItemRecords.push(Item);
             }
             let foundMatch = false;
             this.CondencedItemRecords.forEach(condencedItem => {
-
               if (condencedItem.item === Item.item) {
                 condencedItem.games = condencedItem.games + Item.games;
-                condencedItem.compGames = condencedItem.compGames + Item.compGames;
+                condencedItem.compGames =
+                  condencedItem.compGames + Item.compGames;
                 condencedItem.compWins = condencedItem.compWins + Item.compWins;
                 condencedItem.wins = condencedItem.wins + Item.wins;
                 foundMatch = true;
               }
-
             });
             if (!foundMatch) {
               this.CondencedItemRecords.push(Item);
@@ -76,7 +88,7 @@ export class PlayerBoatListComponent implements OnInit, OnChanges {
             b.compGames > 0 ? b.compWins / b.compGames : -1,
             isAsc
           );
-         default:
+        default:
           return compare(a.compGames, b.compGames, isAsc);
       }
     });
@@ -89,7 +101,6 @@ export class PlayerBoatListComponent implements OnInit, OnChanges {
     }
     return `${(input * 100) / 3}%`;
   }
-
 }
 
 function compare(
