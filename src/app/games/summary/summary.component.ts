@@ -1,4 +1,10 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  SimpleChanges,
+  OnChanges
+} from '@angular/core';
 import { GameContent, GameSimple } from 'src/app/models/game-simple';
 
 @Component({
@@ -9,16 +15,19 @@ import { GameContent, GameSimple } from 'src/app/models/game-simple';
 export class GamesSummaryComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
-  constructor() { }
-  coOpCount = 0;
-  tradingCount = 0;
-  southWins = 0;
-  coOpWins = 0;
-  battleModeCount = 0;
-  totalEvenTeams = 0;
-  totalValidGames = 0;
-  gamesInLast24Hours = 0;
-  playersInLast24Hours = 0;
+
+  coOpCount: number;
+  tradingCount: number;
+  coOpWins: number;
+  tradingWins: number;
+  battleWins: number;
+  battleModeCount: number;
+  totalEvenTeams: number;
+  totalValidGames: number;
+  gamesInLast24Hours: number;
+  playersInLast24Hours: number;
+
+  constructor() {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.SimpleGamesList) {
@@ -27,69 +36,63 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
       }
       if (this.SimpleGamesList) {
         this.SimpleGamesList.Content.forEach(game => {
-          if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+          if (
+            game.dateProcessed &&
+            game.numPlayers &&
+            game.settings &&
+            game.wn
+          ) {
             this.filteredGamesList.push(game);
           }
         });
       }
 
+      this.battleModeCount = this.filteredGamesList.filter(
+        game => game.settings.battle
+      ).length;
 
-      this.coOpCount = 0;
-      this.tradingCount = 0;
-      this.southWins = 0;
-      this.coOpWins = 0;
-      this.battleModeCount = 0;
-      this.totalEvenTeams = 0;
-      this.totalValidGames = 0;
-      this.gamesInLast24Hours = 0;
-      this.playersInLast24Hours = 0;
+      this.tradingCount = this.filteredGamesList.filter(
+        game => game.settings.trading
+      ).length;
 
-      this.filteredGamesList.forEach(game => {
-        const yesterday = new Date();
-        yesterday.setHours(yesterday.getHours() - 24);
-        if (new Date(game.dateProcessed) > yesterday) {
-          this.gamesInLast24Hours++;
-          if (game.numPlayers) {
-            this.playersInLast24Hours += game.numPlayers;
-          }
-        }
-        if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
-         this.totalValidGames++;
-         const SouthWon = game.wn === 'South';
-         if (game.settings.coOp) {
-          this.coOpCount++;
-          if (SouthWon) {
-            this.coOpWins++;
-          }
-         } else {
-            if (game.numPlayers % 2 === 0) {
-              this.totalEvenTeams++;
-              if (SouthWon) {
-                this.southWins++;
-              }
-            }
-         }
-         if (game.settings.battle) {
-          this.battleModeCount++;
-         }
-         if (game.settings.trading) {
-          this.tradingCount++;
-         }
-        }
-      });
+      this.battleWins = this.filteredGamesList.filter(
+        game => game.settings.battle && game.wn === 'South'
+      ).length;
+
+      this.tradingWins = this.filteredGamesList.filter(
+        game => game.settings.trading && game.wn === 'South'
+      ).length;
+
+      this.coOpCount = this.filteredGamesList.filter(
+        game => game.settings.coOp
+      ).length;
+
+      this.coOpWins = this.filteredGamesList.filter(
+        game => game.settings.coOp && game.wn === 'South'
+      ).length;
+
+      // This isn't actually even teams, just even number of players
+      this.totalEvenTeams = this.filteredGamesList.filter(
+        game => game.numPlayers % 2 === 0 && !game.settings.coOp
+      ).length;
+
+      this.totalValidGames = this.filteredGamesList.filter(
+        game =>
+          game.dateProcessed && game.numPlayers && game.settings && game.wn
+      ).length;
+
+      const yesterday = new Date();
+      yesterday.setHours(yesterday.getHours() - 24);
+
+      this.gamesInLast24Hours = this.filteredGamesList.filter(
+        game => new Date(game.dateProcessed) > yesterday
+      ).length;
+
+      this.playersInLast24Hours = this.filteredGamesList
+        .filter(game => new Date(game.dateProcessed) > yesterday)
+        .reduce((a, b) => a + b.numPlayers || 0, 0);
     }
   }
 
-  truncateDecimals(dec, digits) {
-    if (!dec) return '-';
-
-    const multiplier = Math.pow(10, digits);
-    const adjustedNum = dec * multiplier;
-    const truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
-
-    return truncatedNum / multiplier;
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

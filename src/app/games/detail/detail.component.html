@@ -1,41 +1,37 @@
-<div class="row small" *ngIf="DetailGamesList">
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>ID</h4>
-    <p class="mb-lg-0">
-      <strong>Match Id:</strong> {{ DetailGamesList.Content[0].matchID }}<br />
-      <strong>Date:</strong>
-      {{ FixDate(DetailGamesList.Content[0].dateProcessed) }}
-    </p>
+<div *ngIf="DetailGamesList">
+  <div class="title">
+    <h3>
+      <strong
+        [ngClass]="{
+          'north-empire-color': DetailGamesList.Content[0].wn === 'North',
+          'south-empire-color': DetailGamesList.Content[0].wn === 'South'
+        }"
+        >{{ DetailGamesList.Content[0].wn }} Victory!</strong
+      >
+    </h3>
+    {{ FixTime(DetailGamesList.Content[0].gameDuration) }}
   </div>
 
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>Match Settings</h4>
-    <p class="mb-lg-0">
-      <strong>Objective:</strong>
-      {{ DetailGamesList.Content[0].settings.coOp ? 'Coop' : 'VS' }}<br />
-      <strong>Mode:</strong>
-      {{ DetailGamesList.Content[0].settings.battle ? 'Battle' : 'Normal'
-      }}<br />
-      <strong>Trading:</strong>
-      {{ DetailGamesList.Content[0].settings.trading ? 'Enabled' : 'Disabled' }}
-    </p>
-  </div>
-
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>Players</h4>
-    <p class="mb-lg-0">
-      <strong># of Players:</strong> {{ DetailGamesList.Content[0].numPlayers
-      }}<br />
-      <strong>Load Time:</strong> {{ DetailGamesList.Content[0].loadTime }}s
-    </p>
-  </div>
-
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>Outcome</h4>
-    <p class="mb-lg-0">
-      <strong>Winner:</strong> {{ DetailGamesList.Content[0].wn }}<br />
-      <strong>Duration:</strong>
-      {{ FixTime(DetailGamesList.Content[0].gameDuration) }}
-    </p>
+  <div class="game-settings">
+    {{ DetailGamesList.Content[0].dateProcessed | howLongAgo }}
+    <div>
+      <div>
+        <strong>{{
+          DetailGamesList.Content[0].settings.coOp ? 'Co-Op' : 'Normal'
+        }}</strong>
+      </div>
+      <div>
+        <small>
+          {{ DetailGamesList.Content[0].settings.battle ? 'Battle' : '' }}
+          {{
+            DetailGamesList.Content[0].settings.battle &&
+            DetailGamesList.Content[0].settings.trading
+              ? '-'
+              : ''
+          }}
+          {{ DetailGamesList.Content[0].settings.trading ? 'Trading' : '' }}
+        </small>
+      </div>
+    </div>
   </div>
 </div>

@@ -1,37 +1,46 @@
-<div class="row small">
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>Popularity</h4>
-    <p class="mb-lg-0">
-      <strong># of Games in last 24 hours:</strong> {{ gamesInLast24Hours }}<br>
-      <strong># of Players in last 24 hours:</strong> {{ playersInLast24Hours }}
-    </p>
-  </div>
-
-  <div class="col-12 col-sm-6 col-lg-3">
-    <h4>Team Balance</h4>
-    <p class="mb-lg-0" title="Sample Size: {{ totalEvenTeams }}">
-      <strong>North Win %:</strong> {{ truncateDecimals(100 - southWins / totalEvenTeams * 100, 2) }}<br>
-      <strong>South Win %:</strong> {{ truncateDecimals(southWins / totalEvenTeams * 100, 2) }}<br>
-    </p>
-  </div>
-
-  <div class="col-12 col-lg-6">
-    <h4>Game Modes</h4>
-
-    <div class="row">
-      <div class="col-12 col-sm-6">
-        <p class="mb-0">
-          <strong>Co-op %:</strong> {{ truncateDecimals(coOpCount / totalValidGames * 100, 2) }}<br>
-          <strong>Co-op Win %:</strong> {{ truncateDecimals(coOpWins / coOpCount * 100, 2) }}
-        </p>
-      </div>
-
-      <div class="col-12 col-sm-6">
-        <p class="mb-0">
-          <strong>Battle Mode %:</strong> {{ truncateDecimals(battleModeCount / totalValidGames * 100, 2) }}<br>
-          <strong>Trade Mode %:</strong> {{ truncateDecimals(tradingCount / totalValidGames * 100, 2) }}
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+<table
+  class="table table-striped table-hover small"
+  matSort
+  (matSortChange)="sortData($event)"
+>
+  <thead class="bg-gray-100 text-gray-500">
+    <tr>
+      <th>Last 24 Hours</th>
+      <th>Count</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Games</td>
+      <td>{{ gamesInLast24Hours }}</td>
+    </tr>
+    <tr>
+      <td>Players</td>
+      <td>{{ playersInLast24Hours }}</td>
+    </tr>
+  </tbody>
+  <thead class="bg-gray-100 text-gray-500">
+    <tr>
+      <th>Game Types</th>
+      <th>Matches</th>
+      <th>South Win Rate</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Co-op</td>
+      <td>{{ coOpCount }}</td>
+      <td>{{ coOpWins / coOpCount | percent }}</td>
+    </tr>
+    <tr>
+      <td>Trading</td>
+      <td>{{ tradingCount }}</td>
+      <td>{{ tradingWins / tradingCount | percent }}</td>
+    </tr>
+    <tr>
+      <td>Battle</td>
+      <td>{{ battleModeCount }}</td>
+      <td>{{ battleWins / battleModeCount | percent }}</td>
+    </tr>
+  </tbody>
+</table>
