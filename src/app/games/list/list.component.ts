@@ -18,6 +18,7 @@ export class GamesListComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
   filteredGamesList: GameSimple[];
   sortedData: GameSimple[];
+
   constructor(private router: Router) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes.SimpleGamesList) {

@@ -23,7 +23,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
   ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.playerDetails) {
+    if (changes.playerDetails && changes.playerDetails.currentValue) {
       const playerData = changes.playerDetails.currentValue.Content;
       for (const player of playerData) {
         const name = player.playerName;
@@ -45,7 +45,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
         ships = ships.map(shipData => {
           const shipName = shipData.item;
           let imageName = shipName.replace(/ /g, '_');
-          imageName = imageName.replace('\'', '');
+          imageName = imageName.replace("'", '');
           const time = shipData.time;
           const image = `/assets/boat-icons/${imageName}.png`;
           return { name: shipName, time, image };

@@ -1,6 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemRecordContent, ItemRecord } from 'src/app/models/player-item-record';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import {
+  ItemRecordContent,
+  ItemRecord
+} from 'src/app/models/player-item-record';
 import { Sort } from '@angular/material';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'items-list',
@@ -12,7 +22,9 @@ export class ListComponent implements OnInit, OnChanges {
   CondencedItemRecords: ItemRecord[];
   sortedData: ItemRecord[];
   TotalSample: number;
-  constructor() {}
+  isSmallScreen: boolean;
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes.ItemRecordList) {
       if (!this.CondencedItemRecords) {
@@ -21,7 +33,12 @@ export class ListComponent implements OnInit, OnChanges {
       this.TotalSample = 0;
       if (this.ItemRecordList) {
         this.ItemRecordList.Content.forEach(item => {
-          if(item.item && !item.item.includes('lorne') && !item.item.includes('caulk') && !item.item.includes('combo')) {
+          if (
+            item.item &&
+            !item.item.includes('lorne') &&
+            !item.item.includes('caulk') &&
+            !item.item.includes('combo')
+          ) {
             this.CondencedItemRecords.push(item);
             this.TotalSample = this.TotalSample + item.compGames;
           }
@@ -36,7 +53,19 @@ export class ListComponent implements OnInit, OnChanges {
       });
     }
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.isSmallScreen = this.breakpointObserver.isMatched(
+      '(max-width: 599px)'
+    );
+
+    this.breakpointObserver
+      .observe(['(min-width: 500px)'])
+      .subscribe(result => {
+        this.isSmallScreen = this.breakpointObserver.isMatched(
+          '(max-width: 599px)'
+        );
+      });
+  }
 
   sortData(sort: Sort) {
     const data = this.CondencedItemRecords.slice();
@@ -58,7 +87,7 @@ export class ListComponent implements OnInit, OnChanges {
             b.compGames > 0 ? b.compWins / b.compGames : -1,
             isAsc
           );
-         default:
+        default:
           return compare(a.compGames, b.compGames, isAsc);
       }
     });
@@ -66,9 +95,8 @@ export class ListComponent implements OnInit, OnChanges {
   getPercent(input: number) {
     // duration = mm:ss
 
-    return `${(input * 100)}%`;
+    return `${input * 100}%`;
   }
-
 }
 
 function compare(

@@ -1,6 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemRecordContent, ItemRecord } from 'src/app/models/player-item-record';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
+import {
+  ItemRecordContent,
+  ItemRecord
+} from 'src/app/models/player-item-record';
 import { Sort } from '@angular/material';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'boats-list',
@@ -9,43 +19,55 @@ import { Sort } from '@angular/material';
 })
 export class ListComponent implements OnInit, OnChanges {
   @Input() boatRecordList: ItemRecordContent;
-  CondencedBoatRecords: ItemRecord[];
+  CondensedBoatRecords: ItemRecord[];
   sortedData: ItemRecord[];
   TotalSample: number;
-  constructor() {}
+  isSmallScreen: boolean;
+
+  constructor(private breakpointObserver: BreakpointObserver) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes.boatRecordList) {
-      if (!this.CondencedBoatRecords) {
-        this.CondencedBoatRecords = [];
+      if (!this.CondensedBoatRecords) {
+        this.CondensedBoatRecords = [];
       }
 
       if (this.boatRecordList) {
         this.boatRecordList.Content.forEach(boat => {
-          if(boat.item) {
-            if (boat.item==="Barrel") 
-            {
-              this.TotalSample  =boat.compGames;
-              boat.compWins=boat.compGames/2
+          if (boat.item) {
+            if (boat.item === 'Barrel') {
+              this.TotalSample = boat.compGames;
+              boat.compWins = boat.compGames / 2;
             }
-            this.CondencedBoatRecords.push(boat);
-            
-
+            this.CondensedBoatRecords.push(boat);
           }
         });
       }
       // console.log(this.filteredGamesList.length)
       // console.log(this.SimpleGamesList.Content.length)
-      const data = this.CondencedBoatRecords.slice();
+      const data = this.CondensedBoatRecords.slice();
       this.sortedData = data;
       this.sortedData = data.sort((a, b) => {
         return compare(new Date(a.compGames), new Date(b.compGames), false);
       });
     }
   }
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.isSmallScreen = this.breakpointObserver.isMatched(
+      '(max-width: 599px)'
+    );
+
+    this.breakpointObserver
+      .observe(['(min-width: 500px)'])
+      .subscribe(result => {
+        this.isSmallScreen = this.breakpointObserver.isMatched(
+          '(max-width: 599px)'
+        );
+      });
+  }
 
   sortData(sort: Sort) {
-    const data = this.CondencedBoatRecords.slice();
+    const data = this.CondensedBoatRecords.slice();
     if (!sort.active || sort.direction === '') {
       this.sortedData = data;
       return;
@@ -64,7 +86,7 @@ export class ListComponent implements OnInit, OnChanges {
             b.compGames > 0 ? b.compWins / b.compGames : -1,
             isAsc
           );
-         default:
+        default:
           return compare(a.compGames, b.compGames, isAsc);
       }
     });
@@ -72,9 +94,8 @@ export class ListComponent implements OnInit, OnChanges {
   getPercent(input: number) {
     // duration = mm:ss
 
-    return `${(input * 100)}%`;
+    return `${input * 100}%`;
   }
-
 }
 
 function compare(

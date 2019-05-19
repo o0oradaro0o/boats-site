@@ -3,15 +3,15 @@
     <thead class="bg-gray-100 text-gray-500">
       <tr>
         <th>Player</th>
-        <th class="right-align">Level</th>
-        <th class="right-align">Kills</th>
-        <th class="right-align">Deaths</th>
-        <th class="right-align">Last Hits</th>
-        <th class="right-align">Hero Damage</th>
-        <th class="right-align">
+        <th *ngIf="!isSmallScreen" class="right-align">Level</th>
+        <th class="right-align">{{ isSmallScreen ? 'K' : 'Kills' }}</th>
+        <th class="right-align">{{ isSmallScreen ? 'D' : 'Deaths' }}</th>
+        <th class="right-align">{{ isSmallScreen ? 'LH' : 'Last Hits' }}</th>
+        <th *ngIf="!isSmallScreen" class="right-align">Hero Damage</th>
+        <th *ngIf="!isSmallScreen" class="right-align">
           Damage Tanked
         </th>
-        <th class="right-align">
+        <th *ngIf="!isSmallScreen" class="right-align">
           Building Damage
         </th>
       </tr>
@@ -26,14 +26,22 @@
           <td *ngIf="player.playerName !== undefined" class="name-row">
             <img
               src="{{
-                '/assets/boat-icons/' + player.shp.split(' ').join('_').replace('\'', '') + '.png'
+                '/assets/boat-icons/' +
+                  player.shp
+                    .split(' ')
+                    .join('_')
+                    .replace('\'', '') +
+                  '.png'
               }}"
               alt="{{ player.shp }}"
               class="boat-icons"
             />
             {{ player.playerName }}
           </td>
-          <td *ngIf="player.lvl !== undefined" class="right-align">
+          <td
+            *ngIf="player.lvl !== undefined && !isSmallScreen"
+            class="right-align"
+          >
             {{ player.lvl.toLocaleString() }}
           </td>
           <td *ngIf="player.kls !== undefined" class="right-align">
@@ -45,13 +53,22 @@
           <td *ngIf="player.lh !== undefined" class="right-align">
             {{ player.lh.toLocaleString() }}
           </td>
-          <td *ngIf="player.HeroDamage !== undefined" class="right-align">
+          <td
+            *ngIf="player.HeroDamage !== undefined && !isSmallScreen"
+            class="right-align"
+          >
             {{ player.HeroDamage.toLocaleString() }}
           </td>
-          <td *ngIf="player.damageTanked !== undefined" class="right-align">
+          <td
+            *ngIf="player.damageTanked !== undefined && !isSmallScreen"
+            class="right-align"
+          >
             {{ player.damageTanked.toLocaleString() }}
           </td>
-          <td *ngIf="player.buildingDamage !== undefined" class="right-align">
+          <td
+            *ngIf="player.buildingDamage !== undefined && !isSmallScreen"
+            class="right-align"
+          >
             {{ player.buildingDamage.toLocaleString() }}
           </td>
         </ng-container>

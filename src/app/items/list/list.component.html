@@ -5,7 +5,7 @@
 >
   <thead class="bg-gray-100 text-gray-500">
     <tr>
-      <th mat-sort-header="name">Name</th>
+      <th mat-sort-header="name">Item</th>
       <th mat-sort-header="games" title="Only counts games with >5 players">
         Use Rate
       </th>
@@ -26,10 +26,12 @@
             class="item-icons"
           />
           {{
-            item.item
-              .split('_')
-              .join(' ')
-              .replace('item ', '')
+            isSmallScreen
+              ? ''
+              : item.item
+                  .split('_')
+                  .join(' ')
+                  .replace('item ', '')
           }}
         </td>
         <td>

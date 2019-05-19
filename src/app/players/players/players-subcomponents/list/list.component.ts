@@ -11,6 +11,7 @@ import {
   PlayerSimple,
   PlayerSimpleContent
 } from 'src/app/models/player-simple';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'players-list',
@@ -21,7 +22,12 @@ export class ListComponent implements OnInit, OnChanges {
   @Input() SimplePlayersList: PlayerSimpleContent;
   filteredPlayersList: PlayerSimple[];
   sortedData: PlayerSimple[];
-  constructor(private router: Router) {}
+  isSmallScreen: boolean;
+
+  constructor(
+    private router: Router,
+    private breakpointObserver: BreakpointObserver
+  ) {}
   ngOnChanges(changes: SimpleChanges) {
     if (changes.SimplePlayersList) {
       if (!this.filteredPlayersList) {
@@ -42,7 +48,19 @@ export class ListComponent implements OnInit, OnChanges {
       });
     }
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.isSmallScreen = this.breakpointObserver.isMatched(
+      '(max-width: 599px)'
+    );
+
+    this.breakpointObserver
+      .observe(['(min-width: 500px)'])
+      .subscribe(result => {
+        this.isSmallScreen = this.breakpointObserver.isMatched(
+          '(max-width: 599px)'
+        );
+      });
+  }
 
   sortData(sort: Sort) {
     const data = this.filteredPlayersList.slice();

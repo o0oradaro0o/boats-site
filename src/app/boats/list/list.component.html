@@ -30,7 +30,7 @@
             alt="{{ boat.item }}"
             class="boat-icons"
           />
-          {{ boat.item }}
+          {{ !isSmallScreen ? boat.item : '' }}
         </td>
         <td>
           {{

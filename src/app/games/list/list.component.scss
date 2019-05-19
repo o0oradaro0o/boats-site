@@ -11,6 +11,8 @@
   height: 4px;
 }
 
-.table td {
+.table td,
+.table th {
   vertical-align: middle;
+  padding: 0.25rem;
 }

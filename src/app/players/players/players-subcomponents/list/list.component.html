@@ -7,11 +7,17 @@
     <tr>
       <th mat-sort-header="name">Name</th>
       <th mat-sort-header="games">Games Played</th>
-      <th mat-sort-header="winper" title="Only counts games with >5 players">
+      <th
+        *ngIf="!isSmallScreen"
+        mat-sort-header="winper"
+        title="Only counts games with >5 players"
+      >
         Competitive Win %
       </th>
-      <th mat-sort-header="KD">KDR</th>
-      <th mat-sort-header="lastHits">Average Last Hits</th>
+      <th *ngIf="!isSmallScreen" mat-sort-header="KD">KDR</th>
+      <th *ngIf="!isSmallScreen" mat-sort-header="lastHits">
+        Average Last Hits
+      </th>
       <th mat-sort-header="RecentGame">Most Recent Game</th>
     </tr>
   </thead>
@@ -24,21 +30,21 @@
       <ng-container>
         <td>{{ player.playerName }}</td>
         <td>{{ player.games }}</td>
-        <td>
+        <td *ngIf="!isSmallScreen">
           {{
             player.compGames
               ? ((player.compWins / player.compGames) * 100).toFixed(2) + '%'
               : 'N/A'
           }}
         </td>
-        <td>
+        <td *ngIf="!isSmallScreen">
           {{ (player.kills / player.deaths).toFixed(2) }}
           <div
             class="kd-segment"
             [ngStyle]="{ width: getKDPercent(player.kills / player.deaths) }"
           ></div>
         </td>
-        <td>
+        <td *ngIf="!isSmallScreen">
           {{ (player.lastHits / player.games).toFixed(2) }}
         </td>
         <td>
