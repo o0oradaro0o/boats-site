@@ -5,15 +5,15 @@
     <strong>{{ playersInLast24Hours }}</strong> Players
   </div>
   <div>
-    Of these:
+    in the past 300 games:
     <div>
-      <strong>{{ coOpCount }}</strong> were Co-op
+      <strong>{{ (coOpCount/300*100).toFixed(1) }}%</strong> were Co-op
     </div>
     <div>
-      <strong>{{ tradingCount }}</strong> enabled Trading
+      <strong>{{ (tradingCount/300*100).toFixed(1) }}%</strong> enabled Trading
     </div>
     <div>
-      <strong>{{ battleModeCount }}</strong> enabled Battle Mode
+      <strong>{{ (battleModeCount/300*100).toFixed(1) }}%</strong> enabled Battle Mode
     </div>
   </div>
   <div>

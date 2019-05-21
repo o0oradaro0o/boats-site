@@ -36,6 +36,13 @@ export class DataGrabberService {
       '?include=numPlayers,wn,settings,matchID,dateProcessed,gameDuration&take=200';
     return this.http.get<GameContent>(s, this.httpOptions);
   }
+  
+  gat300Games(): Observable<GameContent> {
+    return this.http.get<GameContent>(
+      apiUrl + 'query/8d442f4d-6bb1-11e9-b164-49ca76f2a334',
+      this.httpOptions
+    );
+  }
 
   getGameDetail(matchId: number): Observable<GameDetailContent> {
     console.log('made a call for ' + matchId);

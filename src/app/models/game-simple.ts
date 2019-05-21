@@ -5,6 +5,9 @@ export interface GameSimple {
   matchID: number;
   dateProcessed: string;
   gameDuration: string;
+  battle: number;
+  coOp: number;
+  trading: number;
 }
 
 interface Settings {

@@ -2,13 +2,13 @@
 
 <div class="bg-blue-200">
   <div class="container py-3 text-white">
-    <games-summary [SimpleGamesList]="SimpleGamesList | async"></games-summary>
+    <games-summary [SimpleGamesList]="MoreGames | async"></games-summary>
   </div>
 </div>
 
 <div class="bg-gray-vertical-emboss py-5">
   <div class="container">
     <h4 class="mb-4">Recent Games</h4>
-    <games-list [SimpleGamesList]="SimpleGamesList | async"></games-list>
+    <games-list [SimpleGamesList]="GamesThisWeek | async"></games-list>
   </div>
 </div>

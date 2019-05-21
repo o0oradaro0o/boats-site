@@ -39,7 +39,6 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
           if (
             game.dateProcessed &&
             game.numPlayers &&
-            game.settings &&
             game.wn
           ) {
             this.filteredGamesList.push(game);
@@ -48,37 +47,37 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
       }
 
       this.battleModeCount = this.filteredGamesList.filter(
-        game => game.settings.battle
+        game => game.battle
       ).length;
 
       this.tradingCount = this.filteredGamesList.filter(
-        game => game.settings.trading
+        game => game.trading
       ).length;
 
       this.battleWins = this.filteredGamesList.filter(
-        game => game.settings.battle && game.wn === 'South'
+        game => game.battle && game.wn === 'South'
       ).length;
 
       this.tradingWins = this.filteredGamesList.filter(
-        game => game.settings.trading && game.wn === 'South'
+        game => game.trading && game.wn === 'South'
       ).length;
 
       this.coOpCount = this.filteredGamesList.filter(
-        game => game.settings.coOp
+        game => game.coOp
       ).length;
 
       this.coOpWins = this.filteredGamesList.filter(
-        game => game.settings.coOp && game.wn === 'South'
+        game => game.coOp && game.wn === 'South'
       ).length;
 
       // This isn't actually even teams, just even number of players
       this.totalEvenTeams = this.filteredGamesList.filter(
-        game => game.numPlayers % 2 === 0 && !game.settings.coOp
+        game => game.numPlayers % 2 === 0 && !game.coOp
       ).length;
 
       this.totalValidGames = this.filteredGamesList.filter(
         game =>
-          game.dateProcessed && game.numPlayers && game.settings && game.wn
+          game.dateProcessed && game.numPlayers && game.wn
       ).length;
 
       const yesterday = new Date();

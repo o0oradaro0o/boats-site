@@ -9,7 +9,8 @@ import { DataGrabberService } from './../data-grabber.service';
   styleUrls: ['./games.component.scss']
 })
 export class GamesComponent implements OnInit {
-  SimpleGamesList: Observable<GameContent>;
+  GamesThisWeek: Observable<GameContent>;
+  MoreGames: Observable<GameContent>;
 
   constructor(loader: DataGrabberService) {
     // List reacts to filter and sort changes
@@ -21,7 +22,8 @@ export class GamesComponent implements OnInit {
     tomorrow.setDate(today.getDate() + 1);
     yesterday.setDate(today.getDate() - 1);
     DByesterday.setDate(today.getDate() - 2);
-    this.SimpleGamesList = merge(loader.getGames(tomorrow),loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
+    this.GamesThisWeek = merge(loader.getGames(tomorrow),loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
+    this.MoreGames = loader.gat300Games();
   }
 
   ngOnInit() {
