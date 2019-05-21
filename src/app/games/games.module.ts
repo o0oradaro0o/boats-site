@@ -21,6 +21,7 @@ import { PurchaseLogComponent } from './purchase-log/purchase-log.component';
 import { PlayerPurchaseHistoryComponent } from './purchase-log/player-purchase-history/player-purchase-history.component';
 
 import { PipesModule } from '../pipes/pipes.module';
+import { SharedModule } from '../shared/shared.module';
 
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
@@ -50,7 +51,8 @@ const GamesRoutes: Routes = [
     MatListModule,
     MatSortModule,
     MatCheckboxModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ]
 })
 export class GamesModule {}

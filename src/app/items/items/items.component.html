@@ -1,13 +1,7 @@
-<div id="banner" class="bg-blue-100">
-    <div class="container py-5 text-center text-gray-500">
-      <h1 class="text-uppercase font-weight-bold">item Stats</h1>
-    </div>
-  </div>
-  
+<app-page-banner text="Game Stats"></app-page-banner>
+
 <div class="bg-gray-vertical-emboss py-5">
-    <div class="container">
-      <items-list
-        [ItemRecordList]="ItemRecordList$ | async"
-      ></items-list>
-    </div>
+  <div class="container">
+    <items-list [ItemRecordList]="ItemRecordList$ | async"></items-list>
   </div>
+</div>

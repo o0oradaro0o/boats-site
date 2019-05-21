@@ -4,11 +4,16 @@ import { BoatsSummaryComponent } from './summary/summary.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BoatsComponent } from './boats/boats.component';
 import { ListComponent } from './list/list.component';
-import { MatSortModule, MatListModule, MatTableModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
+import {
+  MatSortModule,
+  MatListModule,
+  MatTableModule,
+  MatTabsModule,
+  MatCheckboxModule
+} from '@angular/material';
+import { SharedModule } from '../shared/shared.module';
 
-const BoatsRoutes: Routes = [
-  { path: '', component: BoatsComponent },
-];
+const BoatsRoutes: Routes = [{ path: '', component: BoatsComponent }];
 
 @NgModule({
   declarations: [BoatsSummaryComponent, BoatsComponent, ListComponent],
@@ -19,7 +24,8 @@ const BoatsRoutes: Routes = [
     MatTableModule,
     MatListModule,
     MatSortModule,
-    MatCheckboxModule,
+    SharedModule,
+    MatCheckboxModule
   ]
 })
-export class BoatsModule { }
+export class BoatsModule {}

@@ -17,6 +17,8 @@ import { PlayerItemListComponent } from './player/player-subcomponents/player-it
 import { PlayerBoatListComponent } from './player/player-subcomponents/player-boats-list/list.component';
 import { PlayerStatsOverviewComponent } from './player/player-subcomponents/player-stats-overview/player-stats-overview.component';
 
+import { SharedModule } from '../shared/shared.module';
+
 const PlayersRoutes: Routes = [
   { path: '', component: PlayersComponent },
   { path: ':id', component: PlayerComponent }
@@ -42,7 +44,8 @@ const PlayersRoutes: Routes = [
     MatListModule,
     MatSortModule,
     MatCheckboxModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ]
 })
 export class PlayersModule {}

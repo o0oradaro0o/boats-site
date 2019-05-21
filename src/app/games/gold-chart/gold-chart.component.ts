@@ -22,19 +22,24 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
   southEmpTotal: number[] = [];
   goldAdvantage: number[] = [];
   empireTick = [];
+  madeGraph = false;
+
   ngOnChanges(changes: SimpleChanges) {
     if (changes.DetailGamesList) {
-      this.makeGraph();
+      this.madeGraph = this.makeGraph();
+      console.log(this.madeGraph);
     }
   }
   ngOnInit() {}
   makeGraph() {
-    // console.log(this.empireTick.length);
     if (!this.DetailGamesList) {
-      return true;
+      return false;
     }
     if (this.empireTick.length > 0) {
       return true;
+    }
+    if (this.DetailGamesList.Content[0].empGoldHist.length === 0) {
+      return false;
     }
     // Add the initial tick to be 0
     this.empireTick.push(0);

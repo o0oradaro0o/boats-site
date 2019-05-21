@@ -1,46 +1,23 @@
-<table
-  class="table table-striped table-hover small"
-  matSort
-  (matSortChange)="sortData($event)"
->
-  <thead class="bg-gray-100 text-gray-500">
-    <tr>
-      <th>Last 24 Hours</th>
-      <th>Count</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Games</td>
-      <td>{{ gamesInLast24Hours }}</td>
-    </tr>
-    <tr>
-      <td>Players</td>
-      <td>{{ playersInLast24Hours }}</td>
-    </tr>
-  </tbody>
-  <thead class="bg-gray-100 text-gray-500">
-    <tr>
-      <th>Game Types</th>
-      <th>Matches</th>
-      <th>South Win Rate</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Co-op</td>
-      <td>{{ coOpCount }}</td>
-      <td>{{ coOpWins / coOpCount | percent }}</td>
-    </tr>
-    <tr>
-      <td>Trading</td>
-      <td>{{ tradingCount }}</td>
-      <td>{{ tradingWins / tradingCount | percent }}</td>
-    </tr>
-    <tr>
-      <td>Battle</td>
-      <td>{{ battleModeCount }}</td>
-      <td>{{ battleWins / battleModeCount | percent }}</td>
-    </tr>
-  </tbody>
-</table>
+<div class="stats">
+  <div>
+    In the past <strong>24</strong> Hours there were
+    <strong>{{ gamesInLast24Hours }}</strong> Games with
+    <strong>{{ playersInLast24Hours }}</strong> Players
+  </div>
+  <div>
+    Of these:
+    <div>
+      <strong>{{ coOpCount }}</strong> were Co-op
+    </div>
+    <div>
+      <strong>{{ tradingCount }}</strong> enabled Trading
+    </div>
+    <div>
+      <strong>{{ battleModeCount }}</strong> enabled Battle Mode
+    </div>
+  </div>
+  <div>
+    Co-op Mode had a <strong>{{ coOpWins / coOpCount | percent }}</strong> win
+    rate
+  </div>
+</div>

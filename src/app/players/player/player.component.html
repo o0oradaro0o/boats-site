@@ -1,15 +1,12 @@
-<div id="banner" class="bg-blue-100">
-  <div class="container py-5 text-center text-gray-500">
-    <h1 class="text-uppercase font-weight-bold">Player Details</h1>
-  </div>
-</div>
+<app-page-banner text="Player Details"></app-page-banner>
+
 <div class="bg-gray-vertical-emboss py-5">
   <div class="container">
     <!-- <app-player-stats-overview></app-player-stats-overview>
     <hr /> -->
     <div class="row">
       <div class="col-12 col-md-6">
-        <h3>Boat Use</h3>
+        <h4>Boat Use</h4>
         <div class="heightContainer">
           <player-boats-list
             [ItemRecordList]="BoatRecordList$ | async"
@@ -17,7 +14,7 @@
         </div>
       </div>
       <div class="col-12 col-md-6">
-        <h3>Item Use</h3>
+        <h4>Item Use</h4>
         <div class="heightContainer">
           <player-items-list
             [ItemRecordList]="ItemRecordList$ | async"
@@ -26,7 +23,7 @@
       </div>
     </div>
     <hr />
-    <h3>Recent Games</h3>
+    <h4>Recent Games</h4>
     <app-player-recent-games-list [recentGames]="recentGames">
     </app-player-recent-games-list>
   </div>

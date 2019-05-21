@@ -1,18 +1,14 @@
-<div id="banner" class="bg-blue-100">
-  <div class="container py-5 text-center text-gray-500">
-    <h1 class="text-uppercase font-weight-bold">Game Stats</h1>
-  </div>
-</div>
+<app-page-banner text="Game Stats"></app-page-banner>
 
-<div class="bg-blue-200 text-gray-500 py-4">
-  <div class="container">
+<div class="bg-blue-200">
+  <div class="container py-3 text-white">
     <games-summary [SimpleGamesList]="SimpleGamesList | async"></games-summary>
   </div>
 </div>
 
 <div class="bg-gray-vertical-emboss py-5">
   <div class="container">
-    <h3 class="text-center mb-4">Recent Games</h3>
+    <h4 class="mb-4">Recent Games</h4>
     <games-list [SimpleGamesList]="SimpleGamesList | async"></games-list>
   </div>
 </div>

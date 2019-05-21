@@ -4,11 +4,17 @@ import { itemsSummaryComponent } from './summary/summary.component';
 import { RouterModule, Routes } from '@angular/router';
 import { ItemsComponent } from './items/items.component';
 import { ListComponent } from './list/list.component';
-import { MatSortModule, MatListModule, MatTableModule, MatTabsModule, MatCheckboxModule } from '@angular/material';
+import {
+  MatSortModule,
+  MatListModule,
+  MatTableModule,
+  MatTabsModule,
+  MatCheckboxModule
+} from '@angular/material';
 
-const itemsRoutes: Routes = [
-  { path: '', component: ItemsComponent },
-];
+import { SharedModule } from '../shared/shared.module';
+
+const itemsRoutes: Routes = [{ path: '', component: ItemsComponent }];
 
 @NgModule({
   declarations: [itemsSummaryComponent, ItemsComponent, ListComponent],
@@ -20,6 +26,7 @@ const itemsRoutes: Routes = [
     MatListModule,
     MatSortModule,
     MatCheckboxModule,
+    SharedModule
   ]
 })
-export class ItemsModule { }
+export class ItemsModule {}

@@ -1,6 +1,9 @@
-<ng-container *ngIf="northTeamData.length > 0"
-  ><h3>North Empire</h3>
-  <app-end-game-table [playerData]="northTeamData"> </app-end-game-table
-></ng-container>
-<h3>South Empire</h3>
-<app-end-game-table [playerData]="southTeamData"> </app-end-game-table>
+<ng-container *ngIf="northTeamData.length > 0">
+  <h4>North Empire</h4>
+  <app-end-game-table [playerData]="northTeamData"> </app-end-game-table>
+</ng-container>
+
+<ng-container *ngIf="southTeamData.length > 0">
+  <h4>South Empire</h4>
+  <app-end-game-table [playerData]="southTeamData"> </app-end-game-table>
+</ng-container>
