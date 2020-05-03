@@ -41,7 +41,15 @@ export class GamesSummaryComponent implements OnInit, OnChanges {
             game.numPlayers &&
             game.wn
           ) {
-            this.filteredGamesList.push(game);
+            let inListAlready = false;
+            this.filteredGamesList.forEach(filteredgame => {
+              if (filteredgame.matchID == game.matchID) {
+                inListAlready = true;
+              }
+            });
+            if (!inListAlready) {
+              this.filteredGamesList.push(game);
+            }
           }
         });
       }
