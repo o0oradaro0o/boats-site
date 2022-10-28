@@ -1,8 +1,15 @@
 export interface PlayerSimple {
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  hours_worked: number;
-  hourly_wage: number;
+   playerID: number;
+   playerName: string;
+   games: number;
+   wins: number;
+   compWins: number;
+   compGames: number;
+   kills: number;
+   deaths: number;
+   lastHits: number;
+   lastGame: string;
+}
+export interface PlayerSimpleContent {
+  Content: PlayerSimple[];
 }

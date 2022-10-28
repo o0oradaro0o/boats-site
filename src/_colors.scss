@@ -1,0 +1,88 @@
+/* BRAND COLORS */
+$color-blue-100: #0D152B;
+$color-blue-200: #1C2F5E;
+$color-blue-300: #375BB7;
+$color-blue-400: #3A61C4;
+$color-blue-500: #4A7BF7;
+
+$color-gray-100: #111111;
+$color-gray-200: #444444;
+$color-gray-300: #777777;
+$color-gray-400: #C4C4C4;
+$color-gray-500: #F7F7F7;
+
+$color-red-100: #382123;
+$color-red-200: #6B3F43;
+$color-red-300: #9D5C63;
+$color-red-400: #D17B83;
+$color-red-500: #FF96A0;
+
+$color-yellow-100: #47462D;
+$color-yellow-200: #7A784E;
+$color-yellow-300: #ADAA6E;
+$color-yellow-400: #E1DD8F;
+$color-yellow-500: #FFFAA3;
+
+$color-brown-100: #282520;
+$color-brown-200: #5B5348;
+$color-brown-300: #8E8270;
+$color-brown-400: #C1B099;
+$color-brown-500: #F4DFC1;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+    /* PRIMARY */
+    "blue-100": $color-blue-100,
+    "blue-200": $color-blue-200,
+    "blue-300": $color-blue-300,
+    "blue-400": $color-blue-400,
+    "blue-500": $color-blue-500,
+    "gray-100": $color-gray-100,
+    "gray-200": $color-gray-200,
+    "gray-300": $color-gray-300,
+    "gray-400": $color-gray-400,
+    "gray-500": $color-gray-500,
+    "red-100": $color-red-100,
+    "red-200": $color-red-200,
+    "red-300": $color-red-300,
+    "red-400": $color-red-400,
+    "red-500": $color-red-500,
+    "yellow-100": $color-yellow-100,
+    "yellow-200": $color-yellow-200,
+    "yellow-300": $color-yellow-300,
+    "yellow-400": $color-yellow-400,
+    "yellow-500": $color-yellow-500,
+    "brown-100": $color-brown-100,
+    "brown-200": $color-brown-200,
+    "brown-300": $color-brown-300,
+    "brown-400": $color-brown-400,
+    "brown-500": $color-brown-500
+), $theme-colors);
+
+@each $key, $value in $theme-colors {
+    .text-#{$key} {
+        color: $value !important;
+    }
+
+    .bg-#{$key} {
+        background-color: $value !important;
+    }
+
+    .btn-#{$key} {
+        background-color: $value !important;
+        border-color: $value !important;
+
+        &:hover {
+            background-color: darken($value, 10%) !important;
+            border-color: darken($value, 10%) !important;
+        }
+    }
+
+    .badge-#{$key} {
+        background-color: $value;
+    }
+
+    .border-#{$key} {
+        border-color: $value !important;
+    }
+}

@@ -1,0 +1,14 @@
+<!-- <div class="bg-blue-200 text-gray-500 py-4">
+  <div class="container">
+    <players-summary></players-summary>
+  </div>
+</div> -->
+<app-page-banner text="Player Stats"></app-page-banner>
+
+<div class="bg-gray-vertical-emboss py-5">
+  <div class="container">
+    <players-list
+      [SimplePlayersList]="SimplePlayersList | async"
+    ></players-list>
+  </div>
+</div>

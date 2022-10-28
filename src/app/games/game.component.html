@@ -1,0 +1,41 @@
+<app-page-banner text="Game Details"></app-page-banner>
+
+<div class="bg-blue-200 text-gray-500 py-4">
+  <div class="container">
+    <game-detail [DetailGamesList]="GeneralGameDetail$ | async"></game-detail>
+  </div>
+</div>
+
+<div class="bg-gray-vertical-emboss py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <game-player-snapshot
+          [DetailGamesList]="PlayerDetails$ | async"
+        ></game-player-snapshot>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <game-gold-chart
+          [DetailGamesList]="GeneralGameDetail$ | async"
+        ></game-gold-chart>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-lg-12">
+        <app-purchase-log
+          [playerDetails]="PlayerDetails$ | async"
+        ></app-purchase-log>
+      </div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-12 col-lg-12">
+        <game-timeline
+          [playerDetails]="PlayerDetails$ | async"
+          [gameDetails]="GeneralGameDetail$ | async"
+        ></game-timeline>
+      </div>
+    </div> -->
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<table
+  class="table table-striped table-hover small"
+  matSort
+  (matSortChange)="sortData($event)"
+>
+  <thead class="bg-gray-100 text-gray-500">
+    <tr>
+      <th mat-sort-header="dateProcessed">Result</th>
+      <th mat-sort-header="numPlayers">Players</th>
+      <th mat-sort-header="CoOp">Game Mode</th>
+      <th mat-sort-header="gameDuration">Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      class="innerRow"
+      *ngFor="let game of sortedData"
+      (click)="handleClick(game.matchID)"
+    >
+      <ng-container *ngIf="showRow(game)">
+        <td>
+          <strong
+            [ngClass]="{
+              'north-empire-color': game.wn === 'North',
+              'south-empire-color': game.wn === 'South'
+            }"
+            >{{ game.wn }} Victory</strong
+          >
+          <div>{{ game.dateProcessed | howLongAgo }}</div>
+        </td>
+        <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
+        <td *ngIf="game.settings">
+          <div>
+            <strong>{{ game.settings.coOp ? 'Co-Op' : 'Normal' }}</strong>
+          </div>
+          <div>
+            <small>
+              {{ game.settings.battle ? 'Battle' : '' }}
+              {{ game.settings.battle && game.settings.trading ? '-' : '' }}
+              {{ game.settings.trading ? 'Trading' : '' }}
+            </small>
+          </div>
+        </td>
+        <td>
+          {{ game.gameDuration }}
+          <div
+            class="duration-segment"
+            [ngStyle]="{ width: getDurationPercent(game.gameDuration) }"
+          ></div>
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>

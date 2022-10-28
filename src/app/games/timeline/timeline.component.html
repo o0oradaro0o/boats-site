@@ -1,0 +1,33 @@
+<div class="row">
+  <div id="detailBox" class="col-sm-3">
+    <div id="eventImageHolder">
+      <img id="eventImage" src="{{ HoverImg }}" (error)="tempImg()" />
+    </div>
+    <p id="eventName">{{ currentHoverInfo }}</p>
+    <p id="playerName">{{ currentHoverPlayerName }}</p>
+  </div>
+</div>
+<div id="timeline"></div>
+<div id="checkHolder">
+  <mat-checkbox
+    class="checkbox"
+    color="warn"
+    (change)="toggle('ShowKillsDeaths')"
+    [checked]="ShowKillsDeaths"
+    >Show Kills and Deaths</mat-checkbox
+  >
+  <mat-checkbox
+    class="checkbox"
+    color="primary"
+    (change)="toggle('ShowBoats')"
+    [checked]="ShowBoats"
+    >Show Boats
+  </mat-checkbox>
+  <mat-checkbox
+    class="checkbox"
+    color="accent"
+    (change)="toggle('ShowBuys')"
+    [checked]="ShowBuys"
+    >Show Items
+  </mat-checkbox>
+</div>

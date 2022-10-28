@@ -1,0 +1,26 @@
+span {
+  display: block;
+}
+
+.player-info {
+  text-align: center;
+}
+
+.records {
+  text-align: center;
+}
+
+.record {
+  display: inline-block;
+  margin-right: 15px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.wins {
+  color: green;
+}
+
+.losses {
+  color: red;
+}

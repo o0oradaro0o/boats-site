@@ -1,0 +1,30 @@
+<app-page-banner text="Player Details"></app-page-banner>
+
+<div class="bg-gray-vertical-emboss py-5">
+  <div class="container">
+    <!-- <app-player-stats-overview></app-player-stats-overview>
+    <hr /> -->
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <h4>Boat Use</h4>
+        <div class="heightContainer">
+          <player-boats-list
+            [ItemRecordList]="BoatRecordList$ | async"
+          ></player-boats-list>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <h4>Item Use</h4>
+        <div class="heightContainer">
+          <player-items-list
+            [ItemRecordList]="ItemRecordList$ | async"
+          ></player-items-list>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <h4>Recent Games</h4>
+    <app-player-recent-games-list [recentGames]="recentGames">
+    </app-player-recent-games-list>
+  </div>
+</div>

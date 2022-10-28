@@ -1,0 +1,23 @@
+<div class="stats">
+  <div>
+    In the past <strong>24</strong> Hours there were
+    <strong>{{ gamesInLast24Hours }}</strong> Games with
+    <strong>{{ playersInLast24Hours }}</strong> Players
+  </div>
+  <div>
+    in the past 300 games:
+    <div>
+      <strong>{{ (coOpCount/300*100).toFixed(1) }}%</strong> were Co-op
+    </div>
+    <div>
+      <strong>{{ (tradingCount/300*100).toFixed(1) }}%</strong> enabled Trading
+    </div>
+    <div>
+      <strong>{{ (battleModeCount/300*100).toFixed(1) }}%</strong> enabled Battle Mode
+    </div>
+  </div>
+  <div>
+    Co-op Mode had a <strong>{{ coOpWins / coOpCount | percent }}</strong> win
+    rate
+  </div>
+</div>

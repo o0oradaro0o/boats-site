@@ -1,0 +1,38 @@
+<div *ngIf="DetailGamesList" class="game-settings">
+  <div>
+    <div>
+      <strong>{{
+        DetailGamesList.Content[0].settings.coOp ? 'Co-Op' : 'Normal'
+      }}</strong>
+    </div>
+    <div>
+      <div>
+        <small>
+          {{ DetailGamesList.Content[0].settings.battle ? 'Battle' : '' }}
+          {{
+            DetailGamesList.Content[0].settings.battle &&
+            DetailGamesList.Content[0].settings.trading
+              ? '-'
+              : ''
+          }}
+          {{ DetailGamesList.Content[0].settings.trading ? 'Trading' : '' }}
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <div class="title">
+    <h3>
+      <strong
+        [ngClass]="{
+          'north-empire-color': DetailGamesList.Content[0].wn === 'North',
+          'south-empire-color': DetailGamesList.Content[0].wn === 'South'
+        }"
+        >{{ DetailGamesList.Content[0].wn }} Victory!</strong
+      >
+    </h3>
+    {{ FixTime(DetailGamesList.Content[0].gameDuration) }}
+  </div>
+
+  <div>{{ DetailGamesList.Content[0].dateProcessed | howLongAgo }}</div>
+</div>

@@ -1,0 +1,56 @@
+<table
+  class="table table-striped table-hover table-responsive-lg small"
+  matSort
+  (matSortChange)="sortData($event)"
+>
+  <thead class="bg-gray-100 text-gray-500">
+    <tr>
+      <th mat-sort-header="name">Name</th>
+      <th mat-sort-header="games">Games Played</th>
+      <th
+        *ngIf="!isSmallScreen"
+        mat-sort-header="winper"
+        title="Only counts games with >5 players"
+      >
+        Competitive Win %
+      </th>
+      <th *ngIf="!isSmallScreen" mat-sort-header="KD">KDR</th>
+      <th *ngIf="!isSmallScreen" mat-sort-header="lastHits">
+        Average Last Hits
+      </th>
+      <th mat-sort-header="RecentGame">Most Recent Game</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      class="innerRow"
+      *ngFor="let player of sortedData"
+      (click)="handleClick(player.playerID)"
+    >
+      <ng-container>
+        <td>{{ player.playerName }}</td>
+        <td>{{ player.games }}</td>
+        <td *ngIf="!isSmallScreen">
+          {{
+            player.compGames
+              ? ((player.compWins / player.compGames) * 100).toFixed(2) + '%'
+              : 'N/A'
+          }}
+        </td>
+        <td *ngIf="!isSmallScreen">
+          {{ (player.kills / player.deaths).toFixed(2) }}
+          <div
+            class="kd-segment"
+            [ngStyle]="{ width: getKDPercent(player.kills / player.deaths) }"
+          ></div>
+        </td>
+        <td *ngIf="!isSmallScreen">
+          {{ (player.lastHits / player.games).toFixed(2) }}
+        </td>
+        <td>
+          {{ player.lastGame | howLongAgo }}
+        </td>
+      </ng-container>
+    </tr>
+  </tbody>
+</table>
