@@ -93,7 +93,7 @@ export class DataGrabberService {
   }
 
   getPlayerItemData(playerId: number): Observable<ItemRecordContent> {
-    const query = `{"query":"SELECT * FROM playerBuildInfo where playerID='${playerId}'"}`;
+    const query = `{"query":"SELECT * FROM bships.playerBuildInfo where playerID='${playerId}'"}`;
     return this.http.post<ItemRecordContent>(
       `${apiUrl}query/`,
       query,
@@ -102,7 +102,7 @@ export class DataGrabberService {
   }
 
   getPlayerBoatData(playerId: number): Observable<ItemRecordContent> {
-    const query = `{"query":"SELECT * FROM recentPlayerBoatInfo where playerID='${playerId}'"}`;
+    const query = `{"query":"SELECT * FROM bships.recentPlayerBoatInfo where playerID='${playerId}'"}`;
     return this.http.post<ItemRecordContent>(
       `${apiUrl}query/`,
       query,
@@ -113,7 +113,7 @@ export class DataGrabberService {
   getRecentMatches(playerId: number): Observable<GameDetail[]> {
     const columns =
       'trading, battle, coOp, wn, tm, gameDuration, kls, dth, lvl, numPlayers, shp, dateProcessed, matchID';
-    const query = `{"query":"SELECT top (20) ${columns} FROM gamedata where playerID='${playerId}' and dedi=1 order by dateProcessed desc"}`;
+    const query = `{"query":"SELECT top (20) ${columns} FROM bships.gamedata where playerID='${playerId}' and dedi=1 order by dateProcessed desc"}`;
     return this.http.post<GameDetail[]>(
       `${apiUrl}query/`,
       query,
