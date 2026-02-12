@@ -5,7 +5,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import { Sort } from '@angular/material';
+import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
 import {
   PlayerSimple,

@@ -9,7 +9,7 @@ import {
   ItemRecordContent,
   ItemRecord
 } from 'src/app/models/player-item-record';
-import { Sort } from '@angular/material';
+import { Sort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({

@@ -103,7 +103,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         !this.playerDetails ||
         this.empireTick.length > 0
       ) {
-        return true;
+        return;
       }
 
       this.parseContent();

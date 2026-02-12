@@ -6,7 +6,9 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { GameDetailContent, EmpGold } from 'src/app/models/game-detail';
-import { Chart } from 'chart.js';
+import { Chart, registerables } from 'chart.js';
+
+Chart.register(...registerables);
 
 @Component({
   selector: 'game-gold-chart',
@@ -17,7 +19,7 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
   @Input() DetailGamesList: GameDetailContent;
   constructor() {}
 
-  chart = [];
+  chart: any;
   northEmpTotal: number[] = [];
   southEmpTotal: number[] = [];
   goldAdvantage: number[] = [];
@@ -89,20 +91,18 @@ export class GameGoldChartComponent implements OnInit, OnChanges {
           ]
         },
         options: {
-          legend: {
-            display: true
+          plugins: {
+            legend: {
+              display: true
+            }
           },
           scales: {
-            xAxes: [
-              {
-                display: true
-              }
-            ],
-            yAxes: [
-              {
-                display: true
-              }
-            ]
+            x: {
+              display: true
+            },
+            y: {
+              display: true
+            }
           }
         }
       });

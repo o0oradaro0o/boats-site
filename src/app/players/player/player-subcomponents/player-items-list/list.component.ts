@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ItemRecordContent, ItemRecord } from 'src/app/models/player-Item-record';
-import { Sort } from '@angular/material';
+import { ItemRecordContent, ItemRecord } from 'src/app/models/player-item-record';
+import { Sort } from '@angular/material/sort';
 import { itemsSummaryComponent } from 'src/app/items/summary/summary.component';
 
 @Component({

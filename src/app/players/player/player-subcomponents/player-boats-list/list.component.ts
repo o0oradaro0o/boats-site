@@ -8,8 +8,8 @@ import {
 import {
   ItemRecordContent,
   ItemRecord
-} from 'src/app/models/player-Item-record';
-import { Sort } from '@angular/material';
+} from 'src/app/models/player-item-record';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'player-boats-list',

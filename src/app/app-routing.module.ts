@@ -14,13 +14,13 @@ const routes: Routes = [
     component: BrochureLayoutComponent,
     children: [
       { path: '', component: HomepageComponent, pathMatch: 'full' },
-      { path: 'games', loadChildren: './games/games.module#GamesModule' },
+      { path: 'games', loadChildren: () => import('./games/games.module').then(m => m.GamesModule) },
       {
         path: 'players',
-        loadChildren: './players/players.module#PlayersModule'
+        loadChildren: () => import('./players/players.module').then(m => m.PlayersModule)
       },
-      { path: 'boats', loadChildren: './boats/boats.module#BoatsModule' },
-      { path: 'items', loadChildren: './items/items.module#ItemsModule' }
+      { path: 'boats', loadChildren: () => import('./boats/boats.module').then(m => m.BoatsModule) },
+      { path: 'items', loadChildren: () => import('./items/items.module').then(m => m.ItemsModule) }
     ]
   }
 ];

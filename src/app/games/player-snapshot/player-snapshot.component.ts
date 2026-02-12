@@ -6,7 +6,7 @@ import {
   SimpleChanges
 } from '@angular/core';
 import { GameDetailContent, GameDetail } from 'src/app/models/game-detail';
-import { Sort } from '@angular/material';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'game-player-snapshot',
@@ -70,8 +70,6 @@ export class PlayerSnapshotComponent implements OnInit, OnChanges {
           return compare(a.lh, b.lh, isAsc);
         case 'herodamage':
           return compare(a.HeroDamage, b.HeroDamage, isAsc);
-        case 'damageTanked':
-          return compare(a.damageTanked, b.damageTanked, isAsc);
         case 'damageTanked':
           return compare(a.damageTanked, b.damageTanked, isAsc);
         case 'ship':
