@@ -1,0 +1,54 @@
+$foam: #d4edf7;
+$accent: #4a7bf7;
+$south: #ff9b47;
+
+.teams-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.team-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.team-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid;
+
+  &--north {
+    border-color: rgba($accent, 0.25);
+    .team-badge {
+      color: #7ba7ff;
+    }
+  }
+  &--south {
+    border-color: rgba($south, 0.25);
+    .team-badge {
+      color: #ffba7f;
+    }
+  }
+}
+
+.team-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.team-count {
+  font-size: 0.58rem;
+  color: rgba($foam, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}

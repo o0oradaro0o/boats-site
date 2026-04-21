@@ -1,7 +1,24 @@
-#banner {
-  background-image: url(/assets/stats/banner.png);
+$foam: #d4edf7;
+$accent: #4a7bf7;
 
-  -webkit-box-shadow: inset 0px 0px 50px 50px rgba(0,0,0,0.5);
-  -moz-box-shadow: inset 0px 0px 50px 50px rgba(0,0,0,0.5);
-  box-shadow: inset 0px 0px 50px 50px rgba(0,0,0,0.5);
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba($foam, 0.35);
+  margin-bottom: 1.25rem;
+}
+
+.section-divider {
+  height: 1px;
+  background: rgba($foam, 0.07);
+  margin: 2.5rem 0;
+}
+
+.loading-label {
+  font-size: 0.75rem;
+  color: rgba($foam, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 }

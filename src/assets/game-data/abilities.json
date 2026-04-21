@@ -1,0 +1,528 @@
+{
+  "cloud_dragon_lua": {
+    "key": "cloud_dragon_lua",
+    "description": "Deploy a cloud dragon to breathe fire at enemies.",
+    "textureName": "lina_dragon_slave_alt1",
+    "cooldown": "18.0 17.0 16.0 15.0",
+    "castRange": 1200,
+    "values": {
+      "damage_tooltip": "100 125 150 175",
+      "duration": "4.6 6.1 7.6 9.1"
+    }
+  },
+  "pistols_battleship": {
+    "key": "pistols_battleship",
+    "description": "Fires pistols at nearby enemies for a short burst.",
+    "textureName": "pistols",
+    "cooldown": "25.0 25.0 25.0 25.0",
+    "castRange": 600,
+    "values": {
+      "pistol_duration": "5.0",
+      "pistol_base_dmg": "85 170 255 340",
+      "pistol_hp_dmg": "0.075 0.15 0.225 0.3",
+      "tooltip_range": "600"
+    }
+  },
+  "bail_water": {
+    "key": "bail_water",
+    "description": "Bail water for a burst of movement speed.",
+    "textureName": "bail",
+    "cooldown": "20.0 20.0 20.0 20.0",
+    "castRange": 0,
+    "values": {
+      "bail_bonus_move_speed": "50 75 100 125",
+      "bail_duration": "6.0 6.0 6.0 6.0"
+    }
+  },
+  "tighten_hoop": {
+    "key": "tighten_hoop",
+    "description": "Passive: Tighten barrel hoops for bonus armor and regen.",
+    "textureName": "hoops",
+    "cooldown": "0",
+    "castRange": 0,
+    "values": {
+      "hoop_bonus_armor": "1 2 3 4",
+      "health_regen": "4.0 6.0 8.0 10.0"
+    }
+  },
+  "kunkka_torrent_bships": {
+    "key": "kunkka_torrent_bships",
+    "description": "Call down a torrent of water at a target location.",
+    "textureName": "kunkka_torrent_bships",
+    "cooldown": "25 22 19 16",
+    "castRange": 1300,
+    "values": {
+      "radius": {
+        "value": "320"
+      },
+      "movespeed_bonus": "-35",
+      "slow_duration": "0.5 1.0 1.5 2.0",
+      "stun_duration": {
+        "value": "1.6"
+      },
+      "delay": "1.6 1.6 1.6 1.6",
+      "torrent_damage": {
+        "value": "100 150 200 250"
+      },
+      "damage_tick_interval": "0.2"
+    }
+  },
+  "discoship_battleship": {
+    "key": "discoship_battleship",
+    "description": "Toggle disco mode — pulse damaging disco balls around you.",
+    "textureName": "keeper_of_the_light_chakra_magic",
+    "cooldown": "0",
+    "castRange": 0,
+    "values": {
+      "radius": "800 1000 1200 1600",
+      "miss_chance": "1 2 3 4"
+    }
+  },
+  "fun_battleship": {
+    "key": "fun_battleship",
+    "description": "Aura: Grant nearby allies regen and movement speed.",
+    "textureName": "meepo_divided_we_stand",
+    "cooldown": "0",
+    "castRange": 600,
+    "values": {
+      "health_regen": "9.0 18.0 27.0 36.0",
+      "fun_bonus_move_speed": "8 12 16 20"
+    }
+  },
+  "dive_battleship": {
+    "key": "dive_battleship",
+    "description": "Phase through enemy ships briefly to reposition.",
+    "textureName": "dive_battleship_puck",
+    "cooldown": "14.0 12.0 10.0 8.0",
+    "castRange": 0,
+    "values": {
+      "duration": "0.4 0.5 0.6 0.7"
+    }
+  },
+  "ramming_speed_battleship": {
+    "key": "ramming_speed_battleship",
+    "description": "Ram forward at high speed, damaging enemies in your path.",
+    "textureName": "ramming_speed_battleship",
+    "cooldown": "25.0 22.0 19.0 16.0",
+    "castRange": 0,
+    "values": {
+      "turn_rate": "-9000 -9000 -9000 -9000",
+      "duration": "1.0 1.2 1.4 1.6",
+      "base_speed": "450.0",
+      "accel_boost": "100",
+      "knockback_radius": "270",
+      "damage": "100 150 200 250",
+      "knocback_modifier_duration": "1.2 1.4 1.6 1.8"
+    }
+  },
+  "head_above_water_battleship": {
+    "key": "head_above_water_battleship",
+    "description": "Heal based on missing health.",
+    "textureName": "head_above_water_battleship",
+    "cooldown": "30.0 25.0 20.0 13.0",
+    "castRange": 0,
+    "values": {
+      "duration": "4.0 5.0 6.0 7.0",
+      "bonus_armor": "16 19 22 25",
+      "magic_armor": "50"
+    }
+  },
+  "meepo_earthbind_battleship": {
+    "key": "meepo_earthbind_battleship",
+    "description": "Drop anchor chains to root a group of enemies.",
+    "textureName": "meepo_earthbind_battleship",
+    "cooldown": "20 16 12 8",
+    "castRange": 1050,
+    "values": {
+      "duration": "2.0 2.5 3 3.5",
+      "radius": "220",
+      "speed": "2000",
+      "tooltip_range": "1050 1150 1250 1350"
+    }
+  },
+  "riki_blink_strike_battleship": {
+    "key": "riki_blink_strike_battleship",
+    "description": "Blink behind an enemy ship and strike from stealth.",
+    "textureName": "riki_blink_strike_battleship",
+    "cooldown": "20 18 16",
+    "castRange": 700,
+    "values": {
+      "tooltip_range": "800",
+      "bonus_damage": "400 500 600",
+      "max_charges": "1 1 1",
+      "charge_restore_time": "20.0 18.0 16.0"
+    }
+  },
+  "gun_it": {
+    "key": "gun_it",
+    "description": "Gun the engine for a burst of extreme speed.",
+    "textureName": "overcharge",
+    "cooldown": "12",
+    "castRange": 0,
+    "values": {
+      "hero_damage": ".2",
+      "base_speed": "300.0 350.0 400.5 450.0",
+      "accel_boost": "100"
+    }
+  },
+  "drop_craft": {
+    "key": "drop_craft",
+    "description": "Drop a craft that harasses nearby enemies.",
+    "textureName": "drop_craft",
+    "cooldown": "30 25 20",
+    "castRange": 0,
+    "values": {
+      "duration": "15"
+    }
+  },
+  "doom_bringer_scorched_earth_battleship": {
+    "key": "doom_bringer_scorched_earth_battleship",
+    "description": "Set the sea ablaze, dealing fire damage over time.",
+    "textureName": "doom_bringer_scorched_earth_battleship",
+    "cooldown": "18.0 17.0 16.0 15.0",
+    "castRange": 600,
+    "values": {
+      "damage_per_second": "40 55 70 85",
+      "radius": "600 600 600 600",
+      "bonus_movement_speed_pct": "20 23 25 27",
+      "duration": "10.0 12.0 14.0 16.0",
+      "damage_per_hero": "0"
+    }
+  },
+  "plane_fly_battleship": {
+    "key": "plane_fly_battleship",
+    "description": "Take to the air briefly, passing over terrain.",
+    "textureName": "batrider_firefly",
+    "cooldown": "30.0 27.0 24.0 20.0",
+    "castRange": 0,
+    "values": {
+      "damage_per_second": "50 60 70 80",
+      "radius": "200 300 400 500",
+      "duration": "4.0 4.0 4.0 4.0",
+      "tick_interval": "0.5 0.5 0.5 0.5",
+      "tree_radius": "100 100 100 100",
+      "speed_bonus": "150 150 150 150"
+    }
+  },
+  "mayday_battleship": {
+    "key": "mayday_battleship",
+    "description": "Draw all nearby enemy fire away from allies.",
+    "textureName": "mayday",
+    "cooldown": "0",
+    "castRange": 0,
+    "values": {
+      "heal_amount": "350.0 400.0 450.0",
+      "delay": "10.0"
+    }
+  },
+  "mirana_leap_battlsehip": {
+    "key": "mirana_leap_battlsehip",
+    "description": "Leap across the water at high speed.",
+    "textureName": "mirana_leap_battlsehip",
+    "cooldown": "0.75 0.75 0.75 0.75",
+    "castRange": 0,
+    "values": {
+      "leap_distance": "470",
+      "leap_speed": "1300.0",
+      "leap_acceleration": "6000.0",
+      "leap_speedbonus": "8 16 24 32",
+      "leap_speedbonus_as": "25 50 75 100",
+      "leap_bonus_duration": "2.5"
+    }
+  },
+  "windrunner_powershot_battleship": {
+    "key": "windrunner_powershot_battleship",
+    "description": "Fire a high-velocity power shot in a line.",
+    "textureName": "windrunner_powershot_battleship",
+    "cooldown": "15.0 14.0 13.0 12.0",
+    "castRange": 2325,
+    "values": {
+      "powershot_damage": "110 210 310 410",
+      "damage_reduction": "20",
+      "arrow_width": "150 150 150 150",
+      "arrow_range": "2600",
+      "arrow_speed": "3000.0 3000.0 3000.0 3000.0",
+      "tree_width": "75 75 75 75",
+      "vision_radius": "500 500 500 500",
+      "vision_duration": "1.3 1.3 1.3 1.3"
+    }
+  },
+  "swim_battleship": {
+    "key": "swim_battleship",
+    "description": "Dive below the surface briefly, becoming untargetable.",
+    "textureName": "swimbreak",
+    "cooldown": "30 30 30",
+    "castRange": 300,
+    "values": {
+      "regen": "4.5 5.0 5.5",
+      "stun_time": "3"
+    }
+  },
+  "keeping_up_battleship": {
+    "key": "keeping_up_battleship",
+    "description": "Match speed with a target vessel.",
+    "textureName": "joanses_up",
+    "cooldown": "22.0 20.0 18.0 15.0",
+    "castRange": 450,
+    "values": {
+      "duration": "1.0 1.5 2.0 2.5",
+      "movment": "150 175 200 225",
+      "movment_slow": "-150 -175 -200 -225"
+    }
+  },
+  "batten_hatches": {
+    "key": "batten_hatches",
+    "description": "Batten down the hatches, reducing incoming damage temporarily.",
+    "textureName": "icon_zodiac_ability4",
+    "cooldown": "0",
+    "castRange": 0,
+    "values": {
+      "hoop_bonus_armor": "2 4 6",
+      "health_regen": "6.0 8.0 10.0"
+    }
+  },
+  "ruse_battleship": {
+    "key": "ruse_battleship",
+    "description": "Disguise your ship as wreckage.",
+    "textureName": "ruse",
+    "cooldown": "30.0 28.0 26.0 24.0",
+    "castRange": 500,
+    "values": {
+      "duration": "2.0",
+      "dmg": "0.4 0.55 0.7 0.85"
+    }
+  },
+  "war_drumbs_battleship": {
+    "key": "war_drumbs_battleship",
+    "description": "Beat war drums to boost nearby allied movement speed.",
+    "textureName": "drumb",
+    "cooldown": "18.0",
+    "castRange": 600,
+    "values": {
+      "duration": "3.0 4.0 5.0 6.0",
+      "bonus_move_speed": "90 110 130 150"
+    }
+  },
+  "might_battleship": {
+    "key": "might_battleship",
+    "description": "Channel inner might for increased durability.",
+    "textureName": "earthshaker_enchant_totem",
+    "cooldown": "15.0 13.0 11.0 9.0",
+    "castRange": 600,
+    "values": {
+      "duration": "40.0 40.0 40.0 40.0",
+      "strength_bonus_creep": "2",
+      "strength_bonus_hero": "3",
+      "damage_tooltip": "10 14 18 22",
+      "ministun_duration": "0.1"
+    }
+  },
+  "swamp_gas_battleship": {
+    "key": "swamp_gas_battleship",
+    "description": "Release swamp gas, slowing and poisoning nearby enemies.",
+    "textureName": "alchemist_acid_spray",
+    "cooldown": "16.0 14.0 12.0 10.0",
+    "castRange": 700,
+    "values": {
+      "damage": "20 30 40 50",
+      "duration": "4.0",
+      "total_damage": "160 240 320 400"
+    }
+  },
+  "fan_blast_battleship": {
+    "key": "fan_blast_battleship",
+    "description": "Fan out a blast that pushes enemies away.",
+    "textureName": "fan",
+    "cooldown": "15.0 14.0 13.0 12.0",
+    "castRange": 1500,
+    "values": {
+      "movement_speed": "-40 -60 -80 -100",
+      "damage": "80 120 160 200",
+      "duration": "5.0"
+    }
+  },
+  "firework_battleship": {
+    "key": "firework_battleship",
+    "description": "Launch fireworks that explode for area damage.",
+    "textureName": "puck_illusory_orb_merry",
+    "cooldown": "35.0 30.0 25.0 20.0",
+    "castRange": 1500,
+    "values": {
+      "duration": "5 6 7 8",
+      "range": "3000 3500 4000 4500"
+    }
+  },
+  "nav_hack_battleship": {
+    "key": "nav_hack_battleship",
+    "description": "Hack enemy navigation, reversing their controls.",
+    "textureName": "comp",
+    "cooldown": "35.0 30.0 25.0",
+    "castRange": 1200,
+    "values": {
+      "duration": "2.0 2.5 3.0"
+    }
+  },
+  "harpoon_battleship": {
+    "key": "harpoon_battleship",
+    "description": "Fire a harpoon that pulls the first enemy hit toward you.",
+    "textureName": "harpoon",
+    "cooldown": "12 11 10 9",
+    "castRange": 1000,
+    "values": {
+      "cast_range": "1000 1150 1300 1450",
+      "bonus_damage": "60 80 100 120",
+      "bonus_duration": "1.2",
+      "range": "1.0 0.95 0.9 0.85"
+    }
+  },
+  "wale_bait_battleship": {
+    "key": "wale_bait_battleship",
+    "description": "Drop bait that lures enemies toward it.",
+    "textureName": "bait",
+    "cooldown": "15 14 13 12",
+    "castRange": 800,
+    "values": {
+      "range": "800 900 1000 1100",
+      "duration": "7.0 7.0 7.0 7.0",
+      "dps": "-15",
+      "dps_tooltip": "15"
+    }
+  },
+  "gamble": {
+    "key": "gamble",
+    "description": "Spin all three slots for a powerful random outcome.",
+    "textureName": "gamble",
+    "cooldown": "13 12 11",
+    "castRange": 0,
+    "values": {
+      "lesser_reward": "3 4 5",
+      "greater_reward": "10 20 30"
+    }
+  },
+  "no_fire_zone": {
+    "key": "no_fire_zone",
+    "description": "Establish a no-fire zone around you.",
+    "textureName": "nofire",
+    "cooldown": "30 17 14 11",
+    "castRange": 1000,
+    "values": {
+      "radius": "350 350 350",
+      "duration": "3 4 5"
+    }
+  },
+  "coast_heal_battleship": {
+    "key": "coast_heal_battleship",
+    "description": "Coastal currents repair your hull over time.",
+    "textureName": "rescue",
+    "cooldown": "14.0 13.0 12.0 11.0",
+    "castRange": 700,
+    "values": {
+      "damage": "250 400 550 700"
+    }
+  },
+  "gamble_bell_one": {
+    "key": "gamble_bell_one",
+    "description": "Pull the bell slot for a random effect.",
+    "textureName": "bells",
+    "cooldown": "999",
+    "castRange": 700,
+    "values": {
+      "duration": "3 3.75 4.5 5.25"
+    }
+  },
+  "gamble_cherry_one": {
+    "key": "gamble_cherry_one",
+    "description": "Pull the cherry slot for a random effect.",
+    "textureName": "cherries",
+    "cooldown": "999",
+    "castRange": 950,
+    "values": {
+      "radius": "275 275 275 275",
+      "dmg": "200 300 400 500"
+    }
+  },
+  "gamble_seven_one": {
+    "key": "gamble_seven_one",
+    "description": "Pull the seven slot — jackpot if all three match.",
+    "textureName": "seven",
+    "cooldown": "999",
+    "castRange": 777,
+    "values": {
+      "damage": "77 112 135 147"
+    }
+  },
+  "speed_boat_wave": {
+    "key": "speed_boat_wave",
+    "description": "Create a wake wave that damages and slows enemies.",
+    "textureName": "morphling_waveform",
+    "cooldown": "25.0 23.0 21.0 19.0",
+    "castRange": 1300,
+    "values": {
+      "ball_speed": "1450",
+      "damage_radius": "200",
+      "damage_base": "200 300 400 500"
+    }
+  },
+  "crab_walk": {
+    "key": "crab_walk",
+    "description": "Sidestep quickly to dodge incoming fire.",
+    "textureName": "nyx_assassin_spiked_carapace",
+    "cooldown": "20 16 12 8",
+    "castRange": 0,
+    "values": {
+      "duration": "3.0",
+      "move_speed_pct": "20 25 30 35"
+    }
+  },
+  "crab_grab": {
+    "key": "crab_grab",
+    "description": "Snatch a nearby enemy, holding them in place.",
+    "textureName": "sandking_caustic_finale",
+    "cooldown": "20 19 18 17",
+    "castRange": 150,
+    "values": {
+      "tick_rate": "1.0",
+      "duration": "4.0",
+      "damage_per_tick": "40 60 80 100",
+      "slow": "-20 -30 -40 -50"
+    }
+  },
+  "vengefulspirit_nether_swap_datadriven": {
+    "key": "vengefulspirit_nether_swap_datadriven",
+    "description": "Swap positions with any ship on the battlefield.",
+    "textureName": "swap",
+    "cooldown": "20 18 16 14",
+    "castRange": 700,
+    "values": {
+      "tooltip_range": "700 950 1200",
+      "nether_swap_cooldown_scepter": "10",
+      "tree_radius": "300"
+    }
+  },
+  "speed_shift": {
+    "key": "speed_shift",
+    "description": "Rapidly shift speed to evade enemies.",
+    "textureName": "speed_shift",
+    "cooldown": "0",
+    "castRange": 0,
+    "values": {
+      "ms_range": "100 150 200 250"
+    }
+  },
+  "terrorblade_metamorphosis_datadriven": {
+    "key": "terrorblade_metamorphosis_datadriven",
+    "description": "Transform into a powerful combat form.",
+    "textureName": "transform",
+    "cooldown": "15",
+    "castRange": 0,
+    "values": {
+      "duration": "5",
+      "transformation_time": "0.35",
+      "base_attack_time": "1 0.8 0.7 0.6",
+      "bonus_range": "750",
+      "tooltip_attack_range": "550",
+      "bonus_damage": "20 40 60 80",
+      "speed_loss": "-25"
+    }
+  }
+}

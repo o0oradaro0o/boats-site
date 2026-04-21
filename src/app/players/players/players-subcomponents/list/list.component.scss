@@ -1,9 +1,133 @@
-.kd-segment {
-  background-color: black;
-  height: 4px;
+$ocean-deep: #070e1e;
+$ocean-mid: #0f2040;
+$foam: #d4edf7;
+$accent: #4a7bf7;
+
+// ── Sort bar ──────────────────────────────────────────────────────────────────
+
+.player-sort-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+
+  &__label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba($foam, 0.3);
+  }
 }
 
-.table td,
-.table th {
-  padding: 0.25rem;
+.player-sort-btn {
+  padding: 0.2rem 0.6rem;
+  background: transparent;
+  border: 1px solid rgba($foam, 0.1);
+  border-radius: 2px;
+  color: rgba($foam, 0.45);
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    color: $foam;
+    border-color: rgba($foam, 0.3);
+  }
+}
+
+// ── Player list ───────────────────────────────────────────────────────────────
+
+.player-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.6rem 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba($accent, 0.08) !important;
+  }
+}
+
+.player-row__name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: $foam;
+  min-width: 0;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-row__stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+}
+
+.player-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 72px;
+  padding: 0 0.5rem;
+  border-left: 1px solid rgba($accent, 0.08);
+
+  &--wide {
+    width: 100px;
+  }
+
+  &__val {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $foam;
+    line-height: 1.1;
+
+    &--muted {
+      color: rgba($foam, 0.45);
+      font-size: 0.72rem;
+      font-weight: 400;
+    }
+    &.win {
+      color: #4caf50;
+    }
+    &.lose {
+      color: #d17b83;
+    }
+  }
+
+  &__lbl {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba($foam, 0.3);
+    margin-top: 0.1rem;
+  }
+
+  &__bar {
+    height: 3px;
+    width: 100%;
+    background: rgba($accent, 0.12);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+  }
+
+  &__fill {
+    height: 100%;
+    background: rgba($accent, 0.6);
+    border-radius: 2px;
+  }
 }

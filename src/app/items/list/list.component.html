@@ -1,64 +1,172 @@
-<table
-  class="table table-striped table-hover small"
-  matSort
-  (matSortChange)="sortData($event)"
->
-  <thead class="bg-gray-100 text-gray-500">
-    <tr>
-      <th mat-sort-header="name">Item</th>
-      <th mat-sort-header="games" title="Only counts games with >5 players">
-        Use Rate
-      </th>
-      <th mat-sort-header="winper" title="Only counts games with >5 players">
-        Competitive Win Rate
-      </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="innerRow" *ngFor="let item of sortedData">
-      <ng-container>
-        <td>
-          <img
-            src="{{
-              '/assets/items/' + item.item.replace('item_', '') + '.png'
-            }}"
-            alt="{{ item.item }}"
-            class="item-icons"
-          />
-          {{
-            isSmallScreen
-              ? ''
-              : item.item
-                  .split('_')
-                  .join(' ')
-                  .replace('item ', '')
-          }}
-        </td>
-        <td>
-          {{
-            item.compGames
-              ? ((item.compGames / TotalSample) * 100).toFixed(2) + '%'
-              : 'N/A'
-          }}
-          <div
-            class="segment"
-            [ngStyle]="{
-              width: getPercent((item.compGames / TotalSample) * 18)
-            }"
-          ></div>
-        </td>
-        <td>
-          {{
-            item.compGames
-              ? ((item.compWins / item.compGames) * 100).toFixed(2) + '%'
-              : 'N/A'
-          }}
-          <div
-            class="segment"
-            [ngStyle]="{ width: getPercent(item.compWins / item.compGames) }"
-          ></div>
-        </td>
+<!-- Category tabs -->
+<div class="item-tabs">
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'all'"
+    (click)="setTab('all')"
+  >
+    All
+  </button>
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'weapon'"
+    (click)="setTab('weapon')"
+  >
+    Weapons
+  </button>
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'hull'"
+    (click)="setTab('hull')"
+  >
+    Hull
+  </button>
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'sail'"
+    (click)="setTab('sail')"
+  >
+    Sail
+  </button>
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'repair'"
+    (click)="setTab('repair')"
+  >
+    Repair
+  </button>
+  <button
+    class="item-tab"
+    [class.active]="activeTab === 'wood'"
+    (click)="setTab('wood')"
+  >
+    Wood
+  </button>
+</div>
+
+<!-- Sort controls -->
+<div class="item-sort-bar">
+  <span class="item-sort-bar__label">Sort:</span>
+  <button
+    class="item-sort-btn"
+    (click)="sortData({ active: 'games', direction: 'desc' })"
+  >
+    Use Rate
+  </button>
+  <button
+    class="item-sort-btn"
+    (click)="sortData({ active: 'winper', direction: 'desc' })"
+  >
+    Win Rate
+  </button>
+  <button
+    class="item-sort-btn"
+    (click)="sortData({ active: 'name', direction: 'asc' })"
+  >
+    Name
+  </button>
+</div>
+
+<!-- Item rows -->
+<div class="item-list">
+  <div
+    *ngFor="let entry of filteredItems"
+    class="item-row ocean-panel"
+    [ngClass]="entry.weaponType ? 'weapon-type-' + entry.weaponType : ''"
+  >
+    <div class="item-row__left">
+      <img
+        [src]="entry.iconUrl"
+        [alt]="entry.record.item"
+        class="item-row__icon"
+        (error)="
+          $any($event.target).src =
+            '/assets/items/' + entry.record.item.replace('item_', '') + '.png'
+        "
+      />
+      <div class="item-row__info">
+        <span class="item-row__name">{{ displayName(entry.record.item) }}</span>
+        <div class="item-row__meta">
+          <span
+            *ngIf="entry.weaponType"
+            class="item-row__type weapon-type-label"
+            >{{ entry.weaponType }}</span
+          >
+          <span *ngIf="entry.weaponData?.doubled" class="item-badge">2x</span>
+          <span
+            *ngIf="entry.weaponData?.isUlt"
+            class="item-badge item-badge--ult"
+            >ult</span
+          >
+          <span *ngIf="entry.weaponData?.cost" class="item-row__cost"
+            >{{ entry.weaponData.cost }}g</span
+          >
+        </div>
+      </div>
+    </div>
+
+    <div class="item-row__stats">
+      <!-- Weapon stats: DPS and range -->
+      <ng-container *ngIf="entry.weaponData">
+        <div class="item-stat">
+          <span class="item-stat__label">DPS</span>
+          <div class="item-stat__bar">
+            <div
+              class="item-stat__fill weapon-type-bar"
+              [style.width]="(entry.weaponData.dps / maxDps) * 100 + '%'"
+            ></div>
+          </div>
+          <span class="item-stat__val">{{ entry.weaponData.dps }}</span>
+        </div>
+        <div class="item-stat">
+          <span class="item-stat__label">Range</span>
+          <div class="item-stat__bar">
+            <div
+              class="item-stat__fill"
+              style="background: #4a7bf7"
+              [style.width]="(entry.weaponData.range / maxRange) * 100 + '%'"
+            ></div>
+          </div>
+          <span class="item-stat__val">{{ entry.weaponData.range }}</span>
+        </div>
       </ng-container>
-    </tr>
-  </tbody>
-</table>
+
+      <div class="item-row__rates">
+        <div class="item-rate">
+          <span class="item-rate__num">
+            {{
+              entry.record.compGames
+                ? ((entry.record.compGames / TotalSample) * 100).toFixed(1) +
+                  '%'
+                : 'N/A'
+            }}
+          </span>
+          <span class="item-rate__lbl">use</span>
+        </div>
+        <div
+          class="item-rate"
+          [class.win]="
+            entry.record.compGames &&
+            entry.record.compWins / entry.record.compGames > 0.5
+          "
+          [class.lose]="
+            entry.record.compGames &&
+            entry.record.compWins / entry.record.compGames <= 0.5
+          "
+        >
+          <span class="item-rate__num">
+            {{
+              entry.record.compGames
+                ? (
+                    (entry.record.compWins / entry.record.compGames) *
+                    100
+                  ).toFixed(1) + '%'
+                : 'N/A'
+            }}
+          </span>
+          <span class="item-rate__lbl">win</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

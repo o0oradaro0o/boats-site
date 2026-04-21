@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { BrochureLayoutComponent } from './_layout/brochure-layout/brochure-layout.component';
 import { BrochureNavComponent } from './_layout/brochure-nav/brochure-nav.component';
 import { BrochureFooterComponent } from './_layout/brochure-footer/brochure-footer.component';
+import { BubblesComponent } from './_layout/bubbles/bubbles.component';
 
 import { PipesModule } from './pipes/pipes.module';
 
@@ -22,16 +23,17 @@ import { HomepageComponent } from './homepage/homepage.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    PipesModule.forRoot()
+    PipesModule.forRoot(),
   ],
   declarations: [
     AppComponent,
     BrochureLayoutComponent,
     BrochureNavComponent,
     BrochureFooterComponent,
-    HomepageComponent
+    BubblesComponent,
+    HomepageComponent,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

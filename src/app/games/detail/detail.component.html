@@ -1,38 +1,42 @@
-<div *ngIf="DetailGamesList" class="game-settings">
-  <div>
-    <div>
-      <strong>{{
-        DetailGamesList.Content[0].settings.coOp ? 'Co-Op' : 'Normal'
-      }}</strong>
-    </div>
-    <div>
-      <div>
-        <small>
-          {{ DetailGamesList.Content[0].settings.battle ? 'Battle' : '' }}
-          {{
-            DetailGamesList.Content[0].settings.battle &&
-            DetailGamesList.Content[0].settings.trading
-              ? '-'
-              : ''
-          }}
-          {{ DetailGamesList.Content[0].settings.trading ? 'Trading' : '' }}
-        </small>
-      </div>
+<div *ngIf="DetailGamesList" class="game-header">
+  <div class="game-header__modes">
+    <span
+      class="mode-badge"
+      [class.mode-coop]="DetailGamesList.Content[0].settings?.coOp"
+    >
+      {{ DetailGamesList.Content[0].settings?.coOp ? 'Co-Op' : 'Normal' }}
+    </span>
+    <span *ngIf="DetailGamesList.Content[0].settings?.battle" class="mode-tag"
+      >Battle</span
+    >
+    <span *ngIf="DetailGamesList.Content[0].settings?.trading" class="mode-tag"
+      >Trading</span
+    >
+  </div>
+
+  <div class="game-header__center">
+    <div
+      class="victory-block"
+      [class.victory-block--north]="DetailGamesList.Content[0].wn === 'North'"
+      [class.victory-block--south]="DetailGamesList.Content[0].wn === 'South'"
+    >
+      <span class="victory-team">{{ DetailGamesList.Content[0].wn }}</span>
+      <span class="victory-sub">Victory</span>
     </div>
   </div>
 
-  <div class="title">
-    <h3>
-      <strong
-        [ngClass]="{
-          'north-empire-color': DetailGamesList.Content[0].wn === 'North',
-          'south-empire-color': DetailGamesList.Content[0].wn === 'South'
-        }"
-        >{{ DetailGamesList.Content[0].wn }} Victory!</strong
-      >
-    </h3>
-    {{ FixTime(DetailGamesList.Content[0].gameDuration) }}
+  <div class="game-header__meta">
+    <div class="meta-stat" *ngIf="DetailGamesList.Content[0].gameDuration">
+      <span class="meta-val">{{
+        FixTime(DetailGamesList.Content[0].gameDuration)
+      }}</span>
+      <span class="meta-lbl">Duration</span>
+    </div>
+    <div class="meta-stat">
+      <span class="meta-val">{{
+        DetailGamesList.Content[0].dateProcessed | howLongAgo
+      }}</span>
+      <span class="meta-lbl">Played</span>
+    </div>
   </div>
-
-  <div>{{ DetailGamesList.Content[0].dateProcessed | howLongAgo }}</div>
 </div>

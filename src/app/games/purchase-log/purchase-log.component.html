@@ -1,7 +1,17 @@
-<app-player-purchase-history
-  [teamPlayers]="northPlayers"
-></app-player-purchase-history>
-<hr />
-<app-player-purchase-history
-  [teamPlayers]="southPlayers"
-></app-player-purchase-history>
+<div *ngIf="northPlayers?.length" class="purchase-team">
+  <div class="purchase-team__header purchase-team__header--north">
+    North Empire
+  </div>
+  <app-player-purchase-history
+    [teamPlayers]="northPlayers"
+  ></app-player-purchase-history>
+</div>
+
+<div *ngIf="southPlayers?.length" class="purchase-team">
+  <div class="purchase-team__header purchase-team__header--south">
+    South Empire
+  </div>
+  <app-player-purchase-history
+    [teamPlayers]="southPlayers"
+  ></app-player-purchase-history>
+</div>

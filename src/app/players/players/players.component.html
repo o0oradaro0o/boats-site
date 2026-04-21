@@ -5,10 +5,15 @@
 </div> -->
 <app-page-banner text="Player Stats"></app-page-banner>
 
-<div class="bg-gray-vertical-emboss py-5">
+<div class="ocean-section py-5">
   <div class="container">
-    <players-list
-      [SimplePlayersList]="SimplePlayersList | async"
-    ></players-list>
+    <ng-container *ngIf="SimplePlayersList | async as data; else loading">
+      <players-list [SimplePlayersList]="data"></players-list>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center py-5">
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>

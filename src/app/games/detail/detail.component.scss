@@ -1,18 +1,117 @@
-.title {
-  text-align: center;
-}
+$foam: #d4edf7;
+$accent: #4a7bf7;
+$south: #ff9b47;
 
-.north-empire-color {
-  color: red;
-}
-
-.south-empire-color {
-  color: green;
-}
-
-.game-settings {
+.game-header {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+  flex-wrap: wrap;
+}
+
+.game-header__modes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.mode-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 3px;
+  color: rgba($foam, 0.45);
+  border: 1px solid rgba($foam, 0.12);
+  background: rgba($foam, 0.04);
+  &.mode-coop {
+    color: #80deea;
+    border-color: rgba(#80deea, 0.28);
+    background: rgba(#80deea, 0.07);
+  }
+}
+
+.mode-tag {
+  font-size: 0.62rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  background: rgba($accent, 0.1);
+  color: rgba($accent, 0.75);
+  border: 1px solid rgba($accent, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.game-header__center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.victory-block {
   text-align: center;
+  &--north {
+    .victory-team {
+      color: #7ba7ff;
+    }
+    .victory-sub {
+      color: rgba(#7ba7ff, 0.45);
+    }
+  }
+  &--south {
+    .victory-team {
+      color: #ffba7f;
+    }
+    .victory-sub {
+      color: rgba(#ffba7f, 0.45);
+    }
+  }
+}
+
+.victory-team {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.victory-sub {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  margin-top: 0.2rem;
+}
+
+.game-header__meta {
+  display: flex;
+  gap: 1.5rem;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.meta-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.meta-val {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: $foam;
+  line-height: 1.1;
+}
+
+.meta-lbl {
+  font-size: 0.57rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba($foam, 0.3);
 }

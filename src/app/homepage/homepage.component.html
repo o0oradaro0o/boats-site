@@ -1,95 +1,153 @@
-<div id="banner" class="banner bg-blue-100">
-  <div class="container text-gray-500 text-center py-6">
-    <h1 class="text-uppercase font-weight-bold">Battle<br class="d-sm-none">ships</h1>
-    <p class="lead text-yellow-500 mb-4">Relive the classic naval tug-of-war WC3 mod in Dota2</p>
-    <a href="https://steamcommunity.com/sharedfiles/filedetails/?id=302491959" target="_blank" class="btn btn-blue-400 text-gray-500">View on Steam</a>
+<!-- Hero -->
+<section class="hero-section">
+  <div class="hero-bg" id="hero-banner"></div>
+  <app-bubbles></app-bubbles>
+  <div class="hero-content container">
+    <h1 class="hero-title">BATTLESHIPS</h1>
+    <p class="hero-sub">Dota 2 Custom Game</p>
+    <div class="hero-actions">
+      <a
+        href="https://steamcommunity.com/sharedfiles/filedetails/?id=302491959"
+        target="_blank"
+        class="btn-porthole"
+      >
+        View on Steam
+      </a>
+      <a
+        href="https://www.youtube.com/watch?v=W_cYLMiBKpI"
+        target="_blank"
+        class="btn-ghost"
+      >
+        How to play
+      </a>
+    </div>
   </div>
-</div>
+</section>
 
-<div class="py-6 bg-gray-vertical-emboss">
+<!-- Live meta strip -->
+<section class="meta-strip">
   <div class="container">
-    <div class="text-center">
-      <h2>Every player has their own style</h2>
-      <p class="lead">And every team needs a diverse lineup in order to seize victory.</p>
-    </div>
-
-    <hr>
-
-    <div class="row mt-5">
-      <div class="col-12 col-lg-4">
-        <div class="row">
-          <div class="col-12 col-md-8 col-lg-12">
-            <h4>Engage in challenging naval combat using a unique battle system.</h4>
-            <p>Battleships is a game heavily based on positioning, team coordination, and map awareness. Dive headfirst into enemy lines with high DPS, short range weapons or pick off enemies from afar with low DPS, high range weapons.</p>
-          </div>
-
-          <div class="col-12 col-md-4 col-lg-12">
-            <!--
-            <img class="col-12 col-md-4 col-lg-12" src="/assets/homepage/combat2.png">
-            <p></p>
-            <img class="col-12 col-md-4 col-lg-12" src="/assets/homepage/combat1.png">
-            -->
-          </div>
-        </div>
+    <div class="meta-strip__grid">
+      <div class="meta-card ocean-panel">
+        <span class="meta-card__value">{{ ships.length }}</span>
+        <span class="meta-card__label">Unique Ships</span>
       </div>
-
-      <div class="col-12 col-lg-4">
-        <div class="row">
-          <div class="col-12 col-md-8 col-lg-12">
-            <h4>Navigate the perilous seas as a Trader and use the economy to your advantage.</h4>
-            <p>Use stealth and trickery to slip through the enemy lines and secure lucrative trading contracts. Tilt the odds in your favor by funding your team's war efforts.</p>
-          </div>
-
-          <div class="col-12 col-md-4 col-lg-12">
-            <!--
-            <i>INSERT IMAGE OF TRADER BOAT, CONTRACT, AND GOLD</i>
-            -->
-          </div>
-        </div>
+      <div class="meta-card ocean-panel">
+        <span class="meta-card__value">{{ weaponTypeCount }}</span>
+        <span class="meta-card__label">Weapon Types</span>
       </div>
-
-      <div class="col-12 col-lg-4">
-        <div class="row">
-          <div class="col-12 col-md-8 col-lg-12">
-            <h4>Upgrade your ship to synergize with your weaponry and play style.</h4>
-            <p>Unlock new abilities and tactics as you upgrade through 4 tiers of ships. Purchase repair crews, reinforced hulls, and other upgrades to gain the upperhand on your opponents.</p>
-          </div>
-          <div class="col-12 col-md-4 col-lg-12">
-            <!--
-            <img class="col-12 col-md-4 col-lg-12" src="/assets/homepage/weapon_layout.png">
-            <img class="col-12 col-md-4 col-lg-12" src="/assets/homepage/ships.png">
-            -->
-          </div>
-        </div>
+      <div class="meta-card ocean-panel">
+        <span class="meta-card__value">{{ uniquePlayers | number }}</span>
+        <span class="meta-card__label">Unique Players</span>
       </div>
-    </div>
-
-    <hr>
-
-    <div class="text-center mt-5">
-      <a href="https://www.youtube.com/watch?v=W_cYLMiBKpI" target="_blank" class="btn btn-blue-400 text-gray-500">Learn how <span class="d-none d-sm-inline">the game is</span><span class="d-inline d-sm-none">to</span> play<span class="d-none d-sm-inline">ed</span></a>
+      <div class="meta-card ocean-panel">
+        <span class="meta-card__value">{{ totalGames | number }}</span>
+        <span class="meta-card__label">Games Tracked</span>
+      </div>
     </div>
   </div>
-</div>
+</section>
 
-<div id="banner2" class="py-6 bg-gray-100 text-gray-500 banner">
+<!-- Ship carousel -->
+<section class="ocean-section nautical-grid" *ngIf="ships.length">
   <div class="container">
-    <div class="text-center">
-      <h3>We have an active, dedicated player base.</h3>
-      <p class="lead">And we're always looking for more players and organized teams.</p>
-    </div>
-
-    <hr class="border-gray-500">
-
-    <div class="row mt-5">
-      <div class="col-12 col-md-6">
-        <h4>We are a growing community of casual and competitive gamers.</h4>
-        <p>Come try it out with the team that maintains the mod, start an organized team, or quickly find a pick-up game. Every Thursday at 8pm CST we have dedicated matches where we share the latest game enhancements and balance patches.</p>
+    <h2 class="section-heading">The Fleet</h2>
+    <p class="section-sub">
+      {{ ships.length }} ships across 3 tiers. Pick your hull, build your
+      load-out, rule the water.
+    </p>
+  </div>
+  <div class="ship-carousel">
+    <a
+      *ngFor="let ship of ships; let i = index"
+      [routerLink]="['/boats', shipSlug(ship)]"
+      class="ship-carousel__card"
+      [style.animationDelay]="i * 60 + 'ms'"
+    >
+      <div class="ship-carousel__portrait">
+        <img
+          *ngIf="ship.heroImage; else spriteOnly"
+          [src]="'assets/game-data/images/heroes/' + ship.heroImage"
+          [alt]="ship.name"
+          class="ship-carousel__hero"
+          (error)="$any($event.target).style.display = 'none'"
+        />
+        <ng-template #spriteOnly>
+          <img
+            [src]="'assets/boat-icons/' + ship.icon + '.png'"
+            [alt]="ship.name"
+            class="ship-carousel__sprite"
+            (error)="$any($event.target).style.display = 'none'"
+          />
+        </ng-template>
       </div>
+      <div class="ship-carousel__footer">
+        <div class="ship-carousel__name-row">
+          <span class="ship-carousel__name">{{ ship.name }}</span>
+          <span class="ship-carousel__price">{{
+            ship.price === 0 ? 'Free' : (ship.price | number)
+          }}</span>
+        </div>
+        <div class="ship-carousel__stats">
+          <span title="HP"><i class="fas fa-heart"></i> {{ ship.hp }}</span>
+          <span title="Speed"
+            ><i class="fas fa-tachometer-alt"></i> {{ ship.speed }}</span
+          >
+        </div>
+      </div>
+    </a>
+  </div>
+</section>
 
-      <div class="col-12 col-md-6 text-center">
-        <a href="https://discord.gg/SPSH2Wm" target="_blank" class="btn btn-blue-400 text-gray-500"><i class="fab fa-discord fa-fw"></i> Join us on Discord</a>
+<!-- Feature sections -->
+<section class="ocean-section-mid">
+  <div class="container">
+    <h2 class="section-heading">Every player has their own style</h2>
+    <p class="section-sub">
+      Every team needs a diverse lineup to seize victory.
+    </p>
+
+    <div class="feature-grid mt-5">
+      <div class="feature-card ocean-panel">
+        <div class="feature-card__icon"><i class="fas fa-crosshairs"></i></div>
+        <h4>Naval Combat</h4>
+        <p>
+          Positioning, coordination, map awareness. Dive in with high-DPS
+          short-range weapons or pick off enemies from afar.
+        </p>
+      </div>
+      <div class="feature-card ocean-panel">
+        <div class="feature-card__icon"><i class="fas fa-coins"></i></div>
+        <h4>Trade Routes</h4>
+        <p>
+          Use stealth and trickery to slip through enemy lines, secure lucrative
+          contracts, and fund your team's war effort.
+        </p>
+      </div>
+      <div class="feature-card ocean-panel">
+        <div class="feature-card__icon"><i class="fas fa-anchor"></i></div>
+        <h4>Ship Upgrades</h4>
+        <p>
+          Unlock new abilities across 4 ship tiers. Purchase repair crews,
+          reinforced hulls, and tactical upgrades.
+        </p>
       </div>
     </div>
   </div>
-</div>
+</section>
+
+<!-- Community banner -->
+<section class="community-section">
+  <div class="community-bg" id="community-banner"></div>
+  <app-bubbles [count]="25"></app-bubbles>
+  <div class="container community-content">
+    <h3>An active, dedicated player base.</h3>
+    <p class="section-sub">
+      Every Thursday at 8pm CST. Dedicated matches, balance patches, and new
+      content.
+    </p>
+    <a href="https://discord.gg/SPSH2Wm" target="_blank" class="btn-porthole">
+      <i class="fab fa-discord"></i> Join on Discord
+    </a>
+  </div>
+</section>

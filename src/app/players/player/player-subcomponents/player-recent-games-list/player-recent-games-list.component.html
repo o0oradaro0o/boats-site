@@ -1,68 +1,60 @@
-<table
-  class="table table-striped table-hover small"
-  matSort
+<div class="games-empty" *ngIf="!recentGames || recentGames.length === 0">
+  <span>No recent games found</span>
+</div>
+
+<div
+  class="game-row ocean-panel"
+  *ngFor="let game of recentGames"
+  (click)="handleClick(game.matchID)"
 >
-  <thead class="bg-gray-100 text-gray-500">
-    <tr>
-      <th>Ship</th>
-      <th>Result</th>
-      <th>Game Mode</th>
-      <th>Players</th>
-      <th>K/D</th>
-      <th>Duration</th>
-    </tr>
-  </thead>
-  <tbody>
-    <ng-container *ngIf="recentGames">
-      <tr
-        class="innerRow"
-        *ngFor="let game of recentGames.Content"
-        (click)="handleClick(game.matchID)"
-      >
-        <td>
-          <img
-            src="{{
-              '/assets/boat-icons/' + game.shp.split(' ').join('_').replace('\'', '') + '.png'
-            }}"
-            alt="{{ game.shp }}"
-            class="boat-icons"
-          />
-        </td>
-        <td>
-          <div
-            [ngClass]="{
-              'winner-color': game.tm === game.wn,
-              'loser-color': game.tm !== game.wn
-            }"
-          >
-            <strong>{{
-              game.tm === game.wn ? 'Won Game' : 'Lost Game'
-            }}</strong>
-          </div>
-          <div>{{ game.dateProcessed | howLongAgo }}</div>
-        </td>
-        <td>
-          <div>
-            <strong>{{ game.coOp ? 'Co-Op' : 'Normal' }}</strong>
-          </div>
-          <div>
-            <small>
-              {{ game.battle ? 'Battle' : '' }}
-              {{ game.battle && game.trading ? '-' : '' }}
-              {{ game.trading ? 'Trading' : '' }}
-            </small>
-          </div>
-        </td>
-        <td>{{ game.numPlayers }}</td>
-        <td>{{ game.kls }}/{{ game.dth }}</td>
-        <td>
-          {{ game.gameDuration | secondsToHhmmss }}
-          <div
-            class="duration-segment"
-            [ngStyle]="{ width: getDurationPercent(game.gameDuration) }"
-          ></div>
-        </td>
-      </tr>
-    </ng-container>
-  </tbody>
-</table>
+  <img class="game-row__ship" [src]="getShipIcon(game.shp)" [alt]="game.shp" />
+
+  <div class="game-row__result">
+    <span
+      [class]="
+        game.tm === game.wn
+          ? 'result-badge result-badge--win'
+          : 'result-badge result-badge--loss'
+      "
+    >
+      {{ game.tm === game.wn ? 'Victory' : 'Defeat' }}
+    </span>
+    <div class="game-row__date">{{ game.dateProcessed | howLongAgo }}</div>
+  </div>
+
+  <div class="game-row__mode">
+    <span class="game-row__mode-main">{{
+      game.coOp ? 'Co-Op' : 'Normal'
+    }}</span>
+    <span class="game-row__mode-sub" *ngIf="game.battle || game.trading">
+      {{ game.battle ? 'Battle' : ''
+      }}{{ game.battle && game.trading ? ' · ' : ''
+      }}{{ game.trading ? 'Trading' : '' }}
+    </span>
+  </div>
+
+  <div class="game-row__stat">
+    <span class="game-row__stat-val">{{ game.numPlayers }}</span>
+    <span class="game-row__stat-lbl">players</span>
+  </div>
+
+  <div class="game-row__stat">
+    <span class="game-row__stat-val"
+      >{{ game.kls }}<span class="game-row__stat-sep">/</span
+      >{{ game.dth }}</span
+    >
+    <span class="game-row__stat-lbl">K / D</span>
+  </div>
+
+  <div class="game-row__duration" *ngIf="game.gameDuration">
+    <span class="game-row__stat-val">{{
+      game.gameDuration | secondsToHhmmss
+    }}</span>
+    <div class="duration-bar">
+      <div
+        class="duration-bar__fill"
+        [style.width]="getDurationPercent(game.gameDuration)"
+      ></div>
+    </div>
+  </div>
+</div>

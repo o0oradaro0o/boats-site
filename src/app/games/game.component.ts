@@ -1,29 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { forkJoin } from 'rxjs';
 import { DataGrabberService } from '../data-grabber.service';
-import { map, filter, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { GameDetail, GameDetailContent } from 'src/app/models/game-detail';
+import { GameDetailContent } from 'src/app/models/game-detail';
 
 @Component({
   selector: 'game',
   templateUrl: './game.component.html',
-  styleUrls: ['./game.component.scss']
+  styleUrls: ['./game.component.scss'],
 })
 export class GameComponent implements OnInit {
   matchId: number;
-  GeneralGameDetail$: Observable<GameDetailContent>;
-  PlayerDetails$: Observable<GameDetailContent>;
+  generalData: GameDetailContent;
+  playerData: GameDetailContent;
+  loading = true;
 
-  constructor(private svc: DataGrabberService, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
+  constructor(
+    private svc: DataGrabberService,
+    private route: ActivatedRoute,
+  ) {
+    this.route.params.subscribe((params) => {
       this.matchId = params.id;
     });
   }
 
   ngOnInit() {
-    this.PlayerDetails$ = this.svc.getPlayerDetails(this.matchId);
-    this.GeneralGameDetail$ = this.svc.getGeneralGameDetail(this.matchId);
+    forkJoin({
+      general: this.svc.getGeneralGameDetail(this.matchId),
+      players: this.svc.getPlayerDetails(this.matchId),
+    }).subscribe(({ general, players }) => {
+      this.generalData = general;
+      this.playerData = players;
+      this.loading = false;
+    });
   }
 }

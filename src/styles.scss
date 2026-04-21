@@ -1,8 +1,87 @@
 @import 'colors';
 @import 'typography';
 @import 'layout';
+@import 'animations';
+@import 'weapon-colors';
 
-body { background-color: $color-gray-500; }
+// Ocean depth palette
+$color-ocean-deep: #070e1e;
+$color-ocean-mid: #0f2040;
+$color-ocean-surface: #1b4b6b;
+$color-foam: #d4edf7;
+
+body {
+  background-color: $color-ocean-deep;
+  color: $color-foam;
+}
+
+// Translucent dark panel used across all pages
+.ocean-panel {
+  background: rgba($color-ocean-mid, 0.82);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba($color-blue-500, 0.14);
+  border-radius: 4px;
+}
+
+// Faint nautical grid overlay (use as ::before on section wrappers)
+.nautical-grid::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba($color-blue-500, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba($color-blue-500, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+// Section with full-width dark bg, relative for grid overlay
+.ocean-section {
+  position: relative;
+  background: $color-ocean-deep;
+  color: $color-foam;
+  padding: 3rem 0;
+}
+
+.ocean-section-mid {
+  position: relative;
+  background: $color-ocean-mid;
+  color: $color-foam;
+  padding: 3rem 0;
+}
+
+// Override Bootstrap table defaults for dark theme
+.ocean-table {
+  width: 100%;
+  background: transparent;
+  color: $color-foam;
+
+  thead tr th {
+    background: rgba($color-ocean-deep, 0.8);
+    color: $color-blue-500;
+    border-bottom: 1px solid rgba($color-blue-500, 0.25);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    padding: 0.75rem 0.5rem;
+  }
+
+  tbody tr td {
+    border-color: rgba($color-blue-500, 0.08);
+    padding: 0.5rem;
+    vertical-align: middle;
+  }
+
+  tbody tr:nth-child(odd) td {
+    background: rgba($color-blue-100, 0.4);
+  }
+
+  tbody tr:hover td {
+    background: rgba($color-blue-500, 0.12);
+    cursor: pointer;
+  }
+}
 
 .banner {
   background-size: cover;
@@ -11,11 +90,17 @@ body { background-color: $color-gray-500; }
 }
 
 .bg-gray-vertical-emboss {
-  background-image: linear-gradient(to bottom, $color-gray-400, $color-gray-500 5%, $color-gray-500 95%, $color-gray-400);
+  background-image: linear-gradient(
+    to bottom,
+    $color-gray-400,
+    $color-gray-500 5%,
+    $color-gray-500 95%,
+    $color-gray-400
+  );
   background-repeat: no-repeat;
 }
 
-.table-striped > tbody > tr:nth-child(2n+1) > td {
+.table-striped > tbody > tr:nth-child(2n + 1) > td {
   background-color: rgba($color-gray-400, 0.1);
 }
 
@@ -24,4 +109,7 @@ body { background-color: $color-gray-500; }
   cursor: pointer;
 }
 
-.mat-sort-header-stem, .mat-sort-header-indicator { color: $color-gray-500; }
+.mat-sort-header-stem,
+.mat-sort-header-indicator {
+  color: $color-gray-500;
+}

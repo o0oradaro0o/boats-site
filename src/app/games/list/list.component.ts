@@ -3,7 +3,7 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { Sort } from '@angular/material/sort';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { GameSimple, GameContent } from 'src/app/models/game-simple';
 @Component({
   selector: 'games-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
 export class GamesListComponent implements OnInit, OnChanges {
   @Input() SimpleGamesList: GameContent;
@@ -27,13 +27,8 @@ export class GamesListComponent implements OnInit, OnChanges {
       }
 
       if (this.SimpleGamesList) {
-        this.SimpleGamesList.Content.forEach(game => {
-          if (
-            game.dateProcessed &&
-            game.numPlayers &&
-            game.settings &&
-            game.wn
-          ) {
+        this.SimpleGamesList.Content.forEach((game) => {
+          if (game.dateProcessed && game.numPlayers && game.wn) {
             if (!game.gameDuration) {
               game.gameDuration = '--';
             } else {
@@ -81,7 +76,7 @@ export class GamesListComponent implements OnInit, OnChanges {
         return compare(
           new Date(a.dateProcessed),
           new Date(b.dateProcessed),
-          false
+          false,
         );
       });
     }
@@ -89,7 +84,7 @@ export class GamesListComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     if (this.SimpleGamesList) {
-      this.SimpleGamesList.Content.forEach(game => {
+      this.SimpleGamesList.Content.forEach((game) => {
         if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
           this.filteredGamesList.push(game);
         }
@@ -121,13 +116,13 @@ export class GamesListComponent implements OnInit, OnChanges {
           return compare(
             new Date(a.dateProcessed),
             new Date(b.dateProcessed),
-            isAsc
+            isAsc,
           );
         default:
           return compare(
             new Date(a.dateProcessed),
             new Date(b.dateProcessed),
-            isAsc
+            isAsc,
           );
       }
     });
@@ -147,13 +142,13 @@ export class GamesListComponent implements OnInit, OnChanges {
   }
 
   showRow(game: GameSimple) {
-    if (game.dateProcessed && game.numPlayers && game.settings && game.wn) {
+    if (game.dateProcessed && game.numPlayers && game.wn) {
       return true;
     }
     return false;
   }
   handleClick(matchId) {
-    this.router.navigate(['/games', matchId]).then(e => {
+    this.router.navigate(['/games', matchId]).then((e) => {
       if (e) {
         console.log('Navigation is successful!');
       } else {
@@ -167,7 +162,7 @@ export class GamesListComponent implements OnInit, OnChanges {
 function compare(
   a: number | string | Date,
   b: number | string | Date,
-  isAsc: boolean
+  isAsc: boolean,
 ) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

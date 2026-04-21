@@ -1,7 +1,14 @@
 <app-page-banner text="Boat Stats"></app-page-banner>
 
-<div class="bg-gray-vertical-emboss py-5">
+<div class="ocean-section py-5">
   <div class="container">
-    <boats-list [boatRecordList]="BoatRecordList | async"></boats-list>
+    <ng-container *ngIf="BoatRecordList | async as data; else loading">
+      <boats-list [boatRecordList]="data"></boats-list>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center py-5">
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>

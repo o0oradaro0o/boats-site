@@ -1,23 +1,41 @@
-<div class="stats">
-  <div>
-    In the past <strong>24</strong> Hours there were
-    <strong>{{ gamesInLast24Hours }}</strong> Games with
-    <strong>{{ playersInLast24Hours }}</strong> Players
-  </div>
-  <div>
-    in the past 300 games:
-    <div>
-      <strong>{{ (coOpCount/300*100).toFixed(1) }}%</strong> were Co-op
+<div class="games-summary">
+  <div class="summary-cards">
+    <div class="summary-card ocean-panel">
+      <span class="summary-card__val">{{ gamesInLast24Hours }}</span>
+      <span class="summary-card__lbl">Games Today</span>
     </div>
-    <div>
-      <strong>{{ (tradingCount/300*100).toFixed(1) }}%</strong> enabled Trading
+    <div class="summary-card ocean-panel">
+      <span class="summary-card__val">{{ playersInLast24Hours }}</span>
+      <span class="summary-card__lbl">Players Today</span>
     </div>
-    <div>
-      <strong>{{ (battleModeCount/300*100).toFixed(1) }}%</strong> enabled Battle Mode
+    <div class="summary-card ocean-panel">
+      <span class="summary-card__val"
+        >{{ ((coOpCount / 300) * 100).toFixed(0) }}%</span
+      >
+      <span class="summary-card__lbl">Co-op Rate</span>
+    </div>
+    <div class="summary-card ocean-panel">
+      <span class="summary-card__val"
+        >{{ ((tradingCount / 300) * 100).toFixed(0) }}%</span
+      >
+      <span class="summary-card__lbl">Trading Enabled</span>
+    </div>
+    <div class="summary-card ocean-panel">
+      <span class="summary-card__val"
+        >{{ ((battleModeCount / 300) * 100).toFixed(0) }}%</span
+      >
+      <span class="summary-card__lbl">Battle Mode</span>
+    </div>
+    <div class="summary-card ocean-panel">
+      <span
+        class="summary-card__val"
+        [class.win]="coOpCount && coOpWins / coOpCount > 0.5"
+        [class.lose]="coOpCount && coOpWins / coOpCount <= 0.5"
+      >
+        {{ coOpCount ? (coOpWins / coOpCount | percent) : 'N/A' }}
+      </span>
+      <span class="summary-card__lbl">Co-op Win Rate</span>
     </div>
   </div>
-  <div>
-    Co-op Mode had a <strong>{{ coOpWins / coOpCount | percent }}</strong> win
-    rate
-  </div>
+  <p class="summary-note">Based on the last 300 recorded games.</p>
 </div>

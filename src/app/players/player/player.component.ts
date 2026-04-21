@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-player',
   templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss']
+  styleUrls: ['./player.component.scss'],
 })
 export class PlayerComponent implements OnInit {
   ItemRecordList$: Observable<ItemRecordContent>;
@@ -17,16 +17,19 @@ export class PlayerComponent implements OnInit {
 
   recentGames: GameDetail[];
   playerId: number;
+  activeTab: 'boats' | 'items' = 'boats';
 
-  constructor(loader: DataGrabberService, private route: ActivatedRoute) {
-    this.route.params.subscribe(params => {
+  constructor(
+    loader: DataGrabberService,
+    private route: ActivatedRoute,
+  ) {
+    this.route.params.subscribe((params) => {
       this.playerId = params.id;
-      loader.getRecentMatches(this.playerId).subscribe(res => {
+      loader.getRecentMatches(this.playerId).subscribe((res) => {
         this.recentGames = res;
       });
       this.ItemRecordList$ = loader.getPlayerItemData(this.playerId);
       this.BoatRecordList$ = loader.getPlayerBoatData(this.playerId);
-   
     });
   }
 

@@ -1,23 +1,89 @@
-.boat-icons {
-  height: 40px;
+$foam: #d4edf7;
+$accent: #4a7bf7;
+
+.player-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
-td {
-  padding: 2px;
-  margin: 1px;
-  vertical-align: middle;
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 4px;
+  background: rgba($foam, 0.025);
+  border: 1px solid rgba($foam, 0.06);
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: rgba($accent, 0.08);
+    border-color: rgba($accent, 0.2);
+  }
 }
 
-th {
-  padding: 5px;
-  margin: 1px;
+.player-row__ship {
+  flex-shrink: 0;
 }
 
-.name-row {
-  min-width: 220px;
+.ship-icon {
+  width: 62px;
+  height: 32px;
+  object-fit: contain;
+  image-rendering: pixelated;
 }
 
-.right-align {
-  text-align: right;
-  padding-right: 5px;
+.player-row__name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: $foam;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.player-ship-name {
+  font-size: 0.6rem;
+  color: rgba($foam, 0.32);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.player-row__stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 50px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.stat-val {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: $foam;
+  line-height: 1.1;
+}
+
+.stat-sep {
+  color: rgba($foam, 0.28);
+  margin: 0 0.1rem;
+}
+
+.stat-lbl {
+  font-size: 0.53rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: rgba($foam, 0.28);
 }

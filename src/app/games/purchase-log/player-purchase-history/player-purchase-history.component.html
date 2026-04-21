@@ -1,22 +1,40 @@
-<div class="card" *ngFor="let playerData of teamPlayers">
-  <div class="content">
-    <div class="row">
-      <div class="item-holder" *ngFor="let ship of playerData.ships">
-        <img class="ship-image" src="{{ ship.image }}" alt="{{ ship.name }}" />
-        <div class="timestamp">{{ ship.time }}</div>
-      </div>
-      <div class="player-name">
-        <a
-          routerLink="{{ '/players/' + playerData.playerID }}"
-          class="nav-link"
-          >{{ playerData.name }}</a
-        >
+<div
+  class="player-purchases ocean-panel"
+  *ngFor="let playerData of teamPlayers"
+>
+  <div class="player-purchases__header">
+    <a
+      [routerLink]="['/players', playerData.playerID]"
+      class="player-purchases__name"
+    >
+      {{ playerData.name }}
+    </a>
+  </div>
+
+  <div class="purchase-timeline" *ngIf="playerData.ships?.length">
+    <span class="timeline-label">Ships</span>
+    <div class="purchase-items">
+      <div class="purchase-item" *ngFor="let ship of playerData.ships">
+        <img
+          [src]="ship.image"
+          [alt]="ship.name"
+          class="purchase-img purchase-img--ship"
+        />
+        <span class="purchase-time">{{ ship.time }}</span>
       </div>
     </div>
-    <div class="row">
-      <div class="item-holder" *ngFor="let item of playerData.items">
-        <img class="item-image" src="{{ item.image }}" alt="{{ item.name }}" />
-        <div class="timestamp">{{ item.time }}</div>
+  </div>
+
+  <div class="purchase-timeline" *ngIf="playerData.items?.length">
+    <span class="timeline-label">Items</span>
+    <div class="purchase-items">
+      <div class="purchase-item" *ngFor="let item of playerData.items">
+        <img
+          [src]="item.image"
+          [alt]="item.name"
+          class="purchase-img purchase-img--item"
+        />
+        <span class="purchase-time">{{ item.time }}</span>
       </div>
     </div>
   </div>

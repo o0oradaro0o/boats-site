@@ -1,21 +1,131 @@
-.boat-icons {
-  height: 40px;
+$ocean-deep: #070e1e;
+$foam: #d4edf7;
+$accent: #4a7bf7;
+
+.games-empty {
+  color: rgba($foam, 0.35);
+  font-size: 0.8rem;
+  padding: 1.5rem;
+  text-align: center;
 }
 
-.table td, .table th {
-  padding: 0.25rem;
-  vertical-align: middle;
+.game-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.65rem 0.9rem;
+  margin-bottom: 0.35rem;
+  cursor: pointer;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+
+  &:hover {
+    background: rgba($accent, 0.08) !important;
+    border-color: rgba($accent, 0.35);
+  }
+
+  &__ship {
+    width: 62px;
+    height: 32px;
+    object-fit: fill;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+  }
+
+  &__result {
+    width: 90px;
+    flex-shrink: 0;
+  }
+
+  &__date {
+    font-size: 0.68rem;
+    color: rgba($foam, 0.35);
+    margin-top: 0.2rem;
+  }
+
+  &__mode {
+    flex: 1;
+    min-width: 70px;
+  }
+
+  &__mode-main {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: $foam;
+    display: block;
+  }
+
+  &__mode-sub {
+    font-size: 0.65rem;
+    color: rgba($foam, 0.4);
+  }
+
+  &__stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 48px;
+    flex-shrink: 0;
+  }
+
+  &__stat-val {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: $foam;
+  }
+
+  &__stat-sep {
+    color: rgba($foam, 0.3);
+    margin: 0 0.1rem;
+  }
+
+  &__stat-lbl {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: rgba($foam, 0.3);
+  }
+
+  &__duration {
+    display: flex;
+    flex-direction: column;
+    min-width: 70px;
+    flex-shrink: 0;
+  }
 }
 
-.winner-color {
-  color: green;
+.result-badge {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  &--win {
+    background: rgba(76, 175, 80, 0.15);
+    color: #4caf50;
+    border: 1px solid rgba(76, 175, 80, 0.3);
+  }
+  &--loss {
+    background: rgba(209, 123, 131, 0.12);
+    color: #d17b83;
+    border: 1px solid rgba(209, 123, 131, 0.25);
+  }
 }
 
-.loser-color {
-  color: red;
-}
+.duration-bar {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 0.3rem;
 
-.duration-segment {
-  background-color: black;
-  height: 4px;
+  &__fill {
+    height: 100%;
+    background: rgba($accent, 0.5);
+    border-radius: 2px;
+  }
 }

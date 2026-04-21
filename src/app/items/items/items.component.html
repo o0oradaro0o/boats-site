@@ -1,7 +1,14 @@
-<app-page-banner text="Game Stats"></app-page-banner>
+<app-page-banner text="Item Stats"></app-page-banner>
 
-<div class="bg-gray-vertical-emboss py-5">
+<div class="ocean-section py-5">
   <div class="container">
-    <items-list [ItemRecordList]="ItemRecordList$ | async"></items-list>
+    <ng-container *ngIf="ItemRecordList$ | async as data; else loading">
+      <items-list [ItemRecordList]="data"></items-list>
+    </ng-container>
+    <ng-template #loading>
+      <div class="text-center py-5">
+        <mat-spinner class="mx-auto"></mat-spinner>
+      </div>
+    </ng-template>
   </div>
 </div>

@@ -3,66 +3,89 @@ import {
   OnInit,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { GameDetailContent } from 'src/app/models/game-detail';
+import { GameDataService } from 'src/app/game-data.service';
+import { ShipData } from 'src/app/models/game-data.models';
 
 @Component({
   selector: 'app-purchase-log',
   templateUrl: './purchase-log.component.html',
-  styleUrls: ['./purchase-log.component.scss']
+  styleUrls: ['./purchase-log.component.scss'],
 })
 export class PurchaseLogComponent implements OnInit, OnChanges {
   @Input() playerDetails: GameDetailContent;
 
   northPlayers = [];
   southPlayers = [];
+  private shipIconMap = new Map<string, string>();
+  private iconsLoaded = false;
 
-  constructor() {}
+  constructor(private gameData: GameDataService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.gameData.getShips().subscribe((ships: ShipData[]) => {
+      ships.forEach((s) =>
+        this.shipIconMap.set(s.name.trim().toLowerCase(), s.icon),
+      );
+      this.iconsLoaded = true;
+      if (this.playerDetails) {
+        this.buildPlayers(this.playerDetails);
+      }
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.playerDetails && changes.playerDetails.currentValue) {
-      const playerData = changes.playerDetails.currentValue.Content;
-      for (const player of playerData) {
-        const name = player.playerName;
-        const team = player.tm;
-        const playerID = player.playerID;
-        // items and ships should already be sorted
-        let items = player.buildOrder;
-        let ships = player.boatOrder;
+      this.northPlayers = [];
+      this.southPlayers = [];
+      if (this.iconsLoaded) {
+        this.buildPlayers(changes.playerDetails.currentValue);
+      }
+    }
+  }
 
-        items = items.map(itemData => {
-          const itemName = itemData.item;
-          // have to remove the item_ substring to get the right asset name
-          const imageName = itemName.replace(/ /g, '_').substring(5);
-          const time = itemData.time;
-          const image = `/assets/items/${imageName}.png`;
-          return { name: itemName, time, image };
-        });
+  private getShipIcon(name: string): string {
+    const icon = this.shipIconMap.get((name ?? '').trim().toLowerCase());
+    return `/assets/boat-icons/${
+      icon ??
+      (name ?? '')
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '_')
+    }.png`;
+  }
 
-        ships = ships.map(shipData => {
-          const shipName = shipData.item;
-          let imageName = shipName.replace(/ /g, '_');
-          imageName = imageName.replace("'", '');
-          const time = shipData.time;
-          const image = `/assets/boat-icons/${imageName}.png`;
-          return { name: shipName, time, image };
-        });
+  private buildPlayers(details: GameDetailContent) {
+    for (const player of details.Content) {
+      const name = player.playerName;
+      const team = player.tm;
+      const playerID = player.playerID;
 
-        const newPlayerData = {
-          name,
-          items,
-          ships,
-          playerID
+      const items = (player.buildOrder ?? []).map((itemData) => {
+        const itemName = String(itemData.item);
+        const imageName = itemName.replace(/ /g, '_').substring(5);
+        return {
+          name: itemName,
+          time: itemData.time,
+          image: `/assets/items/${imageName}.png`,
         };
+      });
 
-        if (team === 'North') {
-          this.northPlayers.push(newPlayerData);
-        } else if (team === 'South') {
-          this.southPlayers.push(newPlayerData);
-        }
+      const ships = (player.boatOrder ?? []).map((shipData) => {
+        return {
+          name: String(shipData.item),
+          time: shipData.time,
+          image: this.getShipIcon(String(shipData.item)),
+        };
+      });
+
+      const newPlayerData = { name, items, ships, playerID };
+      if (team === 'North') {
+        this.northPlayers.push(newPlayerData);
+      } else if (team === 'South') {
+        this.southPlayers.push(newPlayerData);
       }
     }
   }

@@ -1,7 +1,37 @@
-#banner {
-  background-image: url(/assets/stats/banner.png);
+$ocean-deep: #070e1e;
+$foam: #d4edf7;
+$accent: #4a7bf7;
 
-  -webkit-box-shadow: inset 0px 0px 50px 50px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: inset 0px 0px 50px 50px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0px 0px 50px 50px rgba(0, 0, 0, 0.5);
+.page-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid rgba($accent, 0.15);
+}
+
+.page-banner__bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/stats/banner.png');
+  background-size: cover;
+  background-position: center;
+  filter: brightness(0.3) saturate(0.7);
+  z-index: 0;
+}
+
+.page-banner__content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.page-banner__title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $foam;
+  margin: 0;
+  text-shadow: 0 1px 12px rgba($accent, 0.4);
 }

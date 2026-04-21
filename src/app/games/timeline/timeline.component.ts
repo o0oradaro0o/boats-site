@@ -3,7 +3,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import { GameDetailContent } from 'src/app/models/game-detail';
 
@@ -21,7 +21,7 @@ interface Interaction {
 @Component({
   selector: 'game-timeline',
   templateUrl: './timeline.component.html',
-  styleUrls: ['./timeline.component.scss']
+  styleUrls: ['./timeline.component.scss'],
 })
 export class GameTimelineComponent implements OnInit, OnChanges {
   @Input() gameDetails: GameDetailContent;
@@ -79,16 +79,16 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       },
       tickTime: d3.timeSecond,
       tickInterval: 10,
-      tickSize: 5
+      tickSize: 5,
     });
 
     chart.hover(
-      function(d, i, datum) {
+      function (d, i, datum) {
         if (d.info) {
           this.currentHoverInfo = d.info;
           this.HoverImg = d.img;
         }
-      }.bind(this)
+      }.bind(this),
     );
     d3.selectAll('svg > *').remove();
     this.svg.datum(this.datasets).call(chart);
@@ -114,7 +114,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
   parseContent() {
     // player data
-    this.playerDetails.Content.forEach(player => {
+    this.playerDetails.Content.forEach((player) => {
       this.playerIdToName.set(player.playerID, player.playerName);
       this.players.push([player.playerID, player.playerName, player.tm]);
       if (this.ShowBoats) {
@@ -123,7 +123,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
             time: ship.time,
             action: 'ship',
             actor: player.playerID,
-            target: ship.item.toString()
+            target: ship.item.toString(),
           });
         }
       }
@@ -133,7 +133,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
             time: item.time,
             action: 'buy',
             actor: player.playerID,
-            target: item.item.toString()
+            target: item.item.toString(),
           });
         }
         for (const item of player.saleOrder) {
@@ -142,7 +142,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
               time: item.time,
               action: 'sell',
               actor: player.playerID,
-              target: item.item.toString()
+              target: item.item.toString(),
             });
           }
         }
@@ -151,13 +151,13 @@ export class GameTimelineComponent implements OnInit, OnChanges {
 
     if (this.ShowKillsDeaths) {
       // game data
-      this.gameDetails.Content[0].combatLog.forEach(interaction => {
+      this.gameDetails.Content[0].combatLog.forEach((interaction) => {
         // kills
         this.interactions.push({
           time: interaction.Game_time,
           action: 'kill',
           actor: interaction.killer_name,
-          target: interaction.killed_name
+          target: interaction.killed_name,
         });
 
         // deaths
@@ -165,7 +165,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
           time: interaction.Game_time,
           action: 'death',
           actor: interaction.killed_name,
-          target: interaction.killer_name
+          target: interaction.killer_name,
         });
       });
     }
@@ -199,11 +199,11 @@ export class GameTimelineComponent implements OnInit, OnChanges {
     const teamPoint = {
       color,
       starting_time: 0,
-      ending_time: (+this.gameDetails.Content[0].gameDuration * 1000) / 60
+      ending_time: (+this.gameDetails.Content[0].gameDuration * 1000) / 60,
     };
     timelinePoints.push(teamPoint);
     for (const inter of this.interactions.filter(
-      inter => inter.actor === player[0]
+      (inter) => inter.actor === player[0],
     )) {
       let color = 'red';
       let target = inter.target;
@@ -229,7 +229,10 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         while (target.indexOf(' ') >= 0) {
           target = target.replace(' ', '_');
         }
-        image = '/assets/boat-icons/' + target.replace(' ', '_') + '.png';
+        image =
+          '/assets/boat-icons/' +
+          target.replace(' ', '_').toLowerCase() +
+          '.png';
       }
       if (inter.action === 'buy') {
         color = 'yellow';
@@ -248,7 +251,7 @@ export class GameTimelineComponent implements OnInit, OnChanges {
           '/assets/items/' + target.substring(target.indexOf('_') + 1) + '.png';
       }
       let thisTime = inter.time * 1000;
-      this.usedTimes.forEach(usedTime => {
+      this.usedTimes.forEach((usedTime) => {
         if (thisTime < usedTime + 50 && thisTime > usedTime - 50) {
           thisTime = thisTime + 150;
         }
@@ -262,13 +265,13 @@ export class GameTimelineComponent implements OnInit, OnChanges {
         starting_time: thisTime,
         ending_time: thisTime + 0.1,
         display: 'circle',
-        img: image
+        img: image,
       };
       timelinePoints.push(point);
     }
     this.datasets.push({
       label: player[1],
-      times: timelinePoints
+      times: timelinePoints,
     });
   }
 
@@ -297,17 +300,17 @@ export class GameTimelineComponent implements OnInit, OnChanges {
       },
       tickTime: d3.timeSecond,
       tickInterval: 10,
-      tickSize: 5
+      tickSize: 5,
     });
 
     chart.hover(
-      function(d, i, datum) {
+      function (d, i, datum) {
         if (d.info) {
           this.currentHoverInfo = d.info;
           this.HoverImg = d.img;
           this.currentHoverPlayerName = d.playerInfo;
         }
-      }.bind(this)
+      }.bind(this),
     );
 
     this.svg = d3

@@ -1,0 +1,375 @@
+$ocean-deep: #070e1e;
+$ocean-mid: #0f2040;
+$foam: #d4edf7;
+$accent: #4a7bf7;
+
+// ── Layout ────────────────────────────────────────────────────────────────────
+
+.detail-page {
+  min-height: 80vh;
+  padding: 2rem 0 4rem;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2rem;
+  align-items: start;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ── Loading / not-found ───────────────────────────────────────────────────────
+
+.detail-loading {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 0;
+}
+
+.detail-notfound {
+  text-align: center;
+  padding: 4rem 0;
+  color: rgba($foam, 0.5);
+
+  i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    margin-bottom: 1.5rem;
+  }
+}
+
+// ── Back button ───────────────────────────────────────────────────────────────
+
+.btn-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.75rem;
+  color: rgba($foam, 0.45);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
+  transition: color 0.15s;
+
+  &:hover {
+    color: $foam;
+  }
+}
+
+// ── Sidebar ───────────────────────────────────────────────────────────────────
+
+.detail-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-portrait {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: darken($ocean-mid, 4%);
+
+  &__hero {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    filter: brightness(0.7) saturate(0.85);
+  }
+
+  &__sprite {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    max-width: 55%;
+    max-height: 55%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+
+    &--overlay {
+      inset: auto;
+      bottom: 10px;
+      right: 10px;
+      max-width: 30%;
+      max-height: 30%;
+      margin: 0;
+      opacity: 0.9;
+    }
+  }
+}
+
+.detail-tier {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
+  border: 1px solid currentColor;
+  background: rgba($ocean-deep, 0.75);
+}
+
+.detail-title-block {
+  padding: 0 0.25rem;
+}
+
+.detail-name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: $foam;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+// ── Rate panel ────────────────────────────────────────────────────────────────
+
+.detail-rates {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 0.85rem 1rem;
+}
+
+.detail-arc {
+  position: relative;
+  flex-shrink: 0;
+  width: 68px;
+  height: 68px;
+
+  circle:last-child {
+    transition: stroke-dashoffset 0.7s ease;
+    &.winning {
+      stroke: #4caf50;
+    }
+    &.losing {
+      stroke: #d17b83;
+    }
+  }
+
+  &__labels {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__pct {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: $foam;
+    line-height: 1;
+  }
+
+  &__sub {
+    font-size: 0.52rem;
+    color: rgba($foam, 0.45);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+}
+
+.detail-use {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  &__val {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: $foam;
+    line-height: 1;
+  }
+
+  &__label {
+    font-size: 0.6rem;
+    color: rgba($foam, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  &__bar {
+    height: 3px;
+    background: rgba($accent, 0.15);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-top: 0.25rem;
+  }
+
+  &__fill {
+    height: 100%;
+    background: rgba($accent, 0.6);
+    border-radius: 2px;
+    transition: width 0.6s ease;
+  }
+
+  &__games {
+    font-size: 0.6rem;
+    color: rgba($foam, 0.3);
+  }
+}
+
+// ── Stats panel ───────────────────────────────────────────────────────────────
+
+.detail-stats {
+  padding: 0.75rem 1rem;
+}
+
+.detail-section-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba($foam, 0.35);
+  margin: 0 0 0.65rem;
+}
+
+.detail-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba($accent, 0.07);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &__key {
+    font-size: 0.75rem;
+    color: rgba($foam, 0.55);
+    i {
+      color: rgba($accent, 0.6);
+      margin-right: 0.4rem;
+      font-size: 0.65rem;
+    }
+    &--gold {
+      color: #daa520;
+      i {
+        color: #daa520;
+      }
+    }
+  }
+
+  &__val {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: $foam;
+    &--gold {
+      color: #daa520;
+    }
+  }
+}
+
+// ── Abilities ─────────────────────────────────────────────────────────────────
+
+.detail-main {
+  min-width: 0;
+}
+
+.detail-abilities-header {
+  margin-bottom: 1rem;
+}
+
+.detail-abilities {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-no-abilities {
+  font-size: 0.8rem;
+  color: rgba($foam, 0.35);
+  padding: 1.5rem 0;
+}
+
+.ability-card {
+  padding: 0.85rem 1rem;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 4px;
+    flex-shrink: 0;
+    image-rendering: pixelated;
+    border: 1px solid rgba($accent, 0.15);
+    background: rgba($ocean-deep, 0.5);
+  }
+
+  &__title-block {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  &__name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: $foam;
+    text-transform: capitalize;
+    width: 100%;
+  }
+
+  &__cd,
+  &__range {
+    font-size: 0.65rem;
+    color: rgba($foam, 0.45);
+    i {
+      margin-right: 0.2rem;
+    }
+  }
+
+  &__desc {
+    font-size: 0.78rem;
+    color: rgba($foam, 0.65);
+    line-height: 1.6;
+    margin: 0 0 0.5rem;
+  }
+}
+
+.ability-card__values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  border-top: 1px solid rgba($accent, 0.08);
+  padding-top: 0.5rem;
+}
+
+.ability-val {
+  display: flex;
+  gap: 0.35rem;
+  font-size: 0.7rem;
+
+  &__key {
+    color: rgba($foam, 0.4);
+    text-transform: capitalize;
+  }
+
+  &__val {
+    color: $foam;
+    font-weight: 600;
+  }
+}

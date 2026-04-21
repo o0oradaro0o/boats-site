@@ -1,0 +1,74 @@
+<a
+  class="ship-card"
+  [routerLink]="['/boats', slug]"
+  [style.animationDelay]="animationDelay + 'ms'"
+>
+  <!-- Image area: show hero if available, else sprite (never both) -->
+  <div class="ship-card__img-area">
+    <img
+      *ngIf="heroUrl; else spriteImg"
+      [src]="heroUrl"
+      [alt]="displayName"
+      class="ship-card__hero"
+      (error)="$any($event.target).style.display = 'none'"
+    />
+    <ng-template #spriteImg>
+      <img
+        *ngIf="iconUrl"
+        [src]="iconUrl"
+        [alt]="displayName"
+        class="ship-card__sprite"
+        (error)="$any($event.target).style.display = 'none'"
+      />
+    </ng-template>
+  </div>
+
+  <!-- Info strip -->
+  <div class="ship-card__info">
+    <div class="ship-card__name-row">
+      <span class="ship-card__name">{{ displayName }}</span>
+    </div>
+
+    <div class="ship-card__rates" *ngIf="boatRecord?.compGames">
+      <div class="ship-card__arc">
+        <svg viewBox="0 0 40 40" width="34" height="34">
+          <circle
+            cx="20"
+            cy="20"
+            r="16"
+            fill="none"
+            stroke="#1C2F5E"
+            stroke-width="3"
+          />
+          <circle
+            cx="20"
+            cy="20"
+            r="16"
+            fill="none"
+            stroke-width="3"
+            stroke-linecap="round"
+            [class.winning]="winRate > 50"
+            [class.losing]="winRate <= 50"
+            [style.strokeDasharray]="circumference"
+            [style.strokeDashoffset]="dashOffset"
+            transform="rotate(-90 20 20)"
+          />
+        </svg>
+        <span class="arc-label">{{ winRate.toFixed(0) }}%</span>
+      </div>
+      <div class="ship-card__use-wrap">
+        <span class="ship-card__use-label">{{ useRate.toFixed(1) }}% use</span>
+        <div class="ship-card__use-bar">
+          <div class="ship-card__use-fill" [style.width]="useRate + '%'"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="shipData" class="ship-card__quick-stats">
+    <span title="HP"><i class="fas fa-heart"></i> {{ shipData.hp }}</span>
+    <span title="Speed"
+      ><i class="fas fa-tachometer-alt"></i> {{ shipData.speed }}</span
+    >
+  </div>
+</a>

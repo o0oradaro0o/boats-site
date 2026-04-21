@@ -1,108 +1,235 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
   OnChanges,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
 import {
   ItemRecordContent,
-  ItemRecord
+  ItemRecord,
 } from 'src/app/models/player-item-record';
 import { Sort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { GameDataService } from '../../game-data.service';
+import {
+  WeaponData,
+  HullData,
+  SailData,
+  RepairData,
+  WoodData,
+  ItemsJson,
+} from '../../models/game-data.models';
+
+const WEAPON_TYPES = [
+  'fire',
+  'ice',
+  'poison',
+  'plasma',
+  'wind',
+  'coal',
+  'chaos',
+  'breach',
+  'spin',
+  'light',
+  'spread',
+  'iron',
+];
+const MIX_TYPES = [
+  'spread_plasma',
+  'plasma_fire',
+  'fire_coal',
+  'coal_chaos',
+  'chaos_poison',
+  'poison_light',
+  'light_spin',
+  'spin_breach',
+  'breach_ice',
+  'ice_wind',
+  'light_iron',
+  'iron_breach',
+];
+
+function inferWeaponType(key: string): string {
+  for (const mix of MIX_TYPES) {
+    if (key.includes(mix)) return mix;
+  }
+  for (const t of WEAPON_TYPES) {
+    if (key.includes(t)) return t;
+  }
+  return 'unknown';
+}
+
+export interface EnrichedItem {
+  record: ItemRecord;
+  iconUrl: string;
+  weaponType: string | null;
+  weaponData: WeaponData | null;
+  hullData: HullData | null;
+  category: 'weapon' | 'hull' | 'sail' | 'repair' | 'wood' | 'other';
+}
 
 @Component({
   selector: 'items-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
 })
-export class ListComponent implements OnInit, OnChanges {
+export class ListComponent implements OnInit, OnChanges, OnDestroy {
   @Input() ItemRecordList: ItemRecordContent;
-  CondencedItemRecords: ItemRecord[];
-  sortedData: ItemRecord[];
-  TotalSample: number;
-  isSmallScreen: boolean;
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  activeTab: 'all' | 'weapon' | 'hull' | 'sail' | 'repair' | 'wood' = 'all';
+  allItems: EnrichedItem[] = [];
+  TotalSample = 1;
+  isSmallScreen: boolean;
+  maxDps = 1;
+  maxRange = 1;
+
+  private gameItems: ItemsJson | null = null;
+  private condensed: ItemRecord[] = [];
+  private destroy$ = new Subject<void>();
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    private gameDataService: GameDataService,
+  ) {}
+
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.ItemRecordList) {
-      if (!this.CondencedItemRecords) {
-        this.CondencedItemRecords = [];
-      }
+    if (changes.ItemRecordList && this.ItemRecordList) {
+      this.condensed = [];
       this.TotalSample = 0;
-      if (this.ItemRecordList) {
-        this.ItemRecordList.Content.forEach(item => {
-          if (
-            item.item &&
-            !item.item.includes('lorne') &&
-            !item.item.includes('caulk') &&
-            !item.item.includes('combo')
-          ) {
-            this.CondencedItemRecords.push(item);
-            this.TotalSample = this.TotalSample + item.compGames;
-          }
-        });
-      }
-      // console.log(this.filteredGamesList.length)
-      // console.log(this.SimpleGamesList.Content.length)
-      const data = this.CondencedItemRecords.slice();
-      this.sortedData = data;
-      this.sortedData = data.sort((a, b) => {
-        return compare(new Date(a.compGames), new Date(b.compGames), false);
+      this.ItemRecordList.Content.forEach((item) => {
+        if (
+          item.item &&
+          !item.item.includes('lorne') &&
+          !item.item.includes('caulk') &&
+          !item.item.includes('combo')
+        ) {
+          this.condensed.push(item);
+          this.TotalSample += item.compGames;
+        }
       });
+      this.buildEnriched();
     }
   }
-  ngOnInit() {
-    this.isSmallScreen = this.breakpointObserver.isMatched(
-      '(max-width: 599px)'
-    );
 
+  ngOnInit() {
+    this.isSmallScreen =
+      this.breakpointObserver.isMatched('(max-width: 599px)');
     this.breakpointObserver
       .observe(['(min-width: 500px)'])
-      .subscribe(result => {
-        this.isSmallScreen = this.breakpointObserver.isMatched(
-          '(max-width: 599px)'
-        );
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        this.isSmallScreen =
+          this.breakpointObserver.isMatched('(max-width: 599px)');
       });
+
+    this.gameDataService
+      .getItems()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((items) => {
+        this.gameItems = items;
+        this.maxDps = Math.max(...items.weapons.map((w) => w.dps || 0), 1);
+        this.maxRange = Math.max(...items.weapons.map((w) => w.range || 0), 1);
+        this.buildEnriched();
+      });
+  }
+
+  private buildEnriched() {
+    if (!this.condensed.length) return;
+    this.allItems = this.condensed
+      .sort((a, b) => b.compGames - a.compGames)
+      .map((record) => {
+        const key = record.item;
+        const iconUrl = `/assets/game-data/images/items/${key.replace('item_', '')}.png`;
+        let weaponType: string | null = null;
+        let weaponData: WeaponData | null = null;
+        let hullData: HullData | null = null;
+        let category: EnrichedItem['category'] = 'other';
+
+        if (this.gameItems) {
+          weaponData =
+            this.gameItems.weapons.find((w) => w.key === key) ?? null;
+          hullData = this.gameItems.hulls.find((h) => h.key === key) ?? null;
+          const sailData = this.gameItems.sails.find((s) => s.key === key);
+          const repairData = this.gameItems.repairs.find((r) => r.key === key);
+          const woodData = this.gameItems.woods.find((w) => w.key === key);
+          if (weaponData) {
+            category = 'weapon';
+            weaponType = weaponData.type;
+          } else if (hullData) category = 'hull';
+          else if (sailData) category = 'sail';
+          else if (repairData) category = 'repair';
+          else if (woodData) category = 'wood';
+        }
+        if (!weaponType && (key.includes('_bow') || key.includes('_cannon'))) {
+          weaponType = inferWeaponType(key);
+          category = 'weapon';
+        }
+        return { record, iconUrl, weaponType, weaponData, hullData, category };
+      });
+  }
+
+  get filteredItems(): EnrichedItem[] {
+    const base =
+      this.activeTab === 'all'
+        ? this.allItems
+        : this.allItems.filter((i) => i.category === this.activeTab);
+    return base.filter((i) => i.record.compGames > 1);
+  }
+
+  setTab(tab: typeof this.activeTab) {
+    this.activeTab = tab;
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   sortData(sort: Sort) {
-    const data = this.CondencedItemRecords.slice();
-    if (!sort.active || sort.direction === '') {
-      this.sortedData = data;
-      return;
-    }
-
-    this.sortedData = data.sort((a: ItemRecord, b: ItemRecord) => {
-      const isAsc = sort.direction === 'asc';
+    const isAsc = sort.direction === 'asc';
+    this.allItems = [...this.allItems].sort((a, b) => {
       switch (sort.active) {
         case 'name':
-          return compare(a.item, b.item, isAsc);
+          return compare(a.record.item, b.record.item, isAsc);
         case 'games':
-          return compare(a.compGames, b.compGames, isAsc);
+          return compare(a.record.compGames, b.record.compGames, isAsc);
         case 'winper':
           return compare(
-            a.compGames > 0 ? a.compWins / a.compGames : -1,
-            b.compGames > 0 ? b.compWins / b.compGames : -1,
-            isAsc
+            a.record.compGames > 0
+              ? a.record.compWins / a.record.compGames
+              : -1,
+            b.record.compGames > 0
+              ? b.record.compWins / b.record.compGames
+              : -1,
+            isAsc,
           );
         default:
-          return compare(a.compGames, b.compGames, isAsc);
+          return compare(a.record.compGames, b.record.compGames, isAsc);
       }
     });
   }
-  getPercent(input: number) {
-    // duration = mm:ss
 
+  getPercent(input: number): string {
     return `${input * 100}%`;
+  }
+
+  displayName(key: string): string {
+    return key
+      .split('_')
+      .join(' ')
+      .replace('item ', '')
+      .replace(/\b\w/g, (c) => c.toUpperCase());
   }
 }
 
 function compare(
   a: number | string | Date,
   b: number | string | Date,
-  isAsc: boolean
+  isAsc: boolean,
 ) {
   return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
 }

@@ -1,15 +1,50 @@
-.segment {
-  background-color: black;
-  height: 4px;
-}
-.innerRow:hover {
-  cursor: default;
+@import '../../../animations';
+@import '../../../weapon-colors';
+
+$ocean-deep: #070e1e;
+$foam: #d4edf7;
+$accent: #4a7bf7;
+
+.tier-section {
+  margin-bottom: 2.5rem;
 }
 
-.table td {
-  padding: 0.1rem;
+.tier-section__header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba($accent, 0.12);
 }
 
-.boat-icons {
-  height: 30px;
+.tier-section__title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.tier-section__label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: $foam;
+}
+
+.tier-section__sublabel {
+  font-size: 0.62rem;
+  color: rgba($foam, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.tier-section__count {
+  font-size: 0.72rem;
+  color: rgba($foam, 0.35);
+  letter-spacing: 0.05em;
+}
+
+.ship-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
 }

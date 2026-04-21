@@ -1,31 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, merge} from 'rxjs';
+import { Observable } from 'rxjs';
+import { shareReplay } from 'rxjs/operators';
 import { GameContent } from './../models/game-simple';
 import { DataGrabberService } from './../data-grabber.service';
 
 @Component({
   selector: 'games',
   templateUrl: './games.component.html',
-  styleUrls: ['./games.component.scss']
+  styleUrls: ['./games.component.scss'],
 })
 export class GamesComponent implements OnInit {
-  GamesThisWeek: Observable<GameContent>;
-  MoreGames: Observable<GameContent>;
+  Games$: Observable<GameContent>;
 
   constructor(loader: DataGrabberService) {
-    // List reacts to filter and sort changes
-    
-    const today = new Date();
-    const tomorrow = new Date(today);
-    const yesterday = new Date(today);
-    const DByesterday = new Date(today);
-    tomorrow.setDate(today.getDate() + 1);
-    yesterday.setDate(today.getDate() - 1);
-    DByesterday.setDate(today.getDate() - 2);
-    this.GamesThisWeek = merge(loader.getGames(tomorrow),loader.getGames(today),loader.getGames(yesterday),loader.getGames(DByesterday));
-    this.MoreGames = loader.gat300Games();
+    this.Games$ = loader.get300Games().pipe(shareReplay(1));
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

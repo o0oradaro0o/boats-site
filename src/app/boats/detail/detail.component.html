@@ -1,0 +1,175 @@
+<div class="detail-page ocean-section">
+  <div class="container">
+    <!-- Loading -->
+    <div *ngIf="loading" class="detail-loading">
+      <mat-spinner diameter="48"></mat-spinner>
+    </div>
+
+    <!-- Not found -->
+    <div *ngIf="!loading && notFound" class="detail-notfound">
+      <i class="fas fa-ship"></i>
+      <p>Ship not found.</p>
+      <a routerLink="/boats" class="btn-back">Back to fleet</a>
+    </div>
+
+    <!-- Detail layout -->
+    <div *ngIf="!loading && ship" class="detail-layout">
+      <!-- Left: portrait + key stats -->
+      <div class="detail-sidebar">
+        <div class="detail-portrait ocean-panel">
+          <img
+            *ngIf="heroUrl"
+            [src]="heroUrl"
+            [alt]="ship.name"
+            class="detail-portrait__hero"
+            (error)="$any($event.target).style.display = 'none'"
+          />
+          <img
+            [src]="iconUrl"
+            [alt]="ship.name"
+            class="detail-portrait__sprite"
+            [class.detail-portrait__sprite--overlay]="heroUrl"
+            (error)="$any($event.target).style.display = 'none'"
+          />
+          <span class="detail-tier" [ngClass]="'tier-badge-' + ship.tier"
+            >T{{ ship.tier }}</span
+          >
+        </div>
+
+        <div class="detail-title-block">
+          <h1 class="detail-name">{{ ship.name }}</h1>
+        </div>
+
+        <!-- Win/use rates -->
+        <div class="detail-rates ocean-panel" *ngIf="record?.compGames">
+          <div class="detail-arc">
+            <svg viewBox="0 0 68 68" width="68" height="68">
+              <circle
+                cx="34"
+                cy="34"
+                r="30"
+                fill="none"
+                stroke="#1C2F5E"
+                stroke-width="4"
+              />
+              <circle
+                cx="34"
+                cy="34"
+                r="30"
+                fill="none"
+                stroke-width="4"
+                stroke-linecap="round"
+                [class.winning]="winRate > 50"
+                [class.losing]="winRate <= 50"
+                [style.strokeDasharray]="circumference"
+                [style.strokeDashoffset]="dashOffset"
+                transform="rotate(-90 34 34)"
+              />
+            </svg>
+            <div class="detail-arc__labels">
+              <span class="detail-arc__pct">{{ winRate.toFixed(1) }}%</span>
+              <span class="detail-arc__sub">win rate</span>
+            </div>
+          </div>
+          <div class="detail-use">
+            <span class="detail-use__val">{{ useRate.toFixed(1) }}%</span>
+            <span class="detail-use__label">use rate</span>
+            <div class="detail-use__bar">
+              <div class="detail-use__fill" [style.width]="useRate + '%'"></div>
+            </div>
+            <span class="detail-use__games">{{ record.compGames }} games</span>
+          </div>
+        </div>
+
+        <!-- Base stats -->
+        <div class="detail-stats ocean-panel">
+          <h3 class="detail-section-label">Base Stats</h3>
+          <div class="detail-stat-row">
+            <span class="detail-stat-row__key"
+              ><i class="fas fa-redo"></i> Turn Rate</span
+            >
+            <span class="detail-stat-row__val">{{ ship.turnRate }}</span>
+          </div>
+          <div class="detail-stat-row">
+            <span class="detail-stat-row__key detail-stat-row__key--gold"
+              ><i class="fas fa-coins"></i> Bounty</span
+            >
+            <span class="detail-stat-row__val detail-stat-row__val--gold"
+              >{{ ship.bountyGold }}g</span
+            >
+          </div>
+          <div class="detail-stat-row">
+            <span class="detail-stat-row__key"
+              ><i class="fas fa-heart"></i> HP</span
+            >
+            <span class="detail-stat-row__val">{{ ship.hp }}</span>
+          </div>
+          <div class="detail-stat-row">
+            <span class="detail-stat-row__key"
+              ><i class="fas fa-plus-circle"></i> HP Regen</span
+            >
+            <span class="detail-stat-row__val">{{ ship.hpRegen }}/s</span>
+          </div>
+          <div class="detail-stat-row">
+            <span class="detail-stat-row__key"
+              ><i class="fas fa-tachometer-alt"></i> Speed</span
+            >
+            <span class="detail-stat-row__val">{{ ship.speed }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: abilities -->
+      <div class="detail-main">
+        <a routerLink="/boats" class="btn-back"
+          ><i class="fas fa-arrow-left"></i> Fleet</a
+        >
+
+        <h2 class="detail-section-label detail-abilities-header">Abilities</h2>
+
+        <div *ngIf="abilities.length === 0" class="detail-no-abilities">
+          No ability data available.
+        </div>
+
+        <div class="detail-abilities">
+          <div *ngFor="let ab of abilities" class="ability-card ocean-panel">
+            <div class="ability-card__header">
+              <img
+                [src]="ab.iconUrl"
+                [alt]="ab.key"
+                class="ability-card__icon"
+                (error)="$any($event.target).style.opacity = '0'"
+              />
+              <div class="ability-card__title-block">
+                <span class="ability-card__name">{{
+                  ab.key.split('_').join(' ')
+                }}</span>
+                <span *ngIf="ab.data.cooldown" class="ability-card__cd">
+                  <i class="fas fa-clock"></i> {{ ab.data.cooldown }}s
+                </span>
+                <span *ngIf="ab.data.castRange" class="ability-card__range">
+                  <i class="fas fa-crosshairs"></i> {{ ab.data.castRange }}
+                </span>
+              </div>
+            </div>
+            <p class="ability-card__desc">{{ ab.data.description }}</p>
+            <div
+              *ngIf="statValues(ab.data.values).length"
+              class="ability-card__values"
+            >
+              <div
+                *ngFor="let sv of statValues(ab.data.values)"
+                class="ability-val"
+              >
+                <span class="ability-val__key">{{
+                  sv.key.split('_').join(' ')
+                }}</span>
+                <span class="ability-val__val">{{ sv.val }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

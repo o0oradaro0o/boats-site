@@ -1,0 +1,610 @@
+{
+  "ships": [
+    {
+      "key": "npc_dota_hero_tiny_battleship8d",
+      "name": "Starter Boat",
+      "icon": "starter_boat",
+      "tier": 0,
+      "price": 0,
+      "heroImage": null,
+      "hp": 300,
+      "hpRegen": 1,
+      "speed": 225,
+      "turnRate": 0.7,
+      "bountyGold": 74,
+      "abilities": ["bail_water", "tighten_hoop"]
+    },
+    {
+      "key": "npc_dota_hero_abaddon_battleship8d",
+      "name": "Barrel",
+      "icon": "barrel",
+      "tier": 0,
+      "price": 0,
+      "heroImage": "barrel.png",
+      "hp": 300,
+      "hpRegen": 1,
+      "speed": 225,
+      "turnRate": 0.7,
+      "bountyGold": 74,
+      "abilities": ["bail_water", "tighten_hoop"]
+    },
+    {
+      "key": "npc_dota_hero_rubick_battleship8d",
+      "name": "Catamaran",
+      "icon": "catamaran",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": null,
+      "hp": 600,
+      "hpRegen": 8,
+      "speed": 285,
+      "turnRate": 0.3,
+      "bountyGold": 124,
+      "abilities": [
+        "mirana_leap_battlsehip",
+        "windrunner_powershot_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_crystal_maiden_battleship8d",
+      "name": "Canoe",
+      "icon": "canoe",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": "npc_dota_hero_crystal_maiden.png",
+      "hp": 800,
+      "hpRegen": 5,
+      "speed": 290,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "war_drumbs_battleship",
+        "might_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_phantom_lancer_battleship8d",
+      "name": "Airboat",
+      "icon": "airboat",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": "npc_dota_hero_phantom_lancer.png",
+      "hp": 900,
+      "hpRegen": 6,
+      "speed": 310,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "swamp_gas_battleship",
+        "fan_blast_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "crab_ship",
+      "name": "Crab",
+      "icon": "crab",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": null,
+      "hp": 900,
+      "hpRegen": 5,
+      "speed": 280,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": ["crab_walk", "crab_grab", "batten_hatches"]
+    },
+    {
+      "key": "npc_dota_hero_puck_battleship8d",
+      "name": "Zodiac",
+      "icon": "zodiac",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": null,
+      "hp": 925,
+      "hpRegen": 6,
+      "speed": 290,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "dive_battleship",
+        "ramming_speed_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_batrider_battleship8d",
+      "name": "Dinghy",
+      "dbName": "Whaling Dinghy",
+      "icon": "whaling_dinghy",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": "npc_dota_hero_batrider.png",
+      "hp": 1000,
+      "hpRegen": 2,
+      "speed": 300,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "harpoon_battleship",
+        "wale_bait_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_tidehunter_battleship8d",
+      "name": "Pontoon",
+      "dbName": "Pontoon Boat",
+      "icon": "pontoon_boat",
+      "tier": 1,
+      "price": 1000,
+      "heroImage": "npc_dota_hero_tidehunter.png",
+      "hp": 1150,
+      "hpRegen": 6,
+      "speed": 280,
+      "turnRate": 0.3,
+      "bountyGold": 124,
+      "abilities": [
+        "head_above_water_battleship",
+        "meepo_earthbind_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_nevermore_battleship8d",
+      "name": "Plane",
+      "dbName": "Broken Sea Plane",
+      "icon": "broken_sea_plane",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": "npc_dota_hero_nevermore.png",
+      "hp": 2250,
+      "hpRegen": 16,
+      "speed": 320,
+      "turnRate": 0.3,
+      "bountyGold": 299,
+      "abilities": [
+        "plane_fly_battleship",
+        "ruse_battleship",
+        "mayday_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_morphling_battleship8d",
+      "name": "Speed Boat",
+      "icon": "speed_boat",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": null,
+      "hp": 2400,
+      "hpRegen": 15,
+      "speed": 350,
+      "turnRate": 0.5,
+      "bountyGold": 299,
+      "abilities": ["speed_boat_wave", "gun_it", "swim_battleship"]
+    },
+    {
+      "key": "npc_dota_hero_storm_spirit_battleship8d",
+      "name": "Junk Boat",
+      "dbName": "Junk Ship",
+      "icon": "junk_ship",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": "npc_dota_hero_storm_spirit.png",
+      "hp": 2550,
+      "hpRegen": 14,
+      "speed": 330,
+      "turnRate": 0.5,
+      "bountyGold": 299,
+      "abilities": [
+        "cloud_dragon_lua",
+        "firework_battleship",
+        "nav_hack_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_brewmaster_battleship",
+      "name": "River Boat",
+      "dbName": "Riverboat",
+      "icon": "riverboat",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": "npc_dota_hero_brewmaster.png",
+      "hp": 2600,
+      "hpRegen": 13,
+      "speed": 290,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "gamble_cherry_one",
+        "gamble_bell_one",
+        "gamble_seven_one",
+        "gamble"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_kunkka_bships",
+      "name": "Shore Guard",
+      "icon": "shore_guard",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": "kunkka.png",
+      "hp": 2700,
+      "hpRegen": 17,
+      "speed": 300,
+      "turnRate": 0.7,
+      "bountyGold": 299,
+      "abilities": [
+        "kunkka_torrent_bships",
+        "coast_heal_battleship",
+        "no_fire_zone"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_lion_battleship8d",
+      "name": "Yacht",
+      "icon": "yacht",
+      "tier": 2,
+      "price": 3000,
+      "heroImage": "npc_dota_hero_lion.png",
+      "hp": 2800,
+      "hpRegen": 12,
+      "speed": 330,
+      "turnRate": 0.7,
+      "bountyGold": 299,
+      "abilities": [
+        "doom_bringer_scorched_earth_battleship",
+        "keeping_up_battleship",
+        "drop_craft"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_jakiro_battleship8d",
+      "name": "Galleon",
+      "icon": "galleon",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "npc_dota_hero_jakiro.png",
+      "hp": 5700,
+      "hpRegen": 20,
+      "speed": 360,
+      "turnRate": 0.5,
+      "bountyGold": 524,
+      "abilities": [
+        "sniper_shrapnel_battleship",
+        "hit_battleship",
+        "sniper_assassinate_battleship"
+      ]
+    },
+    {
+      "key": "fail_ship",
+      "name": "Fail Ship",
+      "icon": "fail_boat",
+      "tier": 3,
+      "price": 3000,
+      "heroImage": null,
+      "hp": 2500,
+      "hpRegen": 18,
+      "speed": 300,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "terrorblade_metamorphosis_datadriven",
+        "speed_shift",
+        "vengefulspirit_nether_swap_datadriven"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_brewmaster_battleship8d",
+      "name": "House Boat",
+      "icon": "house_boat",
+      "tier": 3,
+      "price": 6000,
+      "heroImage": "brewmaster.png",
+      "hp": 5600,
+      "hpRegen": 20,
+      "speed": 350,
+      "turnRate": 0.5,
+      "bountyGold": 524,
+      "abilities": [
+        "discoship_battleship",
+        "fun_battleship",
+        "riki_blink_strike_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_marci_battleship8d",
+      "name": "Science Ship",
+      "icon": "science_ship",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "npc_dota_hero_marci.png",
+      "hp": 5000,
+      "hpRegen": 25,
+      "speed": 360,
+      "turnRate": 0.5,
+      "bountyGold": 525,
+      "abilities": [
+        "pistols_battleship",
+        "deadline_battleship",
+        "abaddon_aphotic_shield_battleship",
+        "deploy_science_tower"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_zuus_battleship8d",
+      "name": "Tug Boat",
+      "icon": "tug_boat",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": "npc_dota_hero_ember_spirit.png",
+      "hp": 9500,
+      "hpRegen": 20,
+      "speed": 380,
+      "turnRate": 0.7,
+      "bountyGold": 799,
+      "abilities": [
+        "timber_chain_lua",
+        "pudge_meat_hook_lua",
+        "shove_battleship",
+        "batrider_flaming_lasso_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_magnus_battleship8d",
+      "name": "Viking Warship",
+      "icon": "viking_warship",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "npc_dota_hero_slark.png",
+      "hp": 5500,
+      "hpRegen": 100,
+      "speed": 350,
+      "turnRate": 0.5,
+      "bountyGold": 525,
+      "abilities": [
+        "pistols_battleship",
+        "spirit_breaker_charge_of_darkness_battleship",
+        "Pillage",
+        "big_boom"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_shredder_forreal_battleship8d",
+      "name": "Ironclad",
+      "dbName": "Ironclad Gunship",
+      "icon": "ironclad_gunship",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "shredder.png",
+      "hp": 6200,
+      "hpRegen": 60,
+      "speed": 330,
+      "turnRate": 0.3,
+      "bountyGold": 525,
+      "abilities": [
+        "port_cannons",
+        "bow_cannon",
+        "starboard_cannon",
+        "ironclad_weapon_fire",
+        "ironclad_heavy_armor",
+        "ironclad_cannon_barrage"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_shredder_battleship8d",
+      "name": "Submarine",
+      "icon": "submarine",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "npc_dota_hero_sniper.png",
+      "hp": 4900,
+      "hpRegen": 20,
+      "speed": 270,
+      "turnRate": 0.6,
+      "bountyGold": 525,
+      "abilities": [
+        "pistols_battleship",
+        "tidehunter_gush_battleship",
+        "peak_battleship",
+        "submerge_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_visage_battleship8d",
+      "name": "Noah's Ark",
+      "dbName": "Noahs Ark",
+      "icon": "noahs_ark",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": null,
+      "hp": 11000,
+      "hpRegen": 20,
+      "speed": 390,
+      "turnRate": 0.3,
+      "bountyGold": 799,
+      "abilities": [
+        "monkey_buisness",
+        "raven_battleship",
+        "noah_guardian_angel_datadriven",
+        "mountain_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_gyrocopter_battleship8d",
+      "name": "Aircraft Carrier",
+      "icon": "aircraft_carrier",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": "gyrocopter.png",
+      "hp": 12000,
+      "hpRegen": 20,
+      "speed": 360,
+      "turnRate": 0.3,
+      "bountyGold": 799,
+      "abilities": [
+        "turret_battleship",
+        "launch_craft",
+        "launch_all",
+        "Over_And_Out"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_spectre_battleship8d",
+      "name": "Battleship",
+      "icon": "battleship",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": "npc_dota_hero_tusk.png",
+      "hp": 10000,
+      "hpRegen": 20,
+      "speed": 375,
+      "turnRate": 0.6,
+      "bountyGold": 799,
+      "abilities": [
+        "antimage_blink_battleship",
+        "miss_lua",
+        "disruptor_kinetic_field_battleship",
+        "gyrocopter_call_down_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_windrunner_battleship8d",
+      "name": "Construction Ship",
+      "icon": "construction_ship",
+      "tier": 2,
+      "price": 6000,
+      "heroImage": "npc_dota_hero_windrunner.png",
+      "hp": 5000,
+      "hpRegen": 20,
+      "speed": 350,
+      "turnRate": 0.6,
+      "bountyGold": 525,
+      "abilities": [
+        "pistols_battleship",
+        "into_the_hold",
+        "salvage_battleship",
+        "shadow_shaman_shackles_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_wisp_battleship8d",
+      "name": "Ice Ship",
+      "dbName": "Ice Breaker",
+      "icon": "ice_breaker",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": "npc_dota_hero_pugna.png",
+      "hp": 9200,
+      "hpRegen": 20,
+      "speed": 380,
+      "turnRate": 0.6,
+      "bountyGold": 799,
+      "abilities": [
+        "jakiro_ice_path_battleship",
+        "iceberg_battleship",
+        "icy_waters_battleship",
+        "crystal_maiden_freezing_field_battleship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_razor_battleship8d",
+      "name": "Stormchaser",
+      "dbName": "Stormchaser Hydrofoil",
+      "icon": "stormchaser_hydrofoil",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": "npc_dota_hero_razor.png",
+      "hp": 8900,
+      "hpRegen": 20,
+      "speed": 300,
+      "turnRate": 0.5,
+      "bountyGold": 799,
+      "abilities": [
+        "static_link_lua",
+        "ball_lightning_lua",
+        "electric_bounce_lua",
+        "thunder_storm"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_wisp2_battleship8d",
+      "name": "UFO",
+      "icon": "ufo",
+      "tier": 3,
+      "price": 12000,
+      "heroImage": null,
+      "hp": 9200,
+      "hpRegen": 20,
+      "speed": 380,
+      "turnRate": 0.6,
+      "bountyGold": 799,
+      "abilities": [
+        "death_beam_fire_lua",
+        "we_come_in_peace_battleship",
+        "ufo_invis",
+        "tractor_beam"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_vengefulspirit_battleship8d",
+      "name": "Phoenician",
+      "icon": "phoenician",
+      "tier": 3,
+      "price": 750,
+      "heroImage": "npc_dota_hero_vengefulspirit.png",
+      "hp": 450,
+      "hpRegen": 5,
+      "speed": 300,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "pistols_battleship",
+        "estab_route",
+        "Trade_hide_battleship",
+        "batten_hatches"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_enigma_battleship8d",
+      "name": "Ghost Ship",
+      "dbName": "Ghost",
+      "icon": "ghost",
+      "tier": 3,
+      "price": 8000,
+      "heroImage": "npc_dota_hero_enigma.png",
+      "hp": 5500,
+      "hpRegen": 18,
+      "speed": 360,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "instill_terror",
+        "estab_route",
+        "go_daralect",
+        "ghost_ship"
+      ]
+    },
+    {
+      "key": "npc_dota_hero_bane_battleship8d",
+      "name": "Cargo",
+      "icon": "cargo",
+      "tier": 3,
+      "price": 4000,
+      "heroImage": "npc_dota_hero_bane.png",
+      "hp": 2200,
+      "hpRegen": 10,
+      "speed": 325,
+      "turnRate": 0.7,
+      "bountyGold": 124,
+      "abilities": [
+        "pistols_battleship",
+        "estab_route",
+        "swap_mission",
+        "dump_cargo"
+      ]
+    }
+  ]
+}

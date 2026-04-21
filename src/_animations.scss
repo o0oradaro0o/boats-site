@@ -1,0 +1,66 @@
+@keyframes riseFromWater {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 6px rgba(74, 123, 247, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 22px rgba(74, 123, 247, 0.85);
+  }
+}
+
+@keyframes glowPulseText {
+  0%,
+  100% {
+    text-shadow: 0 0 4px rgba(74, 123, 247, 0.4);
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(74, 123, 247, 0.95);
+  }
+}
+
+@keyframes waveDrift {
+  0% {
+    background-position: 0 bottom;
+  }
+  100% {
+    background-position: 120px bottom;
+  }
+}
+
+@keyframes strokeDraw {
+  from {
+    stroke-dashoffset: var(--circumference, 100);
+  }
+  to {
+    stroke-dashoffset: var(--dash-offset, 50);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}

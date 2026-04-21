@@ -1,0 +1,26 @@
+$foam: #d4edf7;
+$accent: #4a7bf7;
+$south: #ff9b47;
+
+.purchase-team {
+  margin-bottom: 1.25rem;
+}
+
+.purchase-team__header {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding-bottom: 0.35rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid;
+
+  &--north {
+    color: #7ba7ff;
+    border-color: rgba($accent, 0.22);
+  }
+  &--south {
+    color: #ffba7f;
+    border-color: rgba($south, 0.22);
+  }
+}

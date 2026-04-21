@@ -1,14 +1,28 @@
 <app-page-banner text="Game Stats"></app-page-banner>
 
-<div class="bg-blue-200">
-  <div class="container py-3 text-white">
-    <games-summary [SimpleGamesList]="MoreGames | async"></games-summary>
+<ng-container *ngIf="Games$ | async as data; else loading">
+  <div class="ocean-section-mid">
+    <div class="container py-3">
+      <games-summary [SimpleGamesList]="data"></games-summary>
+    </div>
   </div>
-</div>
 
-<div class="bg-gray-vertical-emboss py-5">
-  <div class="container">
-    <h4 class="mb-4">Recent Games</h4>
-    <games-list [SimpleGamesList]="GamesThisWeek | async"></games-list>
+  <div class="ocean-section py-5">
+    <div class="container">
+      <h4 class="mb-4">Recent Games</h4>
+      <games-list [SimpleGamesList]="data"></games-list>
+    </div>
   </div>
-</div>
+</ng-container>
+
+<ng-template #loading>
+  <div class="ocean-section py-5">
+    <div
+      class="container d-flex flex-column align-items-center py-5"
+      style="gap: 1rem"
+    >
+      <mat-spinner diameter="40"></mat-spinner>
+      <span class="loading-label">Loading games...</span>
+    </div>
+  </div>
+</ng-template>

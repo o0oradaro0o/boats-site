@@ -1,0 +1,77 @@
+// Weapon type accent colors
+$weapon-fire: #ff6b35;
+$weapon-ice: #4fc3f7;
+$weapon-poison: #7ec850;
+$weapon-plasma: #ce93d8;
+$weapon-wind: #80deea;
+$weapon-coal: #a1887f;
+$weapon-chaos: #ff8a65;
+$weapon-breach: #ffd54f;
+$weapon-spin: #f48fb1;
+$weapon-light: #fff176;
+$weapon-spread: #b0bec5;
+$weapon-iron: #90a4ae;
+
+// Tier accent colors
+$tier-0-color: #8a8a8a;
+$tier-1-color: #cd853f;
+$tier-2-color: #c0c0c0;
+$tier-3-color: #ffd700;
+
+$weapon-types: (
+  fire: $weapon-fire,
+  ice: $weapon-ice,
+  poison: $weapon-poison,
+  plasma: $weapon-plasma,
+  wind: $weapon-wind,
+  coal: $weapon-coal,
+  chaos: $weapon-chaos,
+  breach: $weapon-breach,
+  spin: $weapon-spin,
+  light: $weapon-light,
+  spread: $weapon-spread,
+  iron: $weapon-iron,
+);
+
+@each $type, $color in $weapon-types {
+  .weapon-type-#{$type} {
+    --weapon-color: #{$color};
+
+    .weapon-type-bar {
+      background: $color;
+    }
+    .weapon-type-label {
+      color: $color;
+    }
+    .weapon-type-border {
+      border-left: 3px solid $color !important;
+    }
+  }
+}
+
+.tier-badge-0 {
+  color: $tier-0-color;
+  border-color: $tier-0-color;
+}
+.tier-badge-1 {
+  color: $tier-1-color;
+  border-color: $tier-1-color;
+}
+.tier-badge-2 {
+  color: $tier-2-color;
+  border-color: $tier-2-color;
+}
+.tier-badge-3 {
+  color: $tier-3-color;
+  border-color: $tier-3-color;
+}
+
+.tier-glow-1 {
+  box-shadow: 0 0 0 1px rgba($tier-1-color, 0.4);
+}
+.tier-glow-2 {
+  box-shadow: 0 0 0 1px rgba($tier-2-color, 0.4);
+}
+.tier-glow-3 {
+  box-shadow: 0 0 0 1px rgba($tier-3-color, 0.5);
+}

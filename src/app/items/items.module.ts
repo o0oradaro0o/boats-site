@@ -9,6 +9,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -24,7 +25,8 @@ const itemsRoutes: Routes = [{ path: '', component: ItemsComponent }];
     MatListModule,
     MatSortModule,
     MatCheckboxModule,
-    SharedModule
-  ]
+    MatProgressSpinnerModule,
+    SharedModule,
+  ],
 })
 export class ItemsModule {}

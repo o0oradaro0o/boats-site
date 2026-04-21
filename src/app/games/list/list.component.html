@@ -1,54 +1,49 @@
-<table
-  class="table table-striped table-hover small"
-  matSort
-  (matSortChange)="sortData($event)"
->
-  <thead class="bg-gray-100 text-gray-500">
-    <tr>
-      <th mat-sort-header="dateProcessed">Result</th>
-      <th mat-sort-header="numPlayers">Players</th>
-      <th mat-sort-header="CoOp">Game Mode</th>
-      <th mat-sort-header="gameDuration">Duration</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr
-      class="innerRow"
-      *ngFor="let game of sortedData"
-      (click)="handleClick(game.matchID)"
-    >
-      <ng-container *ngIf="showRow(game)">
-        <td>
-          <strong
-            [ngClass]="{
-              'north-empire-color': game.wn === 'North',
-              'south-empire-color': game.wn === 'South'
-            }"
-            >{{ game.wn }} Victory</strong
+<div class="game-list">
+  <div
+    *ngFor="let game of sortedData"
+    class="game-row ocean-panel"
+    (click)="handleClick(game.matchID)"
+  >
+    <ng-container *ngIf="showRow(game)">
+      <div class="game-row__result">
+        <span
+          class="victory-badge"
+          [ngClass]="game.wn === 'North' ? 'victory-north' : 'victory-south'"
+          >{{ game.wn }}</span
+        >
+        <span class="game-row__ago">{{ game.dateProcessed | howLongAgo }}</span>
+      </div>
+
+      <div class="game-row__stat" *ngIf="game.numPlayers">
+        <span class="game-row__val">{{ game.numPlayers }}</span>
+        <span class="game-row__lbl">players</span>
+      </div>
+
+      <div class="game-row__mode">
+        <span
+          class="mode-badge"
+          [class.mode-coop]="game.settings?.coOp || game.coOp"
+          >{{ game.settings?.coOp || game.coOp ? 'Co-Op' : 'Normal' }}</span
+        >
+        <div class="mode-tags">
+          <span *ngIf="game.settings?.battle || game.battle" class="mode-tag"
+            >Battle</span
           >
-          <div>{{ game.dateProcessed | howLongAgo }}</div>
-        </td>
-        <td *ngIf="game.numPlayers">{{ game.numPlayers }}</td>
-        <td *ngIf="game.settings">
-          <div>
-            <strong>{{ game.settings.coOp ? 'Co-Op' : 'Normal' }}</strong>
-          </div>
-          <div>
-            <small>
-              {{ game.settings.battle ? 'Battle' : '' }}
-              {{ game.settings.battle && game.settings.trading ? '-' : '' }}
-              {{ game.settings.trading ? 'Trading' : '' }}
-            </small>
-          </div>
-        </td>
-        <td>
-          {{ game.gameDuration }}
+          <span *ngIf="game.settings?.trading || game.trading" class="mode-tag"
+            >Trading</span
+          >
+        </div>
+      </div>
+
+      <div class="game-row__duration">
+        <span class="game-row__val">{{ game.gameDuration }}</span>
+        <div class="duration-bar">
           <div
-            class="duration-segment"
-            [ngStyle]="{ width: getDurationPercent(game.gameDuration) }"
+            class="duration-bar__fill"
+            [style.width]="getDurationPercent(game.gameDuration)"
           ></div>
-        </td>
-      </ng-container>
-    </tr>
-  </tbody>
-</table>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

@@ -7,6 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatListModule } from '@angular/material/list';
 import { MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { GamesComponent } from './games.component';
 import { GamesSummaryComponent } from './summary/summary.component';
 import { GamesListComponent } from './list/list.component';
@@ -25,7 +26,7 @@ import { SharedModule } from '../shared/shared.module';
 
 const GamesRoutes: Routes = [
   { path: '', component: GamesComponent },
-  { path: ':id', component: GameComponent }
+  { path: ':id', component: GameComponent },
 ];
 
 @NgModule({
@@ -40,7 +41,7 @@ const GamesRoutes: Routes = [
     PlayerSnapshotComponent,
     EndGameTableComponent,
     PurchaseLogComponent,
-    PlayerPurchaseHistoryComponent
+    PlayerPurchaseHistoryComponent,
   ],
   imports: [
     CommonModule,
@@ -51,8 +52,9 @@ const GamesRoutes: Routes = [
     MatListModule,
     MatSortModule,
     MatCheckboxModule,
+    MatProgressSpinnerModule,
     PipesModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
 })
 export class GamesModule {}
