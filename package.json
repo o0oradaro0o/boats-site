@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "parse-game-data": "node scripts/parse-game-data.js",
-    "deploy": "ng build --configuration production && angular-cli-ghpages --branch devlop"
+    "deploy": "ng build --configuration production && angular-cli-ghpages --branch gh-pages"
   },
   "private": true,
   "prettier": {
