@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, combineLatest } from 'rxjs';
 import { takeUntil, switchMap, map } from 'rxjs/operators';
-import { GameDataService } from '../../game-data.service';
+import { GameDataService, LocalizationMap } from '../../game-data.service';
 import { DataGrabberService } from '../../data-grabber.service';
 import { ShipData, AbilityData } from '../../models/game-data.models';
 import { ItemRecord } from '../../models/player-item-record';
@@ -31,6 +31,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   circumference = 2 * Math.PI * 30;
   dashOffset = 0;
 
+  private localization: LocalizationMap = {};
   private destroy$ = new Subject<void>();
 
   constructor(
@@ -40,6 +41,10 @@ export class DetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.gameDataService.getLocalization().subscribe((loc) => {
+      this.localization = loc;
+    });
+
     this.route.paramMap
       .pipe(
         takeUntil(this.destroy$),
@@ -102,16 +107,55 @@ export class DetailComponent implements OnInit, OnDestroy {
 
   get iconUrl(): string {
     if (!this.ship) return '';
-    return `assets/boat-icons/${this.ship.icon}.png`;
+    return `/assets/boat-icons/${this.ship.icon}.png`;
   }
 
   get heroUrl(): string | null {
     return this.ship?.heroImage
-      ? `assets/game-data/images/heroes/${this.ship.heroImage}`
+      ? `/assets/game-data/images/heroes/${this.ship.heroImage}`
       : null;
   }
 
   statValues(values: Record<string, string>): { key: string; val: string }[] {
     return Object.entries(values).map(([key, val]) => ({ key, val }));
+  }
+
+  /** Look up an ability's display name in addon_english. */
+  abilityName(key: string): string {
+    const loc = this.localization;
+    return (
+      loc[`DOTA_Tooltip_Ability_${key}`] ??
+      loc[`DOTA_Tooltip_ability_${key}`] ??
+      key.split('_').join(' ')
+    );
+  }
+
+  /** Look up an ability's description in addon_english and convert \n to HTML <br>. */
+  abilityDescription(ab: AbilityEntry): string {
+    const loc = this.localization;
+    const desc = (
+      loc[`DOTA_Tooltip_ability_${ab.key}_Description`] ??
+      loc[`DOTA_Tooltip_ability_${ab.key}_description`] ??
+      ab.data.description
+    );
+    return desc.replace(/\\n/g, '<br>');
+  }
+
+  /** Format a leveled value like "16.0 14.0 12.0 10.0s" → "16.0 / 14.0 / 12.0 / 10.0s". */
+  formatLeveledValue(val: string | number): string {
+    const str = String(val);
+    const parts = str.split(/\s+/);
+    if (parts.length <= 1) return str;
+    return parts.join(' / ');
+  }
+
+  /** Look up a stat value label in addon_english. */
+  statLabel(abilityKey: string, statKey: string): string {
+    const loc = this.localization;
+    return (
+      loc[`DOTA_Tooltip_ability_${abilityKey}_${statKey}`] ??
+      loc[`DOTA_Tooltip_Ability_${abilityKey}_${statKey}`] ??
+      statKey.split('_').join(' ')
+    );
   }
 }

@@ -1,18 +1,21 @@
 $foam: #d4edf7;
 $accent: #4a7bf7;
+$gold: #fffaa3;
+$gold-glow: rgba(255, 250, 163, 0.15);
 
 .player-table {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.5rem;
 }
 
 .player-row {
-  display: flex;
+  display: grid;
+  grid-template-columns: 90px minmax(110px, 1fr) 55px 90px 72px 90px 90px 85px;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.45rem 0.7rem;
-  border-radius: 4px;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 5px;
   background: rgba($foam, 0.025);
   border: 1px solid rgba($foam, 0.06);
   cursor: pointer;
@@ -31,21 +34,19 @@ $accent: #4a7bf7;
 }
 
 .ship-icon {
-  width: 62px;
-  height: 32px;
+  width: 90px;
+  height: 48px;
   object-fit: contain;
-  image-rendering: pixelated;
 }
 
 .player-row__name {
-  flex: 1;
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
 .player-name {
-  font-size: 0.82rem;
+  font-size: 1rem;
   font-weight: 600;
   color: $foam;
   white-space: nowrap;
@@ -54,36 +55,61 @@ $accent: #4a7bf7;
 }
 
 .player-ship-name {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   color: rgba($foam, 0.32);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .player-row__stat {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-width: 50px;
   text-align: center;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .stat-val {
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 600;
   color: $foam;
-  line-height: 1.1;
+  line-height: 1.2;
 }
 
 .stat-sep {
   color: rgba($foam, 0.28);
-  margin: 0 0.1rem;
+  margin: 0 0.2rem;
 }
 
 .stat-lbl {
-  font-size: 0.53rem;
+  font-size: 0.62rem;
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: rgba($foam, 0.28);
+}
+
+// ── stat leader highlight ────────────────────────────────────────────
+
+.stat-trophy-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.trophy-icon {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  filter: brightness(1.3) drop-shadow(0 0 3px rgba(255, 250, 163, 0.5));
+  flex-shrink: 0;
+}
+
+// Gold highlight on the stat value when it has a trophy
+.stat-trophy-wrap:has(.trophy-icon) {
+  color: $gold;
+  text-shadow: 0 0 8px $gold-glow;
 }

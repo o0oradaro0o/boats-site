@@ -19,6 +19,15 @@ export class PlayerSnapshotComponent implements OnInit, OnChanges {
   sortedData: GameDetail[];
   northTeamData: GameDetail[];
   southTeamData: GameDetail[];
+
+  // ── overall best-in-game stat leaders ────────────────────────────────
+  bestKills = new Set<string>();
+  bestDeaths = new Set<string>();
+  bestLastHits = new Set<string>();
+  bestHeroDmg = new Set<string>();
+  bestTanked = new Set<string>();
+  bestBldgDmg = new Set<string>();
+
   constructor() {}
 
   ngOnInit() {}
@@ -38,11 +47,47 @@ export class PlayerSnapshotComponent implements OnInit, OnChanges {
           this.playersList.push(player);
         });
       }
-      // console.log(this.playersList.length);
-      // console.log(this.DetailGamesList.Content.length);
       const data = this.playersList.slice();
       this.northTeamData = data.filter(playerData => playerData.tm === 'North');
       this.southTeamData = data.filter(playerData => playerData.tm === 'South');
+      this.computeBestStats(data);
+    }
+  }
+
+  private computeBestStats(allPlayers: GameDetail[]) {
+    this.bestKills.clear();
+    this.bestDeaths.clear();
+    this.bestLastHits.clear();
+    this.bestHeroDmg.clear();
+    this.bestTanked.clear();
+    this.bestBldgDmg.clear();
+
+    if (!allPlayers.length) return;
+
+    let maxKills = -Infinity;
+    let minDeaths = Infinity;
+    let maxLH = -Infinity;
+    let maxHeroDmg = -Infinity;
+    let maxTanked = -Infinity;
+    let maxBldgDmg = -Infinity;
+
+    for (const p of allPlayers) {
+      if (+p.kls > maxKills) maxKills = +p.kls;
+      if (+p.dth < minDeaths) minDeaths = +p.dth;
+      if (+p.lh > maxLH) maxLH = +p.lh;
+      if (+p.HeroDamage > maxHeroDmg) maxHeroDmg = +p.HeroDamage;
+      if (+p.damageTanked > maxTanked) maxTanked = +p.damageTanked;
+      if (+p.buildingDamage > maxBldgDmg) maxBldgDmg = +p.buildingDamage;
+    }
+
+    for (const p of allPlayers) {
+      const id = p.playerID;
+      if (+p.kls === maxKills) this.bestKills.add(id);
+      if (+p.dth === minDeaths) this.bestDeaths.add(id);
+      if (+p.lh === maxLH) this.bestLastHits.add(id);
+      if (+p.HeroDamage === maxHeroDmg) this.bestHeroDmg.add(id);
+      if (+p.damageTanked === maxTanked) this.bestTanked.add(id);
+      if (+p.buildingDamage === maxBldgDmg) this.bestBldgDmg.add(id);
     }
   }
 

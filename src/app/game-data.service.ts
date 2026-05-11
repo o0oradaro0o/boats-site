@@ -11,11 +11,14 @@ import {
   WeaponData,
 } from './models/game-data.models';
 
+export type LocalizationMap = Record<string, string>;
+
 @Injectable({ providedIn: 'root' })
 export class GameDataService {
   private ships$: Observable<ShipData[]>;
   private items$: Observable<ItemsJson>;
   private abilities$: Observable<AbilitiesJson>;
+  private localization$: Observable<LocalizationMap>;
 
   constructor(private http: HttpClient) {
     this.ships$ = this.http.get<ShipsJson>('/assets/game-data/ships.json').pipe(
@@ -33,6 +36,13 @@ export class GameDataService {
 
     this.abilities$ = this.http
       .get<AbilitiesJson>('/assets/game-data/abilities.json')
+      .pipe(
+        catchError(() => of({})),
+        shareReplay(1),
+      );
+
+    this.localization$ = this.http
+      .get<LocalizationMap>('/assets/game-data/localization.json')
       .pipe(
         catchError(() => of({})),
         shareReplay(1),
@@ -56,6 +66,11 @@ export class GameDataService {
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/^-|-$/g, '') === slug.toLowerCase() ||
+            (s.dbName &&
+              s.dbName
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '') === slug.toLowerCase()) ||
             s.icon === slug.toLowerCase(),
         ),
       ),
@@ -82,6 +97,27 @@ export class GameDataService {
 
   getAbility(key: string): Observable<AbilityData | undefined> {
     return this.abilities$.pipe(map((abs) => abs[key]));
+  }
+
+  /** Load the localization map from addon_english.txt */
+  getLocalization(): Observable<LocalizationMap> {
+    return this.localization$;
+  }
+
+  /**
+   * Build a shipIconMap from ShipData[].
+   * Maps both `name` and `dbName` (if present) to the icon filename stem,
+   * so API responses that return the full display name still resolve.
+   */
+  buildShipIconMap(ships: ShipData[]): Map<string, string> {
+    const map = new Map<string, string>();
+    for (const s of ships) {
+      map.set(s.name.trim().toLowerCase(), s.icon);
+      if (s.dbName) {
+        map.set(s.dbName.trim().toLowerCase(), s.icon);
+      }
+    }
+    return map;
   }
 
   getAllGameData(): Observable<{

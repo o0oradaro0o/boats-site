@@ -26,9 +26,7 @@ export class PurchaseLogComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.gameData.getShips().subscribe((ships: ShipData[]) => {
-      ships.forEach((s) =>
-        this.shipIconMap.set(s.name.trim().toLowerCase(), s.icon),
-      );
+      this.shipIconMap = this.gameData.buildShipIconMap(ships);
       this.iconsLoaded = true;
       if (this.playerDetails) {
         this.buildPlayers(this.playerDetails);

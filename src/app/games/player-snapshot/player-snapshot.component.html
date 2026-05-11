@@ -4,7 +4,15 @@
       <span class="team-badge">North Empire</span>
       <span class="team-count">{{ northTeamData.length }} players</span>
     </div>
-    <app-end-game-table [playerData]="northTeamData"></app-end-game-table>
+    <app-end-game-table
+      [playerData]="northTeamData"
+      [bestKills]="bestKills"
+      [bestDeaths]="bestDeaths"
+      [bestLastHits]="bestLastHits"
+      [bestHeroDmg]="bestHeroDmg"
+      [bestTanked]="bestTanked"
+      [bestBldgDmg]="bestBldgDmg"
+    ></app-end-game-table>
   </div>
 
   <div class="team-section" *ngIf="southTeamData && southTeamData.length > 0">
@@ -12,6 +20,14 @@
       <span class="team-badge">South Empire</span>
       <span class="team-count">{{ southTeamData.length }} players</span>
     </div>
-    <app-end-game-table [playerData]="southTeamData"></app-end-game-table>
+    <app-end-game-table
+      [playerData]="southTeamData"
+      [bestKills]="bestKills"
+      [bestDeaths]="bestDeaths"
+      [bestLastHits]="bestLastHits"
+      [bestHeroDmg]="bestHeroDmg"
+      [bestTanked]="bestTanked"
+      [bestBldgDmg]="bestBldgDmg"
+    ></app-end-game-table>
   </div>
 </div>

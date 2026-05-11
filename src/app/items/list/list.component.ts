@@ -14,7 +14,7 @@ import { Sort } from '@angular/material/sort';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { GameDataService } from '../../game-data.service';
+import { GameDataService, LocalizationMap } from '../../game-data.service';
 import {
   WeaponData,
   HullData,
@@ -63,10 +63,31 @@ function inferWeaponType(key: string): string {
   return 'unknown';
 }
 
+/** Format a weapon type string as a display label. */
+function formatWeaponType(type: string): string {
+  if (type.includes('_')) {
+    return type
+      .split('_')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join('/');
+  }
+  return type.charAt(0).toUpperCase() + type.slice(1);
+}
+
+/** Build a short nickname e.g. "Fire 2", "Ice Ult", "Spread/Plasma 1". */
+function weaponNickname(weaponData: WeaponData | null, weaponType: string | null): string | null {
+  if (!weaponType) return null;
+  const base = formatWeaponType(weaponType);
+  if (weaponData?.isUlt) return `${base} Ult`;
+  if (weaponData?.tier) return `${base} ${weaponData.tier}`;
+  return base;
+}
+
 export interface EnrichedItem {
   record: ItemRecord;
   iconUrl: string;
   weaponType: string | null;
+  weaponNickname: string | null;
   weaponData: WeaponData | null;
   hullData: HullData | null;
   category: 'weapon' | 'hull' | 'sail' | 'repair' | 'wood' | 'other';
@@ -88,13 +109,18 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   maxRange = 1;
 
   private gameItems: ItemsJson | null = null;
+  private localization: LocalizationMap = {};
   private condensed: ItemRecord[] = [];
   private destroy$ = new Subject<void>();
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private gameDataService: GameDataService,
-  ) {}
+  ) {
+    this.gameDataService.getLocalization().subscribe((loc) => {
+      this.localization = loc;
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.ItemRecordList && this.ItemRecordList) {
@@ -168,7 +194,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
           weaponType = inferWeaponType(key);
           category = 'weapon';
         }
-        return { record, iconUrl, weaponType, weaponData, hullData, category };
+        return { record, iconUrl, weaponType, weaponNickname: weaponNickname(weaponData, weaponType), weaponData, hullData, category };
       });
   }
 
@@ -218,6 +244,11 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   displayName(key: string): string {
+    // Try the full key first, then the short key
+    const localized = this.localization['DOTA_Tooltip_ability_' + key]
+      || this.localization['DOTA_Tooltip_ability_item_' + key];
+    if (localized) return localized;
+    // Fallback to the old heuristic
     return key
       .split('_')
       .join(' ')

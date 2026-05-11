@@ -20,13 +20,13 @@
           <img
             *ngIf="heroUrl"
             [src]="heroUrl"
-            [alt]="ship.name"
+            [alt]="ship.dbName ?? ship.name"
             class="detail-portrait__hero"
             (error)="$any($event.target).style.display = 'none'"
           />
           <img
             [src]="iconUrl"
-            [alt]="ship.name"
+            [alt]="ship.dbName ?? ship.name"
             class="detail-portrait__sprite"
             [class.detail-portrait__sprite--overlay]="heroUrl"
             (error)="$any($event.target).style.display = 'none'"
@@ -37,7 +37,7 @@
         </div>
 
         <div class="detail-title-block">
-          <h1 class="detail-name">{{ ship.name }}</h1>
+          <h1 class="detail-name">{{ ship.dbName ?? ship.name }}</h1>
         </div>
 
         <!-- Win/use rates -->
@@ -141,18 +141,16 @@
                 (error)="$any($event.target).style.opacity = '0'"
               />
               <div class="ability-card__title-block">
-                <span class="ability-card__name">{{
-                  ab.key.split('_').join(' ')
-                }}</span>
+                <span class="ability-card__name">{{ abilityName(ab.key) }}</span>
                 <span *ngIf="ab.data.cooldown" class="ability-card__cd">
-                  <i class="fas fa-clock"></i> {{ ab.data.cooldown }}s
+                  <i class="fas fa-clock"></i> {{ formatLeveledValue(ab.data.cooldown) }}s
                 </span>
                 <span *ngIf="ab.data.castRange" class="ability-card__range">
-                  <i class="fas fa-crosshairs"></i> {{ ab.data.castRange }}
+                  <i class="fas fa-crosshairs"></i> {{ formatLeveledValue(ab.data.castRange) }}
                 </span>
               </div>
             </div>
-            <p class="ability-card__desc">{{ ab.data.description }}</p>
+            <p class="ability-card__desc" [innerHTML]="abilityDescription(ab)"></p>
             <div
               *ngIf="statValues(ab.data.values).length"
               class="ability-card__values"
@@ -161,10 +159,8 @@
                 *ngFor="let sv of statValues(ab.data.values)"
                 class="ability-val"
               >
-                <span class="ability-val__key">{{
-                  sv.key.split('_').join(' ')
-                }}</span>
-                <span class="ability-val__val">{{ sv.val }}</span>
+                <span class="ability-val__key">{{ statLabel(ab.key, sv.key) }}</span>
+                <span class="ability-val__val">{{ formatLeveledValue(sv.val) }}</span>
               </div>
             </div>
           </div>

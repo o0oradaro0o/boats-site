@@ -12,6 +12,12 @@ import { ShipData } from 'src/app/models/game-data.models';
 })
 export class EndGameTableComponent implements OnInit {
   @Input() playerData: GameDetail[];
+  @Input() bestKills = new Set<string>();
+  @Input() bestDeaths = new Set<string>();
+  @Input() bestLastHits = new Set<string>();
+  @Input() bestHeroDmg = new Set<string>();
+  @Input() bestTanked = new Set<string>();
+  @Input() bestBldgDmg = new Set<string>();
   isSmallScreen: boolean;
   private shipIconMap = new Map<string, string>();
 
@@ -29,9 +35,7 @@ export class EndGameTableComponent implements OnInit {
         this.breakpointObserver.isMatched('(max-width: 599px)');
     });
     this.gameData.getShips().subscribe((ships: ShipData[]) => {
-      ships.forEach((s) =>
-        this.shipIconMap.set(s.name.trim().toLowerCase(), s.icon),
-      );
+      this.shipIconMap = this.gameData.buildShipIconMap(ships);
     });
   }
 

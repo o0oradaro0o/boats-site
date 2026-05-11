@@ -48,7 +48,7 @@ export class HomepageComponent implements OnInit {
   }
 
   shipSlug(ship: ShipData): string {
-    return ship.name
+    return (ship.dbName ?? ship.name)
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');

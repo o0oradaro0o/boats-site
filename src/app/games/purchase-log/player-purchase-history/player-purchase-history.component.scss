@@ -59,13 +59,13 @@ $accent: #4a7bf7;
   height: 32px;
   width: 62px;
   object-fit: contain;
-  image-rendering: pixelated;
 }
 
 .purchase-img--item {
   height: 32px;
   width: 32px;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: left center;
 }
 
 .purchase-time {

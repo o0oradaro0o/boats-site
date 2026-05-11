@@ -8,13 +8,14 @@
       <img
         [src]="getShipIcon(player.shp)"
         [alt]="player.shp"
+        [title]="player.shp"
         class="ship-icon"
       />
     </div>
 
     <div class="player-row__name">
-      <span class="player-name">{{ player.playerName }}</span>
-      <span class="player-ship-name">{{ player.shp }}</span>
+      <span class="player-name" [title]="player.playerName">{{ player.playerName }}</span>
+      <span class="player-ship-name" [title]="player.shp">{{ player.shp }}</span>
     </div>
 
     <div class="player-row__stat" *ngIf="!isSmallScreen">
@@ -23,31 +24,85 @@
     </div>
 
     <div class="player-row__stat">
-      <span class="stat-val"
-        >{{ player.kls }}<span class="stat-sep">/</span>{{ player.dth }}</span
-      >
+      <span class="stat-val">
+        <span class="stat-trophy-wrap">
+          {{ player.kls }}
+          <img
+            *ngIf="bestKills.has(player.playerID)"
+            src="/assets/stats/trophies/kills.png"
+            class="trophy-icon"
+            alt="Most kills"
+            title="Most Kills"
+          />
+        </span>
+        <span class="stat-sep">/</span>
+        <span class="stat-trophy-wrap">
+          {{ player.dth }}
+          <img
+            *ngIf="bestDeaths.has(player.playerID)"
+            src="/assets/stats/trophies/deaths.png"
+            class="trophy-icon"
+            alt="Fewest deaths"
+            title="Fewest Deaths"
+          />
+        </span>
+      </span>
       <span class="stat-lbl">K / D</span>
     </div>
 
     <div class="player-row__stat" *ngIf="!isSmallScreen">
-      <span class="stat-val">{{ player.lh }}</span>
+      <span class="stat-val stat-trophy-wrap">
+        {{ player.lh }}
+        <img
+          *ngIf="bestLastHits.has(player.playerID)"
+          src="/assets/stats/trophies/creeps.png"
+          class="trophy-icon"
+          alt="Most last hits"
+          title="Most Last Hits"
+        />
+      </span>
       <span class="stat-lbl">Last Hits</span>
     </div>
 
     <div class="player-row__stat" *ngIf="!isSmallScreen">
-      <span class="stat-val">{{ player.HeroDamage?.toLocaleString() }}</span>
+      <span class="stat-val stat-trophy-wrap">
+        {{ player.HeroDamage?.toLocaleString() }}
+        <img
+          *ngIf="bestHeroDmg.has(player.playerID)"
+          src="/assets/stats/trophies/herodmg.PNG"
+          class="trophy-icon"
+          alt="Most hero damage"
+          title="Most Hero Damage"
+        />
+      </span>
       <span class="stat-lbl">Hero Dmg</span>
     </div>
 
     <div class="player-row__stat" *ngIf="!isSmallScreen">
-      <span class="stat-val">{{ player.damageTanked?.toLocaleString() }}</span>
+      <span class="stat-val stat-trophy-wrap">
+        {{ player.damageTanked?.toLocaleString() }}
+        <img
+          *ngIf="bestTanked.has(player.playerID)"
+          src="/assets/stats/trophies/tank.PNG"
+          class="trophy-icon"
+          alt="Most damage tanked"
+          title="Most Damage Tanked"
+        />
+      </span>
       <span class="stat-lbl">Tanked</span>
     </div>
 
     <div class="player-row__stat" *ngIf="!isSmallScreen">
-      <span class="stat-val">{{
-        player.buildingDamage?.toLocaleString()
-      }}</span>
+      <span class="stat-val stat-trophy-wrap">
+        {{ player.buildingDamage?.toLocaleString() }}
+        <img
+          *ngIf="bestBldgDmg.has(player.playerID)"
+          src="/assets/stats/trophies/tower.png"
+          class="trophy-icon"
+          alt="Most building damage"
+          title="Most Building Damage"
+        />
+      </span>
       <span class="stat-lbl">Bldg Dmg</span>
     </div>
   </div>

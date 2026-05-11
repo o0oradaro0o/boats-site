@@ -244,13 +244,10 @@ $blue-accent: #4a7bf7;
   overflow: hidden;
 }
 
-.ship-carousel__hero,
 .ship-carousel__sprite {
   width: 124px;
   height: 64px;
   object-fit: fill;
-  image-rendering: pixelated;
-  image-rendering: crisp-edges;
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.7));
 }
 

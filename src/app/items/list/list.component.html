@@ -92,6 +92,11 @@
             class="item-row__type weapon-type-label"
             >{{ entry.weaponType }}</span
           >
+          <span
+            *ngIf="entry.weaponNickname"
+            class="item-row__nickname"
+            >{{ entry.weaponNickname }}</span
+          >
           <span *ngIf="entry.weaponData?.doubled" class="item-badge">2x</span>
           <span
             *ngIf="entry.weaponData?.isUlt"

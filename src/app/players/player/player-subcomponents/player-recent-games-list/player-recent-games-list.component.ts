@@ -27,9 +27,7 @@ export class PlayerRecentGamesListComponent implements OnInit {
 
   ngOnInit() {
     this.gameData.getShips().subscribe((ships: ShipData[]) => {
-      ships.forEach((s) =>
-        this.shipIconMap.set(s.name.trim().toLowerCase(), s.icon),
-      );
+      this.shipIconMap = this.gameData.buildShipIconMap(ships);
     });
   }
 

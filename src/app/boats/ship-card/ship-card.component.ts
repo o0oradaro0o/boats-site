@@ -34,11 +34,11 @@ export class ShipCardComponent implements OnChanges {
   }
 
   get displayName(): string {
-    return this.shipData?.name ?? this.boatRecord?.item ?? '?';
+    return this.shipData?.dbName ?? this.shipData?.name ?? this.boatRecord?.item ?? '?';
   }
 
   get slug(): string {
-    return (this.shipData?.name ?? this.boatRecord?.item ?? '')
+    return (this.shipData?.dbName ?? this.shipData?.name ?? this.boatRecord?.item ?? '')
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
@@ -46,17 +46,17 @@ export class ShipCardComponent implements OnChanges {
 
   get iconUrl(): string {
     if (this.shipData?.icon) {
-      return `assets/boat-icons/${this.shipData.icon}.png`;
+      return `/assets/boat-icons/${this.shipData.icon}.png`;
     }
     if (this.boatRecord?.item) {
-      return `assets/boat-icons/${this.boatRecord.item.split(' ').join('_').replace("'", '').toLowerCase()}.png`;
+      return `/assets/boat-icons/${this.boatRecord.item.split(' ').join('_').replace("'", '').toLowerCase()}.png`;
     }
     return '';
   }
 
   get heroUrl(): string | null {
     if (this.shipData?.heroImage) {
-      return `assets/game-data/images/heroes/${this.shipData.heroImage}`;
+      return `/assets/game-data/images/heroes/${this.shipData.heroImage}`;
     }
     return null;
   }
