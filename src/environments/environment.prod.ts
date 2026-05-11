@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  battleshipsApiUrl: 'https://vanatta.xyz/boats-api/',
 };
