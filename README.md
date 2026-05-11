@@ -26,14 +26,10 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
 
-## AWS API
+## Battleships API
 
 URL:
-https://grdxgi2qm1.execute-api.us-east-1.amazonaws.com/battleships
-
-ask radar for the api key
-
-need to pass the header x-api-key with that value to auth no IP whitelist
+https://vanatta.xyz/boats-api/
 
 call /describe to see the table schema
 
