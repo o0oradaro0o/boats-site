@@ -18,9 +18,6 @@ import { GameDataService, LocalizationMap } from '../../game-data.service';
 import {
   WeaponData,
   HullData,
-  SailData,
-  RepairData,
-  WoodData,
   ItemsJson,
 } from '../../models/game-data.models';
 
@@ -68,9 +65,10 @@ function formatWeaponType(type: string): string {
   if (type.includes('_')) {
     return type
       .split('_')
-      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .map((w) => (w === 'spin' ? 'Iron' : w.charAt(0).toUpperCase() + w.slice(1)))
       .join('/');
   }
+  if (type === 'spin') return 'Iron';
   return type.charAt(0).toUpperCase() + type.slice(1);
 }
 
@@ -109,6 +107,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   maxRange = 1;
 
   private gameItems: ItemsJson | null = null;
+  private itemNameMap = new Map<string, string>();
   private localization: LocalizationMap = {};
   private condensed: ItemRecord[] = [];
   private destroy$ = new Subject<void>();
@@ -131,7 +130,8 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
           item.item &&
           !item.item.includes('lorne') &&
           !item.item.includes('caulk') &&
-          !item.item.includes('combo')
+          !item.item.includes('combo') &&
+          !item.item.includes('tpscroll')
         ) {
           this.condensed.push(item);
           this.TotalSample += item.compGames;
@@ -157,6 +157,10 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe((items) => {
         this.gameItems = items;
+        this.itemNameMap.clear();
+        [...items.weapons, ...items.hulls, ...items.sails, ...items.repairs, ...items.woods].forEach(
+          (item) => this.itemNameMap.set(item.key, item.name),
+        );
         this.maxDps = Math.max(...items.weapons.map((w) => w.dps || 0), 1);
         this.maxRange = Math.max(...items.weapons.map((w) => w.range || 0), 1);
         this.buildEnriched();
@@ -203,7 +207,7 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
       this.activeTab === 'all'
         ? this.allItems
         : this.allItems.filter((i) => i.category === this.activeTab);
-    return base.filter((i) => i.record.compGames > 1);
+    return base.filter((i) => i.record.compGames > 50);
   }
 
   setTab(tab: typeof this.activeTab) {
@@ -244,11 +248,14 @@ export class ListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   displayName(key: string): string {
-    // Try the full key first, then the short key
+    // Prefer the name from items.json
+    const fromItems = this.itemNameMap.get(key);
+    if (fromItems) return fromItems;
+    // Fall back to localization map
     const localized = this.localization['DOTA_Tooltip_ability_' + key]
       || this.localization['DOTA_Tooltip_ability_item_' + key];
     if (localized) return localized;
-    // Fallback to the old heuristic
+    // Last resort: prettify the key
     return key
       .split('_')
       .join(' ')

@@ -64,7 +64,12 @@ export class GamesListComponent implements OnInit, OnChanges {
               somedate.toLocaleDateString() +
               ' ' +
               somedate.toLocaleTimeString();
-            this.filteredGamesList.push(game);
+            const alreadyInList = this.filteredGamesList.some(
+              (g) => g.matchID === game.matchID,
+            );
+            if (!alreadyInList) {
+              this.filteredGamesList.push(game);
+            }
           }
         });
       }
